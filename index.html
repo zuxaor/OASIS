@@ -1,2785 +1,973 @@
-```html
 <!DOCTYPE html>
 <html lang="fr">
 
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color" content="#6b8f72">
-<meta name="description" content="Oasis • Une île qui évolue avec sa communauté.">
+    <meta name="theme-color" content="#315f4a">
+    <meta
+        name="description"
+        content="Oasis • Une île qui évolue avec sa communauté."
+    >
 
-<title>Oasis • Accueil</title>
+    <title>Oasis • Accueil</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link
-    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&family=Fredoka:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-<style>
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    min-height: 100vh;
-    overflow-x: hidden;
-
-    font-family: "Fredoka", sans-serif;
-
-    color: #29443a;
-
-    background:
-        linear-gradient(
-            180deg,
-            #a8d5d1 0%,
-            #d1e3d4 48%,
-            #e9dfc4 100%
-        );
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
-
-button {
-    font: inherit;
-    border: 0;
-    cursor: pointer;
-}
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root {
-
-    --green-dark: #31574b;
-    --green: #5e9183;
-    --green-light: #83b2a1;
-
-    --blue: #8fc8ce;
-    --sand: #c5a268;
-
-    --cream: #f4efdf;
-
-    --text: #29443a;
-    --muted: #71877f;
-
-    --glass: rgba(255,255,255,.62);
-
-    --border: rgba(255,255,255,.72);
-
-    --shadow:
-        0 25px 60px rgba(55,95,83,.13);
-
-    --radius: 26px;
-}
-
-
-/* =========================================================
-   BACKGROUND
-========================================================= */
-
-body::before {
-
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: -20;
-
-    background:
-
-        radial-gradient(
-            circle at 10% 10%,
-            rgba(255,255,255,.55),
-            transparent 25%
-        ),
-
-        radial-gradient(
-            circle at 90% 20%,
-            rgba(255,255,255,.38),
-            transparent 25%
-        ),
-
-        linear-gradient(
-            180deg,
-            #a7d2d0,
-            #c9ded2 50%,
-            #e9dfc4
-        );
-}
-
-
-/* =========================================================
-   NAVBAR
-========================================================= */
-
-.navbar {
-
-    position: fixed;
-
-    top: 18px;
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    width:
-        min(
-            1180px,
-            calc(100% - 40px)
-        );
-
-    height: 68px;
-
-    padding:
-        0 12px 0 20px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    background:
-        rgba(255,255,255,.76);
-
-    border:
-        2px solid rgba(255,255,255,.72);
-
-    border-radius: 20px;
-
-    backdrop-filter:
-        blur(18px);
-
-    box-shadow:
-        0 15px 45px rgba(55,95,83,.14);
-
-    z-index: 1000;
-}
-
-
-.brand {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 10px;
-
-    font-weight: 800;
-}
-
-
-.brand-mark {
-
-    width: 43px;
-    height: 43px;
-
-    display: grid;
-
-    place-items: center;
-
-    border-radius: 14px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #8fc8c4,
-            #578b82
-        );
-
-    box-shadow:
-        0 8px 20px rgba(55,100,94,.18);
-
-    font-size: 22px;
-}
-
-
-.brand-name {
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size: 22px;
-
-    font-weight: 800;
-
-    color: #41675d;
-}
-
-
-.brand-name span {
-    color: var(--sand);
-}
-
-
-.nav-links {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 4px;
-}
-
-
-.nav-links a {
-
-    padding:
-        10px 14px;
-
-    border-radius: 12px;
-
-    color: #637b73;
-
-    font-size: 12px;
-
-    font-weight: 600;
-
-    transition:
-        .2s ease;
-}
-
-
-.nav-links a:hover {
-
-    background:
-        #e2efeb;
-
-    color:
-        #41675d;
-}
-
-
-.nav-discord {
-
-    padding:
-        12px 18px;
-
-    border-radius:
-        13px;
-
-    background:
-        #638f87;
-
-    color:
-        white;
-
-    font-size:
-        12px;
-
-    font-weight:
-        700;
-
-    box-shadow:
-        0 8px 20px rgba(55,100,94,.18);
-
-    transition:
-        .2s ease;
-}
-
-
-.nav-discord:hover {
-
-    transform:
-        translateY(-2px);
-
-    background:
-        #527c75;
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero {
-
-    min-height:
-        100vh;
-
-    position:
-        relative;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    overflow:
-        hidden;
-
-    isolation:
-        isolate;
-}
-
-
-.hero-sky {
-
-    position:
-        absolute;
-
-    inset:
-        0;
-
-    z-index:
-        -5;
-
-    background:
-
-        linear-gradient(
-            180deg,
-            #8fc8d0 0%,
-            #b6d9d0 43%,
-            #dce0c9 100%
-        );
-}
-
-
-/* =========================================================
-   SUN
-========================================================= */
-
-.hero-sun {
-
-    position:
-        absolute;
-
-    width:
-        230px;
-
-    height:
-        230px;
-
-    right:
-        15%;
-
-    top:
-        17%;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,243,193,.95),
-            rgba(255,222,145,.55) 45%,
-            transparent 72%
-        );
-
-    filter:
-        blur(1px);
-
-    opacity:
-        .75;
-
-    animation:
-        sunPulse 7s ease-in-out infinite;
-}
-
-
-@keyframes sunPulse {
-
-    0%,100% {
-        transform:
-            scale(.96);
-    }
-
-    50% {
-        transform:
-            scale(1.05);
-    }
-}
-
-
-/* =========================================================
-   CLOUDS
-========================================================= */
-
-.cloud {
-
-    position:
-        absolute;
-
-    width:
-        190px;
-
-    height:
-        55px;
-
-    border-radius:
-        999px;
-
-    background:
-        rgba(255,255,255,.42);
-
-    filter:
-        blur(2px);
-
-    opacity:
-        .55;
-
-    animation:
-        cloudMove 24s linear infinite;
-}
-
-
-.cloud::before,
-.cloud::after {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    border-radius:
-        50%;
-
-    background:
-        inherit;
-}
-
-
-.cloud::before {
-
-    width:
-        80px;
-
-    height:
-        80px;
-
-    left:
-        35px;
-
-    bottom:
-        10px;
-}
-
-
-.cloud::after {
-
-    width:
-        65px;
-
-    height:
-        65px;
-
-    left:
-        100px;
-
-    bottom:
-        5px;
-}
-
-
-.cloud-one {
-
-    top:
-        18%;
-
-    left:
-        -220px;
-}
-
-
-.cloud-two {
-
-    top:
-        29%;
-
-    left:
-        -300px;
-
-    transform:
-        scale(.7);
-
-    animation-delay:
-        -10s;
-}
-
-
-@keyframes cloudMove {
-
-    from {
-        transform:
-            translateX(0);
-    }
-
-    to {
-        transform:
-            translateX(145vw);
-    }
-}
-
-
-/* =========================================================
-   ISLAND
-========================================================= */
-
-.hero-island {
-
-    position:
-        absolute;
-
-    left:
-        -5%;
-
-    right:
-        -5%;
-
-    bottom:
-        -2%;
-
-    height:
-        53%;
-
-    z-index:
-        -3;
-
-    background:
-
-        linear-gradient(
-            180deg,
-            #77a995 0%,
-            #58836f 32%,
-            #426b59 65%,
-            #315344 100%
-        );
-
-    clip-path:
-
-        polygon(
-            0 30%,
-            8% 27%,
-            16% 20%,
-            25% 25%,
-            34% 15%,
-            43% 22%,
-            52% 12%,
-            61% 23%,
-            71% 16%,
-            81% 25%,
-            90% 19%,
-            100% 25%,
-            100% 100%,
-            0 100%
-        );
-}
-
-
-/* =========================================================
-   SEA
-========================================================= */
-
-.hero-sea {
-
-    position:
-        absolute;
-
-    left:
-        -5%;
-
-    right:
-        -5%;
-
-    bottom:
-        -10%;
-
-    height:
-        34%;
-
-    z-index:
-        -4;
-
-    background:
-
-        linear-gradient(
-            180deg,
-            rgba(84,157,166,.70),
-            rgba(52,117,133,.95)
-        );
-
-    clip-path:
-
-        polygon(
-            0 15%,
-            10% 20%,
-            21% 11%,
-            33% 18%,
-            45% 9%,
-            57% 19%,
-            69% 12%,
-            82% 17%,
-            100% 10%,
-            100% 100%,
-            0 100%
-        );
-}
-
-
-/* =========================================================
-   WAVES
-========================================================= */
-
-.wave {
-
-    position:
-        absolute;
-
-    left:
-        -10%;
-
-    width:
-        120%;
-
-    height:
-        70px;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(255,255,255,.13);
-
-    z-index:
-        -2;
-
-    animation:
-        waveMove 8s ease-in-out infinite;
-}
-
-
-.wave-one {
-    bottom:
-        22%;
-}
-
-
-.wave-two {
-
-    bottom:
-        14%;
-
-    opacity:
-        .55;
-
-    animation-delay:
-        -3s;
-}
-
-
-@keyframes waveMove {
-
-    0%,100% {
-        transform:
-            translateX(-2%);
-    }
-
-    50% {
-        transform:
-            translateX(2%);
-    }
-}
-
-
-/* =========================================================
-   PALMIERS
-========================================================= */
-
-.palm {
-
-    position:
-        absolute;
-
-    z-index:
-        -1;
-
-    font-size:
-        clamp(
-            80px,
-            10vw,
-            145px
-        );
-
-    opacity:
-        .48;
-
-    filter:
-        drop-shadow(
-            0 20px 20px rgba(30,65,50,.18)
-        );
-
-    animation:
-        palmFloat 5s ease-in-out infinite;
-}
-
-
-.palm-one {
-
-    right:
-        6%;
-
-    bottom:
-        26%;
-}
-
-
-.palm-two {
-
-    left:
-        3%;
-
-    bottom:
-        28%;
-
-    font-size:
-        95px;
-
-    animation-delay:
-        -2s;
-}
-
-
-@keyframes palmFloat {
-
-    0%,100% {
-        transform:
-            rotate(-2deg);
-    }
-
-    50% {
-        transform:
-            rotate(2deg)
-            translateY(-5px);
-    }
-}
-
-
-/* =========================================================
-   HERO CONTENT
-========================================================= */
-
-.hero-content {
-
-    position:
-        relative;
-
-    z-index:
-        5;
-
-    width:
-        min(
-            1180px,
-            calc(100% - 40px)
-        );
-
-    margin:
-        auto;
-
-    padding-top:
-        70px;
-}
-
-
-.hero-tag {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    gap:
-        8px;
-
-    padding:
-        8px 13px;
-
-    border:
-        1px solid rgba(255,255,255,.52);
-
-    border-radius:
-        999px;
-
-    background:
-        rgba(255,255,255,.40);
-
-    color:
-        #4e8279;
-
-    font-size:
-        10px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        1px;
-}
-
-
-.hero-tag-dot {
-
-    width:
-        7px;
-
-    height:
-        7px;
-
-    border-radius:
-        50%;
-
-    background:
-        #6ca69c;
-
-    animation:
-        pulse 2s ease-in-out infinite;
-}
-
-
-@keyframes pulse {
-
-    0%,100% {
-        transform:
-            scale(1);
-
-        opacity:
-            .7;
-    }
-
-    50% {
-        transform:
-            scale(1.5);
-
-        opacity:
-            1;
-    }
-}
-
-
-.hero h1 {
-
-    max-width:
-        800px;
-
-    margin-top:
-        22px;
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        clamp(
-            62px,
-            9vw,
-            118px
-        );
-
-    line-height:
-        .84;
-
-    letter-spacing:
-        -5px;
-
-    font-weight:
-        800;
-
-    color:
-        #294c43;
-
-    animation:
-        heroAppear
-        .9s
-        cubic-bezier(.2,.8,.2,1);
-}
-
-
-.hero h1 span {
-
-    display:
-        block;
-
-    color:
-        #528d84;
-}
-
-
-@keyframes heroAppear {
-
-    from {
-        opacity:
-            0;
-
-        transform:
-            translateY(30px);
-    }
-
-    to {
-        opacity:
-            1;
-
-        transform:
-            translateY(0);
-    }
-}
-
-
-.hero-description {
-
-    max-width:
-        600px;
-
-    margin-top:
-        27px;
-
-    color:
-        #55766d;
-
-    font-size:
-        15px;
-
-    line-height:
-        1.8;
-
-    font-weight:
-        500;
-}
-
-
-.hero-buttons {
-
-    display:
-        flex;
-
-    gap:
-        12px;
-
-    margin-top:
-        30px;
-}
-
-
-.button {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        8px;
-
-    padding:
-        14px 20px;
-
-    border-radius:
-        14px;
-
-    font-size:
-        12px;
-
-    font-weight:
-        700;
-
-    transition:
-        .22s ease;
-}
-
-
-.button-primary {
-
-    background:
-        #578f87;
-
-    color:
-        white;
-
-    box-shadow:
-        0 12px 28px rgba(52,105,96,.22);
-}
-
-
-.button-primary:hover {
-
-    transform:
-        translateY(-3px);
-
-    background:
-        #467c75;
-}
-
-
-.button-secondary {
-
-    background:
-        rgba(255,255,255,.48);
-
-    border:
-        1px solid rgba(69,111,102,.14);
-
-    color:
-        #4d7169;
-}
-
-
-.button-secondary:hover {
-
-    transform:
-        translateY(-2px);
-
-    background:
-        white;
-}
-
-
-/* =========================================================
-   HERO MINI CARD
-========================================================= */
-
-.hero-card {
-
-    position:
-        absolute;
-
-    right:
-        7%;
-
-    bottom:
-        22%;
-
-    width:
-        310px;
-
-    padding:
-        22px;
-
-    border:
-        2px solid rgba(255,255,255,.62);
-
-    border-radius:
-        25px;
-
-    background:
-        rgba(255,255,255,.50);
-
-    backdrop-filter:
-        blur(15px);
-
-    box-shadow:
-        0 30px 65px rgba(40,80,70,.18);
-
-    transform:
-        rotate(2deg);
-
-    animation:
-        cardFloat 6s ease-in-out infinite;
-}
-
-
-@keyframes cardFloat {
-
-    0%,100% {
-        transform:
-            rotate(2deg)
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            rotate(1deg)
-            translateY(-8px);
-    }
-}
-
-
-.hero-card-top {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-}
-
-
-.hero-card-label {
-
-    color:
-        #639287;
-
-    font-size:
-        9px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        2px;
-
-    text-transform:
-        uppercase;
-}
-
-
-.hero-card-level {
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        38px;
-
-    font-weight:
-        800;
-
-    color:
-        #355d52;
-}
-
-
-.hero-card-title {
-
-    margin-top:
-        5px;
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        24px;
-
-    color:
-        #466e62;
-}
-
-
-.hero-card-text {
-
-    margin-top:
-        4px;
-
-    color:
-        #71877f;
-
-    font-size:
-        10px;
-
-    line-height:
-        1.6;
-}
-
-
-.hero-card-progress {
-
-    height:
-        7px;
-
-    margin-top:
-        16px;
-
-    border-radius:
-        99px;
-
-    overflow:
-        hidden;
-
-    background:
-        rgba(70,110,100,.12);
-}
-
-
-.hero-card-progress span {
-
-    display:
-        block;
-
-    width:
-        2%;
-
-    height:
-        100%;
-
-    border-radius:
-        inherit;
-
-    background:
-        linear-gradient(
-            90deg,
-            #5d9188,
-            #93bca8
-        );
-}
-
-
-/* =========================================================
-   SECTION
-========================================================= */
-
-.section {
-
-    padding:
-        120px 20px;
-}
-
-
-.section-light {
-
-    background:
-        rgba(255,255,255,.43);
-
-    border-top:
-        1px solid rgba(70,110,100,.07);
-
-    border-bottom:
-        1px solid rgba(70,110,100,.07);
-}
-
-
-.section-container {
-
-    width:
-        min(
-            1120px,
-            100%
-        );
-
-    margin:
-        auto;
-}
-
-
-.eyebrow {
-
-    color:
-        #5b958a;
-
-    font-size:
-        10px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        3px;
-
-    text-transform:
-        uppercase;
-}
-
-
-.section-title {
-
-    margin-top:
-        8px;
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        clamp(
-            45px,
-            6vw,
-            72px
-        );
-
-    line-height:
-        .95;
-
-    letter-spacing:
-        -2px;
-
-    color:
-        #31574e;
-}
-
-
-.section-title span {
-
-    color:
-        #bd9558;
-}
-
-
-.section-text {
-
-    max-width:
-        680px;
-
-    margin-top:
-        17px;
-
-    color:
-        #71877f;
-
-    font-size:
-        13px;
-
-    line-height:
-        1.8;
-}
-
-
-/* =========================================================
-   ISLAND MAP
-========================================================= */
-
-.island-wrapper {
-
-    margin-top:
-        55px;
-
-    display:
-        grid;
-
-    grid-template-columns:
-        1.1fr .9fr;
-
-    gap:
-        18px;
-}
-
-
-.island-map {
-
-    position:
-        relative;
-
-    min-height:
-        470px;
-
-    overflow:
-        hidden;
-
-    border:
-        2px solid rgba(255,255,255,.70);
-
-    border-radius:
-        30px;
-
-    background:
-
-        linear-gradient(
-            180deg,
-            #91cdd0 0%,
-            #b7d8cc 55%,
-            #d9c58e 56%,
-            #b28b5b 100%
-        );
-
-    box-shadow:
-        var(--shadow);
-}
-
-
-.island-map::before {
-
-    content:
-        "";
-
-    position:
-        absolute;
-
-    width:
-        80%;
-
-    height:
-        60%;
-
-    left:
-        10%;
-
-    top:
-        20%;
-
-    border-radius:
-        48% 52% 45% 55%;
-
-    background:
-        linear-gradient(
-            145deg,
-            #7eae83,
-            #4f7d62
-        );
-
-    transform:
-        rotate(-7deg);
-
-    box-shadow:
-        inset
-        0 20px 35px rgba(255,255,255,.13),
-        0 30px 40px rgba(45,80,60,.18);
-}
-
-
-.map-zone {
-
-    position:
-        absolute;
-
-    z-index:
-        4;
-
-    padding:
-        9px 12px;
-
-    border:
-        1px solid rgba(255,255,255,.62);
-
-    border-radius:
-        12px;
-
-    background:
-        rgba(255,255,255,.72);
-
-    color:
-        #45695e;
-
-    font-size:
-        10px;
-
-    font-weight:
-        800;
-
-    box-shadow:
-        0 8px 18px rgba(45,80,65,.12);
-
-    transition:
-        .2s ease;
-}
-
-
-.map-zone:hover {
-
-    transform:
-        translateY(-4px)
-        scale(1.03);
-
-    background:
-        white;
-}
-
-
-.zone-village {
-
-    left:
-        20%;
-
-    top:
-        38%;
-}
-
-
-.zone-port {
-
-    right:
-        16%;
-
-    top:
-        54%;
-}
-
-
-.zone-forest {
-
-    left:
-        42%;
-
-    bottom:
-        22%;
-}
-
-
-.zone-center {
-
-    left:
-        44%;
-
-    top:
-        28%;
-
-    background:
-        rgba(90,143,130,.88);
-
-    color:
-        white;
-}
-
-
-.map-title {
-
-    position:
-        absolute;
-
-    left:
-        30px;
-
-    top:
-        28px;
-
-    z-index:
-        5;
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        28px;
-
-    color:
-        #3f675b;
-}
-
-
-.map-subtitle {
-
-    position:
-        absolute;
-
-    left:
-        30px;
-
-    top:
-        61px;
-
-    z-index:
-        5;
-
-    color:
-        #628178;
-
-    font-size:
-        10px;
-}
-
-
-/* =========================================================
-   INFO CARDS
-========================================================= */
-
-.info-column {
-
-    display:
-        grid;
-
-    grid-template-rows:
-        repeat(3,1fr);
-
-    gap:
-        14px;
-}
-
-
-.info-card {
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-
-    padding:
-        25px;
-
-    border:
-        2px solid rgba(255,255,255,.70);
-
-    border-radius:
-        24px;
-
-    background:
-        rgba(255,255,255,.62);
-
-    box-shadow:
-        0 18px 40px rgba(55,100,91,.08);
-
-    transition:
-        .25s ease;
-}
-
-
-.info-card:hover {
-
-    transform:
-        translateY(-6px);
-
-    box-shadow:
-        0 25px 50px rgba(55,100,91,.13);
-}
-
-
-.info-icon {
-
-    font-size:
-        32px;
-}
-
-
-.info-card h3 {
-
-    margin-top:
-        13px;
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        25px;
-
-    color:
-        #45695f;
-}
-
-
-.info-card p {
-
-    margin-top:
-        5px;
-
-    color:
-        #748981;
-
-    font-size:
-        10px;
-
-    line-height:
-        1.7;
-}
-
-
-/* =========================================================
-   EVOLUTION
-========================================================= */
-
-.evolution-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(4,1fr);
-
-    gap:
-        14px;
-
-    margin-top:
-        50px;
-}
-
-
-.evolution-card {
-
-    padding:
-        25px 20px;
-
-    border:
-        2px solid rgba(255,255,255,.70);
-
-    border-radius:
-        22px;
-
-    background:
-        rgba(255,255,255,.60);
-
-    box-shadow:
-        0 18px 40px rgba(55,100,91,.07);
-
-    transition:
-        .25s ease;
-}
-
-
-.evolution-card:hover {
-
-    transform:
-        translateY(-7px);
-}
-
-
-.evolution-number {
-
-    width:
-        45px;
-
-    height:
-        45px;
-
-    display:
-        grid;
-
-    place-items:
-        center;
-
-    border-radius:
-        50%;
-
-    background:
-        #60938a;
-
-    color:
-        white;
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        17px;
-
-    font-weight:
-        800;
-}
-
-
-.evolution-card:nth-child(2)
-.evolution-number {
-
-    background:
-        #719f8f;
-}
-
-
-.evolution-card:nth-child(3)
-.evolution-number {
-
-    background:
-        #b39560;
-}
-
-
-.evolution-card:nth-child(4)
-.evolution-number {
-
-    background:
-        #c7b281;
-}
-
-
-.evolution-card h3 {
-
-    margin-top:
-        17px;
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        23px;
-
-    color:
-        #45695f;
-}
-
-
-.evolution-card p {
-
-    margin-top:
-        7px;
-
-    color:
-        #788a84;
-
-    font-size:
-        10px;
-
-    line-height:
-        1.7;
-}
-
-
-.evolution-status {
-
-    display:
-        inline-block;
-
-    margin-top:
-        15px;
-
-    padding:
-        6px 9px;
-
-    border-radius:
-        999px;
-
-    background:
-        #e3efeb;
-
-    color:
-        #5b8b82;
-
-    font-size:
-        8px;
-
-    font-weight:
-        800;
-}
-
-
-/* =========================================================
-   CTA
-========================================================= */
-
-.cta {
-
-    padding:
-        100px 20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #416b5d,
-            #315448
-        );
-
-    color:
-        white;
-}
-
-
-.cta-box {
-
-    width:
-        min(
-            900px,
-            100%
-        );
-
-    margin:
-        auto;
-
-    padding:
-        55px 30px;
-
-    text-align:
-        center;
-
-    border:
-        1px solid rgba(255,255,255,.12);
-
-    border-radius:
-        30px;
-
-    background:
-        rgba(255,255,255,.055);
-}
-
-
-.cta-box h2 {
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        clamp(
-            42px,
-            6vw,
-            68px
-        );
-
-    line-height:
-        .95;
-
-    color:
-        #f2f6ed;
-}
-
-
-.cta-box h2 span {
-
-    color:
-        #d5bc7c;
-}
-
-
-.cta-box p {
-
-    max-width:
-        600px;
-
-    margin:
-        15px auto 0;
-
-    color:
-        #bfd0c5;
-
-    font-size:
-        12px;
-
-    line-height:
-        1.8;
-}
-
-
-.cta-box .button {
-
-    margin-top:
-        25px;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-
-    padding:
-        35px 20px;
-
-    background:
-        #2d493e;
-
-    color:
-        white;
-}
-
-
-.footer-inner {
-
-    width:
-        min(
-            1120px,
-            100%
-        );
-
-    margin:
-        auto;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    gap:
-        20px;
-}
-
-
-.footer-brand {
-
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    color:
-        #cbe2d4;
-
-    font-size:
-        20px;
-
-    font-weight:
-        800;
-}
-
-
-.footer-text {
-
-    color:
-        #adc3b6;
-
-    font-size:
-        10px;
-}
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media(max-width:1000px) {
-
-    .nav-links {
-        display:
-            none;
-    }
-
-    .hero-card {
-
-        right:
-            3%;
-
-        opacity:
-            .65;
-    }
-
-    .island-wrapper {
-
-        grid-template-columns:
-            1fr;
-    }
-
-    .info-column {
-
-        grid-template-columns:
-            repeat(3,1fr);
-
-        grid-template-rows:
-            auto;
-    }
-
-    .evolution-grid {
-
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-}
-
-
-@media(max-width:700px) {
-
-    .navbar {
-
-        top:
-            10px;
-
-        width:
-            calc(100% - 20px);
-
-        height:
-            60px;
-    }
-
-    .brand-name {
-
-        font-size:
-            18px;
-    }
-
-    .nav-discord {
-
-        padding:
-            10px 12px;
-    }
-
-    .hero-content {
-
-        width:
-            calc(100% - 30px);
-
-        padding-top:
-            90px;
-    }
-
-    .hero h1 {
-
-        font-size:
-            60px;
-
-        letter-spacing:
-            -2px;
-    }
-
-    .hero-description {
-
-        font-size:
-            13px;
-    }
-
-    .hero-buttons {
-
-        flex-direction:
-            column;
-    }
-
-    .button {
-
-        width:
-            100%;
-    }
-
-    .hero-card {
-
-        width:
-            250px;
-
-        right:
-            -50px;
-
-        bottom:
-            14%;
-
-        opacity:
-            .35;
-    }
-
-    .hero-sun {
-
-        right:
-            -50px;
-
-        top:
-            20%;
-    }
-
-    .section {
-
-        padding:
-            85px 15px;
-    }
-
-    .section-title {
-
-        font-size:
-            45px;
-    }
-
-    .island-map {
-
-        min-height:
-            380px;
-    }
-
-    .info-column {
-
-        grid-template-columns:
-            1fr;
-    }
-
-    .evolution-grid {
-
-        grid-template-columns:
-            1fr;
-    }
-
-    .footer-inner {
-
-        flex-direction:
-            column;
-
-        text-align:
-            center;
-    }
-}
-
-</style>
+    <link rel="stylesheet" href="./style.css">
 </head>
-
 
 <body>
 
+    <!-- =====================================================
+         PARTICULES
+    ====================================================== -->
 
-<!-- =========================================================
-     NAVBAR
-========================================================= -->
+    <div class="forest-particles">
 
-<nav class="navbar">
+        <span
+            class="forest-particle"
+            style="left:8%;animation-duration:13s;animation-delay:0s;"
+        ></span>
 
-    <a
-        href="./index.html"
-        class="brand"
-    >
+        <span
+            class="forest-particle"
+            style="left:22%;animation-duration:17s;animation-delay:3s;"
+        ></span>
 
-        <div class="brand-mark">
-            🌴
-        </div>
+        <span
+            class="forest-particle"
+            style="left:37%;animation-duration:14s;animation-delay:5s;"
+        ></span>
 
-        <div class="brand-name">
-            OASIS<span>.</span>
-        </div>
+        <span
+            class="forest-particle"
+            style="left:52%;animation-duration:19s;animation-delay:1s;"
+        ></span>
 
-    </a>
+        <span
+            class="forest-particle"
+            style="left:68%;animation-duration:15s;animation-delay:6s;"
+        ></span>
 
+        <span
+            class="forest-particle"
+            style="left:81%;animation-duration:18s;animation-delay:2s;"
+        ></span>
 
-    <div class="nav-links">
-
-        <a href="./index.html">
-            Accueil
-        </a>
-
-        <a href="./village.html">
-            Village
-        </a>
-
-        <a href="./port.html">
-            Port
-        </a>
-
-        <a href="./foret.html">
-            Forêt
-        </a>
-
-    </div>
-
-
-    <a
-        href="https://discord.com"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="nav-discord"
-    >
-        Discord
-    </a>
-
-</nav>
-
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<main>
-
-<section class="hero">
-
-
-    <div class="hero-sky"></div>
-
-
-    <div class="hero-sun"></div>
-
-
-    <div class="cloud cloud-one"></div>
-    <div class="cloud cloud-two"></div>
-
-
-    <div class="hero-sea"></div>
-
-
-    <div class="hero-island"></div>
-
-
-    <div class="wave wave-one"></div>
-    <div class="wave wave-two"></div>
-
-
-    <div class="palm palm-one">
-        🌴
-    </div>
-
-    <div class="palm palm-two">
-        🌴
-    </div>
-
-
-    <div class="hero-content">
-
-
-        <div class="hero-tag">
-
-            <span class="hero-tag-dot"></span>
-
-            OASIS • L'ÎLE ÉVOLUE
-
-        </div>
-
-
-        <h1>
-
-            Bienvenue
-            <span>à Oasis.</span>
-
-        </h1>
-
-
-        <p class="hero-description">
-
-            Une île construite avec sa communauté.
-            Chaque contribution permet à Oasis de
-            grandir, d'évoluer et de devenir un monde
-            toujours plus vivant.
-
-        </p>
-
-
-        <div class="hero-buttons">
-
-
-            <a
-                href="#ile"
-                class="button button-primary"
-            >
-                🏝️ Explorer l'île
-            </a>
-
-
-            <a
-                href="https://discord.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                class="button button-secondary"
-            >
-                💬 Rejoindre Discord
-            </a>
-
-
-        </div>
-
+        <span
+            class="forest-particle"
+            style="left:93%;animation-duration:16s;animation-delay:7s;"
+        ></span>
 
     </div>
 
 
-    <!-- CARTE DE PROGRESSION -->
+    <!-- =====================================================
+         NAVIGATION
+    ====================================================== -->
 
-    <div class="hero-card">
+    <nav class="navbar">
 
+        <a
+            href="./index.html"
+            class="brand"
+        >
 
-        <div class="hero-card-top">
-
-            <div>
-
-                <div class="hero-card-label">
-                    Progression de l'île
-                </div>
-
-                <div class="hero-card-level">
-                    01
-                </div>
-
-            </div>
-
-            <div>
+            <div class="brand-mark">
                 🌴
             </div>
 
-        </div>
-
-
-        <div class="hero-card-title">
-            Les premiers pas
-        </div>
-
-
-        <div class="hero-card-text">
-
-            Oasis commence son évolution.
-            La communauté construit l'île
-            étape après étape.
-
-        </div>
-
-
-        <div class="hero-card-progress">
-
-            <span></span>
-
-        </div>
-
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     ÎLE
-========================================================= -->
-
-<section
-    class="section section-light"
-    id="ile"
->
-
-<div class="section-container">
-
-
-    <div class="eyebrow">
-        Découvrir Oasis
-    </div>
-
-
-    <h2 class="section-title">
-
-        Une île,
-        <span>plusieurs mondes.</span>
-
-    </h2>
-
-
-    <p class="section-text">
-
-        Oasis est divisée en plusieurs zones.
-        Chacune possède son ambiance, son histoire
-        et ses propres évolutions.
-
-    </p>
-
-
-    <div class="island-wrapper">
-
-
-        <!-- CARTE -->
-
-        <div class="island-map">
-
-
-            <div class="map-title">
-                L'île d'Oasis
+            <div class="brand-name">
+                OASIS<span>.</span>
             </div>
 
-
-            <div class="map-subtitle">
-                Explore les différentes zones
-            </div>
+        </a>
 
 
-            <a
-                href="./village.html"
-                class="map-zone zone-village"
-            >
-                🏠 Village
+        <div class="nav-links">
+
+            <a href="./index.html">
+                Accueil
             </a>
 
-
-            <a
-                href="./port.html"
-                class="map-zone zone-port"
-            >
-                ⚓ Port
+            <a href="./village.html">
+                Village
             </a>
 
-
-            <a
-                href="./foret.html"
-                class="map-zone zone-forest"
-            >
-                🌲 Forêt
+            <a href="./port.html">
+                Port
             </a>
 
+            <a href="./foret.html">
+                Forêt
+            </a>
 
-            <div class="map-zone zone-center">
-                🌴 Oasis
-            </div>
-
+            <a href="./contribuer.html">
+                Contribuer
+            </a>
 
         </div>
 
 
-        <!-- INFOS -->
+        <a
+            href="https://discord.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="nav-discord"
+        >
+            Discord
+        </a>
 
-        <div class="info-column">
+    </nav>
 
 
-            <a
-                href="./village.html"
-                class="info-card"
-            >
+    <!-- =====================================================
+         CONTENU
+    ====================================================== -->
 
-                <div class="info-icon">
-                    🏠
+    <main>
+
+
+        <!-- =================================================
+             HERO
+        ================================================== -->
+
+        <section class="hero">
+
+            <div class="hero-forest"></div>
+
+
+            <div class="hero-content">
+
+                <div class="breadcrumb">
+
+                    <span>
+                        Oasis
+                    </span>
+
+                    <span>
+                        ›
+                    </span>
+
+                    <span>
+                        Accueil
+                    </span>
+
                 </div>
 
-                <h3>
-                    Le Village
-                </h3>
 
-                <p>
+                <div class="hero-tag">
+                    🏝️ BIENVENUE SUR OASIS
+                </div>
 
-                    Le cœur de la communauté.
-                    Un village qui se développe
-                    progressivement avec les
-                    contributions.
+
+                <h1>
+
+                    Une île qui
+                    <span>évolue.</span>
+
+                </h1>
+
+
+                <p class="hero-description">
+
+                    Oasis est une communauté vivante où
+                    l'île évolue progressivement grâce
+                    à ses membres. Chaque contribution
+                    participe à l'histoire et à la transformation
+                    du monde.
 
                 </p>
 
-            </a>
+
+                <div class="hero-buttons">
+
+                    <a
+                        href="#ile"
+                        class="button button-primary"
+                    >
+                        🏝️ Découvrir l'île
+                    </a>
 
 
-            <a
-                href="./port.html"
-                class="info-card"
-            >
+                    <a
+                        href="./contribuer.html"
+                        class="button button-secondary"
+                    >
+                        🌱 Contribuer
+                    </a>
 
-                <div class="info-icon">
-                    ⚓
                 </div>
 
-                <h3>
-                    Le Port
-                </h3>
 
-                <p>
+                <div class="hero-stats">
 
-                    Là où l'île rencontre l'océan.
-                    Les anciens quais évolueront
-                    progressivement vers un véritable
-                    centre maritime.
+                    <div class="hero-stat">
+
+                        <strong>
+                            50
+                        </strong>
+
+                        <span>
+                            évolutions
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-stat">
+
+                        <strong>
+                            🌴
+                        </strong>
+
+                        <span>
+                            une île
+                        </span>
+
+                    </div>
+
+
+                    <div class="hero-stat">
+
+                        <strong>
+                            ∞
+                        </strong>
+
+                        <span>
+                            possibilités
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             ÎLE
+        ================================================== -->
+
+        <section
+            class="section evolution-section"
+            id="ile"
+        >
+
+            <div class="section-container">
+
+
+                <div class="eyebrow">
+                    Le monde d'Oasis
+                </div>
+
+
+                <h2 class="section-title">
+
+                    Découvre les
+                    <span>zones de l'île.</span>
+
+                </h2>
+
+
+                <p class="section-text">
+
+                    Oasis est composée de plusieurs zones
+                    qui possèdent chacune leur propre identité
+                    et leur propre histoire.
 
                 </p>
 
-            </a>
+
+                <div class="features-grid">
 
 
-            <a
-                href="./foret.html"
-                class="info-card"
-            >
+                    <!-- VILLAGE -->
 
-                <div class="info-icon">
-                    🌲
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            🏘️
+                        </div>
+
+                        <h3>
+                            Le Village
+                        </h3>
+
+                        <p>
+
+                            Le cœur de la vie d'Oasis.
+                            Un lieu où la communauté
+                            se retrouve et évolue ensemble.
+
+                        </p>
+
+
+                        <a
+                            href="./village.html"
+                            class="button button-secondary"
+                            style="margin-top:18px;"
+                        >
+                            Découvrir
+                        </a>
+
+                    </article>
+
+
+                    <!-- PORT -->
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            ⚓
+                        </div>
+
+                        <h3>
+                            Le Port
+                        </h3>
+
+                        <p>
+
+                            Une zone ouverte sur l'extérieur.
+                            Le port représente les échanges,
+                            les arrivées et les départs.
+
+                        </p>
+
+
+                        <a
+                            href="./port.html"
+                            class="button button-secondary"
+                            style="margin-top:18px;"
+                        >
+                            Découvrir
+                        </a>
+
+                    </article>
+
+
+                    <!-- FORET -->
+
+                    <article class="feature-card">
+
+                        <div class="feature-icon">
+                            🌲
+                        </div>
+
+                        <h3>
+                            La Forêt
+                        </h3>
+
+                        <p>
+
+                            Une zone naturelle qui évolue
+                            progressivement jusqu'à devenir
+                            un véritable sanctuaire.
+
+                        </p>
+
+
+                        <a
+                            href="./foret.html"
+                            class="button button-secondary"
+                            style="margin-top:18px;"
+                        >
+                            Découvrir
+                        </a>
+
+                    </article>
+
+
                 </div>
 
-                <h3>
-                    La Forêt
-                </h3>
+            </div>
 
-                <p>
+        </section>
 
-                    Une zone sauvage où la nature
-                    reprend ses droits et évolue
-                    jusqu'à devenir un sanctuaire.
+
+        <!-- =================================================
+             ÉVOLUTION
+        ================================================== -->
+
+        <section class="section">
+
+            <div class="section-container">
+
+
+                <div class="eyebrow">
+                    Évolution de l'île
+                </div>
+
+
+                <h2 class="section-title">
+
+                    50 étapes pour
+                    <span>transformer Oasis.</span>
+
+                </h2>
+
+
+                <p class="section-text">
+
+                    L'île possède 50 niveaux d'évolution.
+                    La communauté peut participer à cette
+                    progression grâce aux contributions.
 
                 </p>
 
-            </a>
 
+                <div class="evolution-panel">
+
+                    <div class="evolution-mist"></div>
+
+
+                    <div class="evolution-content">
+
+                        <div class="evolution-top">
+
+                            <div>
+
+                                <div class="eyebrow">
+                                    Progression actuelle
+                                </div>
+
+                            </div>
+
+
+                            <div
+                                class="evolution-current"
+                                id="island-status"
+                            >
+                                ÉVOLUTION 01
+                            </div>
+
+                        </div>
+
+
+                        <div
+                            class="evolution-level"
+                            id="island-level"
+                        >
+                            01
+                            <span>/ 50</span>
+                        </div>
+
+
+                        <div
+                            class="evolution-name"
+                            id="island-name"
+                        >
+                            Les premiers pas
+                        </div>
+
+
+                        <p
+                            class="evolution-description"
+                            id="island-description"
+                        >
+                            Oasis commence son histoire.
+                            L'île est encore jeune et
+                            attend les premières contributions
+                            de sa communauté.
+                        </p>
+
+
+                        <div class="evolution-progress">
+
+                            <div class="evolution-progress-top">
+
+                                <span>
+                                    Progression
+                                </span>
+
+                                <span id="island-progress-text">
+                                    2%
+                                </span>
+
+                            </div>
+
+
+                            <div class="evolution-bar">
+
+                                <span
+                                    id="island-progress"
+                                ></span>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="level-selector">
+
+                    <button
+                        class="level-button active"
+                        data-level="1"
+                    >
+
+                        <strong>
+                            01
+                        </strong>
+
+                        <span>
+                            Origine
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="level-button"
+                        data-level="10"
+                    >
+
+                        <strong>
+                            10
+                        </strong>
+
+                        <span>
+                            Développement
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="level-button"
+                        data-level="20"
+                    >
+
+                        <strong>
+                            20
+                        </strong>
+
+                        <span>
+                            Expansion
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="level-button"
+                        data-level="30"
+                    >
+
+                        <strong>
+                            30
+                        </strong>
+
+                        <span>
+                            Transformation
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="level-button"
+                        data-level="40"
+                    >
+
+                        <strong>
+                            40
+                        </strong>
+
+                        <span>
+                            Apogée
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="level-button"
+                        data-level="50"
+                    >
+
+                        <strong>
+                            50
+                        </strong>
+
+                        <span>
+                            Final
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             COMMENT PARTICIPER
+        ================================================== -->
+
+        <section class="section timeline-section">
+
+            <div class="section-container">
+
+
+                <div class="eyebrow">
+                    La communauté
+                </div>
+
+
+                <h2 class="section-title">
+
+                    L'île évolue
+                    <span>avec vous.</span>
+
+                </h2>
+
+
+                <p class="section-text">
+
+                    La progression d'Oasis est collective.
+                    Chaque membre peut participer à l'évolution
+                    de l'île.
+
+                </p>
+
+
+                <div class="timeline">
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-number">
+                            ÉTAPE 01
+                        </div>
+
+                        <h3>
+                            Rejoins la communauté
+                        </h3>
+
+                        <p>
+
+                            Rejoins le serveur et découvre
+                            l'univers d'Oasis.
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-number">
+                            ÉTAPE 02
+                        </div>
+
+                        <h3>
+                            Participe à l'île
+                        </h3>
+
+                        <p>
+
+                            Utilise les fonctionnalités
+                            disponibles pour participer
+                            à la vie de la communauté.
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-number">
+                            ÉTAPE 03
+                        </div>
+
+                        <h3>
+                            Contribue à l'évolution
+                        </h3>
+
+                        <p>
+
+                            Utilise
+                            <strong>/contribuer-ile</strong>
+                            pour participer directement
+                            à la progression de l'île.
+
+                        </p>
+
+                    </div>
+
+
+                    <div class="timeline-item">
+
+                        <div class="timeline-dot"></div>
+
+                        <div class="timeline-number">
+                            ÉTAPE 04
+                        </div>
+
+                        <h3>
+                            Atteignez les 50 évolutions
+                        </h3>
+
+                        <p>
+
+                            La communauté écrit ensemble
+                            l'histoire d'Oasis jusqu'à
+                            l'évolution finale.
+
+                        </p>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================================
+             CTA
+        ================================================== -->
+
+        <section class="cta">
+
+            <div class="cta-box">
+
+                <h2>
+
+                    L'histoire d'Oasis
+                    <span>commence avec vous.</span>
+
+                </h2>
+
+
+                <p>
+
+                    Explore l'île, découvre ses différentes
+                    zones et participe à son évolution.
+
+                </p>
+
+
+                <a
+                    href="./contribuer.html"
+                    class="button button-primary"
+                >
+                    🌱 Participer à l'évolution
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer>
+
+        <div class="footer-inner">
+
+            <div class="footer-brand">
+                OASIS.
+            </div>
+
+
+            <div class="footer-text">
+                L'île évolue avec la communauté.
+            </div>
+
+
+            <div class="footer-text">
+                © 2026 Oasis
+            </div>
 
         </div>
 
+    </footer>
 
-    </div>
 
-</div>
+    <!-- =====================================================
+         SCRIPT
+    ====================================================== -->
 
-</section>
+    <script>
 
+        const islandEvolution = {
 
-<!-- =========================================================
-     ÉVOLUTIONS
-========================================================= -->
+            1: {
+                name: "Les premiers pas",
+                description:
+                    "Oasis commence son histoire. L'île est encore jeune et attend les premières contributions de sa communauté."
+            },
 
-<section class="section">
+            10: {
+                name: "Le développement",
+                description:
+                    "La communauté commence à transformer l'île. Les premières traces d'une véritable civilisation apparaissent."
+            },
 
-<div class="section-container">
+            20: {
+                name: "L'expansion",
+                description:
+                    "Oasis grandit. De nouvelles zones se développent et l'île devient progressivement plus vivante."
+            },
 
+            30: {
+                name: "La transformation",
+                description:
+                    "L'île connaît une véritable transformation. Les différentes zones prennent leur identité."
+            },
 
-    <div class="eyebrow">
-        Le système d'évolution
-    </div>
+            40: {
+                name: "L'apogée",
+                description:
+                    "Oasis atteint une nouvelle maturité. La communauté a profondément transformé son environnement."
+            },
 
+            50: {
+                name: "L'évolution finale",
+                description:
+                    "La 50ᵉ évolution est atteinte. L'histoire de la transformation d'Oasis arrive à son apogée."
+            }
 
-    <h2 class="section-title">
+        };
 
-        L'île évolue
-        <span>avec vous.</span>
 
-    </h2>
+        const levelButtons =
+            document.querySelectorAll(".level-button");
 
 
-    <p class="section-text">
+        const levelElement =
+            document.getElementById("island-level");
 
-        Oasis possède 50 niveaux d'évolution.
-        Chaque niveau représente une nouvelle
-        étape dans la construction de l'île.
 
-    </p>
+        const nameElement =
+            document.getElementById("island-name");
 
 
-    <div class="evolution-grid">
+        const descriptionElement =
+            document.getElementById("island-description");
 
 
-        <article class="evolution-card">
+        const progressElement =
+            document.getElementById("island-progress");
 
-            <div class="evolution-number">
-                01
-            </div>
 
-            <h3>
-                Les débuts
-            </h3>
+        const progressTextElement =
+            document.getElementById("island-progress-text");
 
-            <p>
 
-                L'île commence tout juste
-                à prendre forme.
+        const statusElement =
+            document.getElementById("island-status");
 
-            </p>
 
-            <span class="evolution-status">
-                DÉPART
-            </span>
+        function showIslandEvolution(level) {
 
-        </article>
+            const evolution =
+                islandEvolution[level];
 
+            if (!evolution) {
+                return;
+            }
 
-        <article class="evolution-card">
 
-            <div class="evolution-number">
-                15
-            </div>
+            levelElement.innerHTML =
+                String(level).padStart(2, "0") +
+                ' <span>/ 50</span>';
 
-            <h3>
-                Le développement
-            </h3>
 
-            <p>
+            nameElement.textContent =
+                evolution.name;
 
-                Les premières constructions
-                et zones commencent à apparaître.
 
-            </p>
+            descriptionElement.textContent =
+                evolution.description;
 
-            <span class="evolution-status">
-                DÉVELOPPEMENT
-            </span>
 
-        </article>
+            const percentage =
+                Math.round((level / 50) * 100);
 
 
-        <article class="evolution-card">
+            progressElement.style.width =
+                percentage + "%";
 
-            <div class="evolution-number">
-                30
-            </div>
 
-            <h3>
-                L'expansion
-            </h3>
+            progressTextElement.textContent =
+                percentage + "%";
 
-            <p>
 
-                Oasis devient plus grande,
-                plus riche et plus vivante.
+            statusElement.textContent =
+                "ÉVOLUTION " +
+                String(level).padStart(2, "0");
 
-            </p>
 
-            <span class="evolution-status">
-                EXPANSION
-            </span>
+            levelButtons.forEach(button => {
 
-        </article>
+                button.classList.remove("active");
 
 
-        <article class="evolution-card">
+                if (
+                    Number(button.dataset.level) ===
+                    Number(level)
+                ) {
 
-            <div class="evolution-number">
-                50
-            </div>
+                    button.classList.add("active");
 
-            <h3>
-                L'apogée
-            </h3>
+                }
 
-            <p>
+            });
 
-                L'île atteint son évolution
-                maximale.
+        }
 
-            </p>
 
-            <span class="evolution-status">
-                HORIZON
-            </span>
+        levelButtons.forEach(button => {
 
-        </article>
+            button.addEventListener(
+                "click",
+                () => {
 
+                    showIslandEvolution(
+                        Number(button.dataset.level)
+                    );
 
-    </div>
+                }
+            );
 
-</div>
+        });
 
-</section>
 
+        showIslandEvolution(1);
 
-<!-- =========================================================
-     CTA
-========================================================= -->
-
-<section class="cta">
-
-<div class="cta-box">
-
-
-    <h2>
-
-        Oasis n'est pas
-        <span>encore terminée.</span>
-
-    </h2>
-
-
-    <p>
-
-        Chaque contribution participe à l'évolution
-        de l'île. Explore les zones, découvre leur
-        histoire et accompagne Oasis jusqu'à son
-        évolution finale.
-
-    </p>
-
-
-    <a
-        href="./village.html"
-        class="button button-primary"
-    >
-        🏝️ Commencer l'exploration
-    </a>
-
-
-</div>
-
-</section>
-
-
-</main>
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-<div class="footer-inner">
-
-
-    <div class="footer-brand">
-        OASIS.
-    </div>
-
-
-    <div class="footer-text">
-        Une aventure construite par sa communauté.
-    </div>
-
-
-    <div class="footer-text">
-        © 2026 Oasis
-    </div>
-
-
-</div>
-
-</footer>
-
+    </script>
 
 </body>
+
 </html>
-```
