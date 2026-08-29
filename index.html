@@ -2,31 +2,472 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <meta
-        name="theme-color"
-        content="#071b1a"
-    >
-
-    <meta
-        name="description"
-        content="Oasis, plateforme communautaire tropicale."
-    >
+    <meta name="theme-color" content="#071b1a">
+    <meta name="description" content="Oasis, plateforme communautaire tropicale.">
+    <meta name="color-scheme" content="dark light">
 
     <title>Oasis</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <div id="app"></div>
+    <!-- FOND OASIS -->
+    <div id="oasis-background" aria-hidden="true">
+        <div class="oasis-glow oasis-glow-one"></div>
+        <div class="oasis-glow oasis-glow-two"></div>
+        <div class="oasis-particles"></div>
+    </div>
 
+    <!-- CURSEUR DESKTOP -->
+    <div id="cursor-oasis" aria-hidden="true">
+        <span class="cursor-dot"></span>
+        <span class="cursor-halo"></span>
+    </div>
+
+    <!-- NOTIFICATIONS -->
+    <div
+        id="toast-root"
+        aria-live="polite"
+        aria-atomic="true"
+    ></div>
+
+
+    <!-- HEADER -->
+    <header id="oasis-header" class="site-header">
+
+        <a
+            class="brand"
+            href="#/"
+            data-route="home"
+            aria-label="Oasis - Accueil"
+        >
+            <span class="brand-mark">🌴</span>
+
+            <span class="brand-text">
+                <strong>Oasis</strong>
+                <small>Communauté</small>
+            </span>
+        </a>
+
+
+        <div class="header-actions">
+
+            <button
+                class="icon-button"
+                id="notifications-button"
+                type="button"
+                aria-label="Notifications"
+            >
+                🔔
+            </button>
+
+            <div
+                class="coins-pill"
+                id="header-coins"
+                aria-label="Oasis Coins"
+            >
+                🌴
+                <span>0</span>
+            </div>
+
+            <button
+                class="avatar-button"
+                id="header-avatar"
+                type="button"
+                aria-label="Profil"
+            >
+                👤
+            </button>
+
+        </div>
+
+    </header>
+
+
+    <!-- SIDEBAR -->
+    <aside
+        id="oasis-sidebar"
+        class="sidebar"
+        aria-label="Navigation principale"
+    >
+
+        <nav class="sidebar-nav">
+
+
+            <!-- DÉCOUVERTE -->
+            <section class="nav-section">
+
+                <span class="nav-title">
+                    Découverte
+                </span>
+
+                <a
+                    href="#/"
+                    data-route="home"
+                >
+                    <span>🏠</span>
+                    Accueil
+                </a>
+
+                <a
+                    href="#/dashboard"
+                    data-route="dashboard"
+                >
+                    <span>📊</span>
+                    Dashboard
+                </a>
+
+                <a
+                    href="#/classements"
+                    data-route="classements"
+                >
+                    <span>🏆</span>
+                    Classements
+                </a>
+
+                <a
+                    href="#/evenements"
+                    data-route="evenements"
+                >
+                    <span>🎉</span>
+                    Événements
+                </a>
+
+            </section>
+
+
+            <!-- COMMUNAUTÉ -->
+            <section class="nav-section">
+
+                <span class="nav-title">
+                    Communauté
+                </span>
+
+                <a
+                    href="#/clans"
+                    data-route="clans"
+                >
+                    <span>🏕️</span>
+                    Clans
+                </a>
+
+                <a
+                    href="#/missions"
+                    data-route="missions"
+                >
+                    <span>🎯</span>
+                    Missions
+                </a>
+
+                <a
+                    href="#/defis"
+                    data-route="defis"
+                >
+                    <span>⚔️</span>
+                    Défis
+                </a>
+
+                <a
+                    href="#/succes"
+                    data-route="succes"
+                >
+                    <span>🏅</span>
+                    Succès
+                </a>
+
+                <a
+                    href="#/profils"
+                    data-route="profils"
+                >
+                    <span>👥</span>
+                    Profils
+                </a>
+
+            </section>
+
+
+            <!-- ÉCONOMIE -->
+            <section class="nav-section">
+
+                <span class="nav-title">
+                    Économie
+                </span>
+
+                <a
+                    href="#/oasis-coins"
+                    data-route="oasis-coins"
+                >
+                    <span>💰</span>
+                    Oasis Coins
+                </a>
+
+                <a
+                    href="#/daily"
+                    data-route="daily"
+                >
+                    <span>🎁</span>
+                    Daily
+                </a>
+
+                <a
+                    href="#/work"
+                    data-route="work"
+                >
+                    <span>💼</span>
+                    Work
+                </a>
+
+                <a
+                    href="#/boutique"
+                    data-route="boutique"
+                >
+                    <span>🏪</span>
+                    Boutique
+                </a>
+
+                <a
+                    href="#/acheter"
+                    data-route="acheter"
+                >
+                    <span>🛒</span>
+                    Acheter
+                </a>
+
+                <a
+                    href="#/tickets"
+                    data-route="tickets"
+                >
+                    <span>🎫</span>
+                    Tickets
+                </a>
+
+                <a
+                    href="#/achats"
+                    data-route="achats"
+                >
+                    <span>📦</span>
+                    Achats
+                </a>
+
+            </section>
+
+
+            <!-- OASIS -->
+            <section class="nav-section">
+
+                <span class="nav-title">
+                    Oasis
+                </span>
+
+                <a
+                    href="#/ile"
+                    data-route="ile"
+                >
+                    <span>🏝️</span>
+                    Île Oasis
+                </a>
+
+                <a
+                    href="#/contribuer-ile"
+                    data-route="contribuer-ile"
+                >
+                    <span>🤝</span>
+                    Contribuer
+                </a>
+
+            </section>
+
+
+            <!-- COMPTE -->
+            <section class="nav-section">
+
+                <span class="nav-title">
+                    Compte
+                </span>
+
+                <a
+                    href="#/profil"
+                    data-route="profil"
+                >
+                    <span>👤</span>
+                    Profil
+                </a>
+
+                <a
+                    href="#/parametres"
+                    data-route="parametres"
+                >
+                    <span>⚙️</span>
+                    Paramètres
+                </a>
+
+            </section>
+
+
+            <!-- STAFF -->
+            <section
+                class="nav-section staff-nav"
+                id="staff-navigation"
+                hidden
+            >
+
+                <span class="nav-title">
+                    Staff
+                </span>
+
+                <a
+                    href="#/moderation"
+                    data-route="moderation"
+                >
+                    <span>🛡️</span>
+                    Modération
+                </a>
+
+                <a
+                    href="#/tickets-staff"
+                    data-route="tickets-staff"
+                >
+                    <span>🎫</span>
+                    Gestion des tickets
+                </a>
+
+            </section>
+
+        </nav>
+
+
+        <!-- UTILISATEUR -->
+        <div class="sidebar-footer">
+
+            <div
+                class="user-mini"
+                id="sidebar-user"
+            >
+
+                <div class="avatar-placeholder">
+                    👤
+                </div>
+
+                <div>
+
+                    <strong id="sidebar-display-name">
+                        Invité
+                    </strong>
+
+                    <small id="sidebar-clan">
+                        Aucun clan
+                    </small>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="logout-button"
+                id="logout-button"
+                type="button"
+            >
+                ↪ Déconnexion
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- APPLICATION -->
+    <main
+        id="app"
+        class="app-shell"
+    >
+
+        <div
+            id="page-loader"
+            class="page-loader"
+            hidden
+        >
+
+            <div class="loader-orb"></div>
+
+            <span>
+                Chargement d'Oasis...
+            </span>
+
+        </div>
+
+
+        <div
+            id="page-root"
+            class="page-root"
+        ></div>
+
+    </main>
+
+
+    <!-- NAVIGATION MOBILE -->
+    <nav
+        id="mobile-nav"
+        class="mobile-nav"
+        aria-label="Navigation mobile"
+    >
+
+        <a
+            href="#/"
+            data-route="home"
+        >
+            <span>🏠</span>
+            <small>Accueil</small>
+        </a>
+
+        <a
+            href="#/dashboard"
+            data-route="dashboard"
+        >
+            <span>📊</span>
+            <small>Dashboard</small>
+        </a>
+
+        <a
+            href="#/clans"
+            data-route="clans"
+        >
+            <span>🏕️</span>
+            <small>Clans</small>
+        </a>
+
+        <a
+            href="#/boutique"
+            data-route="boutique"
+        >
+            <span>🏪</span>
+            <small>Boutique</small>
+        </a>
+
+        <a
+            href="#/profil"
+            data-route="profil"
+        >
+            <span>👤</span>
+            <small>Profil</small>
+        </a>
+
+    </nav>
+
+
+    <!-- SCRIPT PRINCIPAL -->
     <script src="script.js"></script>
 
 </body>
