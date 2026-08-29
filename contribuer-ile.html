@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Contribuer à l'Île | Oasis</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="oasis-contribution-page">
+
+  <!-- 🌴 Fond Oasis -->
+  <div class="oasis-background" aria-hidden="true">
+    <div class="oasis-gradient"></div>
+    <div class="oasis-glow oasis-glow-one"></div>
+    <div class="oasis-glow oasis-glow-two"></div>
+    <div class="oasis-mist oasis-mist-one"></div>
+    <div class="oasis-mist oasis-mist-two"></div>
+    <div class="oasis-particles"></div>
+  </div>
+
+
+  <!-- 🧭 Navigation -->
+  <header class="oasis-header">
+
+    <a href="index.html" class="oasis-logo">
+      <span class="oasis-logo-icon">🌴</span>
+      <span>Oasis</span>
+    </a>
+
+    <nav class="oasis-nav" aria-label="Navigation principale">
+
+      <a href="index.html">
+        🏠 Accueil
+      </a>
+
+      <a href="classements.html">
+        🏆 Classements
+      </a>
+
+      <a href="clans.html">
+        🏕️ Clans
+      </a>
+
+      <a href="missions.html">
+        🎯 Missions
+      </a>
+
+      <a href="defis.html">
+        ⚔️ Défis
+      </a>
+
+      <a href="ile.html">
+        🏝️ Île Oasis
+      </a>
+
+      <a href="profil.html">
+        👤 Profil
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- 🏝️ Contenu -->
+  <main class="oasis-page">
+
+    <section class="oasis-hero">
+
+      <div class="oasis-hero-content">
+
+        <span class="oasis-eyebrow">
+          🏝️ ÎLE OASIS
+        </span>
+
+        <h1>
+          Contribuer à <span>l'Oasis</span>
+        </h1>
+
+        <p>
+          Chaque contribution participe directement
+          à la progression de l'île communautaire.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- 💰 Solde -->
+    <section class="contribution-layout">
+
+      <div class="contribution-main">
+
+        <div class="contribution-card">
+
+          <div class="contribution-icon">
+            🌴
+          </div>
+
+          <span class="section-label">
+            TA CONTRIBUTION
+          </span>
+
+          <h2>
+            Fais grandir l'île
+          </h2>
+
+          <p class="contribution-description">
+            Utilise tes Oasis Coins pour contribuer
+            à la progression collective de l'Île Oasis.
+          </p>
+
+
+          <!-- Solde réel -->
+          <div class="balance-box">
+
+            <span>
+              💰 Ton solde
+            </span>
+
+            <strong id="userCoins">
+              —
+            </strong>
+
+            <small>
+              Oasis Coins
+            </small>
+
+          </div>
+
+
+          <!-- Formulaire -->
+          <form
+            id="contributionForm"
+            class="contribution-form"
+            novalidate
+          >
+
+            <label for="contributionAmount">
+              Montant à contribuer
+            </label>
+
+            <div class="amount-input-wrapper">
+
+              <input
+                id="contributionAmount"
+                name="amount"
+                type="number"
+                min="1"
+                step="1"
+                inputmode="numeric"
+                placeholder="Montant"
+                autocomplete="off"
+                required
+              >
+
+              <span>
+                🌴
+              </span>
+
+            </div>
+
+
+            <!-- Montants rapides -->
+            <div class="quick-amounts">
+
+              <button
+                type="button"
+                class="quick-amount"
+                data-amount="100"
+              >
+                100
+              </button>
+
+              <button
+                type="button"
+                class="quick-amount"
+                data-amount="500"
+              >
+                500
+              </button>
+
+              <button
+                type="button"
+                class="quick-amount"
+                data-amount="1000"
+              >
+                1 000
+              </button>
+
+              <button
+                type="button"
+                class="quick-amount"
+                data-amount="5000"
+              >
+                5 000
+              </button>
+
+            </div>
+
+
+            <!-- Erreur -->
+            <p
+              id="contributionError"
+              class="form-error"
+              role="alert"
+              hidden
+            ></p>
+
+
+            <!-- Bouton -->
+            <button
+              type="submit"
+              id="contributeButton"
+              class="oasis-button oasis-button-primary"
+              data-oasis-magnetic
+            >
+              🤝 Contribuer à l'île
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+
+      <!-- 📊 Progression -->
+      <aside class="contribution-sidebar">
+
+        <div class="island-mini-card">
+
+          <span class="section-label">
+            🏝️ PROGRESSION
+          </span>
+
+          <div class="mini-level">
+
+            <strong id="islandLevel">
+              —
+            </strong>
+
+            <span>
+              / 50
+            </span>
+
+          </div>
+
+          <p id="islandLevelName">
+            Chargement...
+          </p>
+
+
+          <div class="progress-track">
+
+            <div
+              id="islandProgressBar"
+              class="progress-fill"
+              style="width: 0%"
+            ></div>
+
+          </div>
+
+          <div class="progress-label">
+            <span>Progression</span>
+
+            <strong id="islandProgress">
+              —
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="contribution-info-card">
+
+          <div class="info-icon">
+            💚
+          </div>
+
+          <h3>
+            Une progression collective
+          </h3>
+
+          <p>
+            Ta contribution est ajoutée à la progression
+            réelle de l'île et sauvegardée côté serveur.
+          </p>
+
+        </div>
+
+
+        <div class="contribution-warning">
+
+          <span>
+            ℹ️
+          </span>
+
+          <p>
+            Les niveaux de l'île ne donnent aucun
+            avantage ni aucune récompense.
+          </p>
+
+        </div>
+
+      </aside>
+
+    </section>
+
+
+    <!-- 🔄 Fonctionnement -->
+    <section class="contribution-steps">
+
+      <div class="section-heading">
+
+        <span class="section-label">
+          🌊 COMMENT ÇA MARCHE ?
+        </span>
+
+        <h2>
+          Chaque contribution compte
+        </h2>
+
+      </div>
+
+
+      <div class="steps-grid">
+
+        <article class="step-card">
+
+          <div class="step-number">
+            01
+          </div>
+
+          <div class="step-icon">
+            💰
+          </div>
+
+          <h3>
+            Choisis un montant
+          </h3>
+
+          <p>
+            Sélectionne le nombre d'Oasis Coins
+            que tu souhaites contribuer.
+          </p>
+
+        </article>
+
+
+        <article class="step-card">
+
+          <div class="step-number">
+            02
+          </div>
+
+          <div class="step-icon">
+            🔐
+          </div>
+
+          <h3>
+            Vérification serveur
+          </h3>
+
+          <p>
+            Ton solde est vérifié côté serveur avant
+            toute modification.
+          </p>
+
+        </article>
+
+
+        <article class="step-card">
+
+          <div class="step-number">
+            03
+          </div>
+
+          <div class="step-icon">
+            🏝️
+          </div>
+
+          <h3>
+            L'île progresse
+          </h3>
+
+          <p>
+            Les Coins sont retirés et la progression
+            réelle de l'île est mise à jour.
+          </p>
+
+        </article>
+
+
+        <article class="step-card">
+
+          <div class="step-number">
+            04
+          </div>
+
+          <div class="step-icon">
+            🎉
+          </div>
+
+          <h3>
+            Nouveau niveau
+          </h3>
+
+          <p>
+            Lorsqu'un niveau est atteint, l'Oasis
+            peut annoncer cette nouvelle à la communauté.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- 🦶 Footer -->
+  <footer class="oasis-footer">
+
+    <div class="footer-brand">
+      🌴 Oasis
+    </div>
+
+    <p>
+      Une communauté. Une île. Une Oasis.
+    </p>
+
+  </footer>
+
+
+  <!-- ⚙️ Script global -->
+  <script src="script.js"></script>
+
+
+  <!-- 🏝️ Logique de contribution -->
+  <script>
+    (() => {
+      "use strict";
+
+      const form =
+        document.getElementById("contributionForm");
+
+      const amountInput =
+        document.getElementById("contributionAmount");
+
+      const errorElement =
+        document.getElementById("contributionError");
+
+      const button =
+        document.getElementById("contributeButton");
+
+      const coinsElement =
+        document.getElementById("userCoins");
+
+      const levelElement =
+        document.getElementById("islandLevel");
+
+      const levelNameElement =
+        document.getElementById("islandLevelName");
+
+      const progressBar =
+        document.getElementById("islandProgressBar");
+
+      const progressElement =
+        document.getElementById("islandProgress");
+
+
+      /*
+       * Aucun solde fictif n'est affiché.
+       * Les données doivent provenir du backend Oasis.
+       */
+
+      window.OasisContribution =
+        window.OasisContribution || {
+
+          balance: null,
+
+          islandLevel: null,
+
+          islandLevelName: null,
+
+          islandProgress: null
+
+        };
+
+
+      function showError(message) {
+
+        if (!errorElement) return;
+
+        errorElement.textContent = message;
+
+        errorElement.hidden = false;
+
+      }
+
+
+      function clearError() {
+
+        if (!errorElement) return;
+
+        errorElement.textContent = "";
+
+        errorElement.hidden = true;
+
+      }
+
+
+      function setLoading(loading) {
+
+        if (!button) return;
+
+        button.disabled = loading;
+
+        button.classList.toggle(
+          "is-loading",
+          loading
+        );
+
+        button.textContent = loading
+          ? "⏳ Contribution..."
+          : "🤝 Contribuer à l'île";
+
+      }
+
+
+      function updateContributionData(data) {
+
+        if (!data) return;
+
+
+        if (
+          Number.isFinite(
+            Number(data.balance)
+          )
+        ) {
+
+          const balance =
+            Number(data.balance);
+
+          window.OasisContribution.balance =
+            balance;
+
+          if (coinsElement) {
+
+            coinsElement.textContent =
+              balance.toLocaleString("fr-FR");
+
+          }
+
+        }
+
+
+        if (
+          Number.isFinite(
+            Number(data.level)
+          )
+        ) {
+
+          const level =
+            Number(data.level);
+
+          window.OasisContribution.islandLevel =
+            level;
+
+          if (levelElement) {
+
+            levelElement.textContent =
+              level;
+
+          }
+
+        }
+
+
+        if (data.levelName) {
+
+          window.OasisContribution.islandLevelName =
+            data.levelName;
+
+          if (levelNameElement) {
+
+            levelNameElement.textContent =
+              data.levelName;
+
+          }
+
+        }
+
+
+        if (
+          Number.isFinite(
+            Number(data.progress)
+          )
+        ) {
+
+          const progress =
+            Math.max(
+              0,
+              Math.min(
+                100,
+                Number(data.progress)
+              )
+            );
+
+          window.OasisContribution.islandProgress =
+            progress;
+
+          if (progressBar) {
+
+            progressBar.style.width =
+              `${progress}%`;
+
+          }
+
+          if (progressElement) {
+
+            progressElement.textContent =
+              `${progress}%`;
+
+          }
+
+        }
+
+      }
+
+
+      /*
+       * Fonction publique permettant au système
+       * backend/API Oasis d'injecter les vraies données.
+       */
+
+      window.OasisContribution.update =
+        updateContributionData;
+
+
+      /*
+       * Montants rapides
+       */
+
+      document
+        .querySelectorAll(".quick-amount")
+        .forEach((quickButton) => {
+
+          quickButton.addEventListener(
+            "click",
+            () => {
+
+              const amount =
+                Number(
+                  quickButton.dataset.amount
+                );
+
+              if (
+                Number.isFinite(amount) &&
+                amount > 0 &&
+                amountInput
+              ) {
+
+                amountInput.value =
+                  amount;
+
+                clearError();
+
+                amountInput.focus();
+
+              }
+
+            }
+          );
+
+        });
+
+
+      /*
+       * Contribution
+       *
+       * IMPORTANT :
+       * aucune modification locale des Coins.
+       *
+       * La contribution réelle doit passer
+       * par une fonction serveur sécurisée.
+       */
+
+      if (form) {
+
+        form.addEventListener(
+          "submit",
+          async (event) => {
+
+            event.preventDefault();
+
+            clearError();
+
+
+            const amount =
+              Number(
+                amountInput
+                  ? amountInput.value
+                  : NaN
+              );
+
+
+            if (
+              !Number.isInteger(amount) ||
+              amount <= 0
+            ) {
+
+              showError(
+                "Entre un montant valide."
+              );
+
+              return;
+
+            }
+
+
+            if (
+              Number.isFinite(
+                window.OasisContribution.balance
+              ) &&
+              amount >
+                window.OasisContribution.balance
+            ) {
+
+              showError(
+                "Ton solde est insuffisant."
+              );
+
+              return;
+
+            }
+
+
+            setLoading(true);
+
+
+            try {
+
+              /*
+               * Le backend doit exposer ici
+               * l'endpoint sécurisé réel.
+               *
+               * Exemple attendu :
+               *
+               * POST /api/island/contribute
+               *
+               * Le frontend ne doit jamais
+               * modifier directement :
+               *
+               * - coins
+               * - progression
+               * - niveau
+               */
+
+              if (
+                typeof window.OasisAPI
+                  ?.contributeToIsland !==
+                "function"
+              ) {
+
+                throw new Error(
+                  "SERVICE_UNAVAILABLE"
+                );
+
+              }
+
+
+              const result =
+                await window.OasisAPI
+                  .contributeToIsland({
+                    amount
+                  });
+
+
+              if (!result) {
+
+                throw new Error(
+                  "INVALID_RESPONSE"
+                );
+
+              }
+
+
+              /*
+               * Le serveur retourne les nouvelles
+               * données réelles.
+               */
+
+              updateContributionData(
+                result
+              );
+
+
+              if (
+                window.Oasis &&
+                typeof window.Oasis
+                  .showToast ===
+                "function"
+              ) {
+
+                window.Oasis.showToast(
+                  "🌴 Contribution enregistrée !",
+                  "success"
+                );
+
+              }
+
+
+              if (
+                result.levelUp &&
+                typeof window.Oasis
+                  ?.showToast ===
+                "function"
+              ) {
+
+                window.Oasis.showToast(
+                  `🏝️ L'Île Oasis atteint le niveau ${result.level} !`,
+                  "success"
+                );
+
+              }
+
+
+              if (amountInput) {
+
+                amountInput.value = "";
+
+              }
+
+            } catch (error) {
+
+              console.error(
+                "Oasis contribution error:",
+                error
+              );
+
+
+              if (
+                error?.message ===
+                "INSUFFICIENT_BALANCE"
+              ) {
+
+                showError(
+                  "Ton solde est insuffisant."
+                );
+
+              } else if (
+                error?.message ===
+                "INVALID_AMOUNT"
+              ) {
+
+                showError(
+                  "Le montant demandé est invalide."
+                );
+
+              } else if (
+                error?.message ===
+                "SERVICE_UNAVAILABLE"
+              ) {
+
+                showError(
+                  "Le service de contribution n'est pas encore disponible."
+                );
+
+              } else {
+
+                showError(
+                  "Impossible d'effectuer la contribution pour le moment."
+                );
+
+              }
+
+            } finally {
+
+              setLoading(false);
+
+            }
+
+          }
+        );
+
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
