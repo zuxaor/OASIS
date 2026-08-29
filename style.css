@@ -1,0 +1,2003 @@
+```css
+/* =========================================================
+   OASIS • STYLE GLOBAL
+   Tropical / Moderne / Premium
+========================================================= */
+
+:root {
+    --oasis-green-dark: #17382a;
+    --oasis-green: #3f7257;
+    --oasis-green-light: #78a77d;
+
+    --oasis-ocean: #4fa9a6;
+    --oasis-ocean-light: #8bc9c3;
+
+    --oasis-sand: #d8be7a;
+    --oasis-sand-light: #eee0b7;
+
+    --oasis-cream: #f4f1e5;
+    --oasis-white: #ffffff;
+
+    --oasis-text: #244238;
+    --oasis-muted: #6d8479;
+
+    --oasis-glass: rgba(255, 255, 255, .62);
+    --oasis-border: rgba(255, 255, 255, .65);
+
+    --oasis-shadow:
+        0 25px 70px rgba(30, 75, 61, .14);
+
+    --oasis-radius: 24px;
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    overflow-x: hidden;
+
+    font-family:
+        "Fredoka",
+        sans-serif;
+
+    color: var(--oasis-text);
+
+    background:
+        linear-gradient(
+            180deg,
+            #a8d4d0 0%,
+            #c9ddd0 38%,
+            #e8dfc2 100%
+        );
+}
+
+body::before {
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -10;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(255,255,255,.48),
+            transparent 24%
+        ),
+
+        radial-gradient(
+            circle at 90% 20%,
+            rgba(255,255,255,.32),
+            transparent 25%
+        );
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea,
+select {
+    font: inherit;
+}
+
+button {
+    border: 0;
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.oasis-container {
+    width:
+        min(
+            1160px,
+            calc(100% - 40px)
+        );
+
+    margin:
+        0 auto;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    position: fixed;
+
+    top: 18px;
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    width:
+        min(
+            1180px,
+            calc(100% - 40px)
+        );
+
+    height: 68px;
+
+    padding:
+        0 12px 0 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background:
+        rgba(255,255,255,.72);
+
+    border:
+        1px solid
+        rgba(255,255,255,.8);
+
+    border-radius: 20px;
+
+    backdrop-filter:
+        blur(20px);
+
+    -webkit-backdrop-filter:
+        blur(20px);
+
+    box-shadow:
+        0 15px 45px
+        rgba(35,75,65,.13);
+
+    z-index: 1000;
+
+    transition:
+        .25s ease;
+}
+
+.navbar.navbar-scrolled {
+    top: 10px;
+
+    background:
+        rgba(255,255,255,.86);
+
+    box-shadow:
+        0 18px 45px
+        rgba(35,75,65,.17);
+}
+
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.brand {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    flex-shrink: 0;
+}
+
+.brand-mark {
+    width: 43px;
+    height: 43px;
+
+    display: grid;
+
+    place-items: center;
+
+    border-radius: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #7bc2bb,
+            #478a80
+        );
+
+    color: white;
+
+    font-size: 22px;
+
+    box-shadow:
+        0 8px 20px
+        rgba(54,120,111,.22);
+}
+
+.brand-name {
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size: 23px;
+
+    font-weight: 800;
+
+    letter-spacing: .5px;
+
+    color:
+        var(--oasis-green);
+}
+
+.brand-name span {
+    color:
+        var(--oasis-sand);
+}
+
+
+/* =========================================================
+   NAV LINKS
+========================================================= */
+
+.nav-links {
+    display: flex;
+
+    align-items: center;
+
+    gap: 4px;
+}
+
+.nav-links a {
+    position: relative;
+
+    padding:
+        10px 14px;
+
+    border-radius: 12px;
+
+    color:
+        #607a70;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    transition:
+        .2s ease;
+}
+
+.nav-links a::after {
+    content: "";
+
+    position: absolute;
+
+    left: 14px;
+    right: 14px;
+
+    bottom: 5px;
+
+    height: 2px;
+
+    border-radius: 99px;
+
+    background:
+        var(--oasis-green);
+
+    transform:
+        scaleX(0);
+
+    transform-origin:
+        center;
+
+    transition:
+        .2s ease;
+}
+
+.nav-links a:hover {
+    color:
+        var(--oasis-green);
+
+    background:
+        rgba(63,114,87,.07);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    transform:
+        scaleX(1);
+}
+
+.nav-links a.active {
+    color:
+        var(--oasis-green);
+
+    background:
+        rgba(63,114,87,.07);
+}
+
+
+/* =========================================================
+   DISCORD BUTTON
+========================================================= */
+
+.nav-discord {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    padding:
+        12px 18px;
+
+    border-radius: 13px;
+
+    background:
+        var(--oasis-green);
+
+    color: white;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 10px 25px
+        rgba(48,95,69,.18);
+
+    transition:
+        .22s ease;
+}
+
+.nav-discord:hover {
+    transform:
+        translateY(-2px);
+
+    background:
+        #315f49;
+
+    box-shadow:
+        0 14px 30px
+        rgba(48,95,69,.24);
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.button {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 8px;
+
+    min-height: 48px;
+
+    padding:
+        13px 20px;
+
+    border-radius: 14px;
+
+    font-size: 12px;
+
+    font-weight: 700;
+
+    transition:
+        .22s ease;
+}
+
+.button-primary {
+    background:
+        var(--oasis-green);
+
+    color:
+        white;
+
+    box-shadow:
+        0 12px 28px
+        rgba(48,95,69,.20);
+}
+
+.button-primary:hover {
+    transform:
+        translateY(-3px);
+
+    background:
+        #315f49;
+
+    box-shadow:
+        0 17px 35px
+        rgba(48,95,69,.25);
+}
+
+.button-secondary {
+    background:
+        rgba(255,255,255,.52);
+
+    border:
+        1px solid
+        rgba(63,114,87,.13);
+
+    color:
+        var(--oasis-green);
+}
+
+.button-secondary:hover {
+    transform:
+        translateY(-2px);
+
+    background:
+        rgba(255,255,255,.82);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    position: relative;
+
+    min-height:
+        100vh;
+
+    display: flex;
+
+    align-items: center;
+
+    overflow: hidden;
+
+    isolation: isolate;
+}
+
+.hero-background {
+    position: absolute;
+
+    inset: 0;
+
+    z-index: -3;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            180deg,
+            #8bc7ca 0%,
+            #b8d8cf 45%,
+            #e5dfc2 100%
+        );
+}
+
+
+/* =========================================================
+   HERO SUN
+========================================================= */
+
+.hero-background::before {
+    content: "";
+
+    position: absolute;
+
+    width:
+        min(520px, 65vw);
+
+    height:
+        min(520px, 65vw);
+
+    right:
+        8%;
+
+    top:
+        8%;
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,240,187,.8),
+            rgba(255,240,187,.22) 42%,
+            transparent 70%
+        );
+
+    animation:
+        oasisSun
+        8s
+        ease-in-out
+        infinite;
+}
+
+@keyframes oasisSun {
+
+    0%,
+    100% {
+        transform:
+            scale(.95);
+    }
+
+    50% {
+        transform:
+            scale(1.08);
+    }
+}
+
+
+/* =========================================================
+   HERO WATER
+========================================================= */
+
+.hero-water {
+    position: absolute;
+
+    left: -5%;
+    right: -5%;
+
+    bottom: -2%;
+
+    height: 42%;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(82,174,177,.75),
+            rgba(49,137,151,.95)
+        );
+
+    clip-path:
+        polygon(
+            0 14%,
+            8% 10%,
+            18% 17%,
+            28% 9%,
+            39% 14%,
+            51% 7%,
+            62% 15%,
+            74% 8%,
+            87% 13%,
+            100% 7%,
+            100% 100%,
+            0 100%
+        );
+
+    z-index: -2;
+}
+
+
+/* =========================================================
+   HERO WAVES
+========================================================= */
+
+.hero-wave {
+    position: absolute;
+
+    left: -10%;
+
+    width: 120%;
+
+    height: 85px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(255,255,255,.16);
+
+    z-index: -1;
+
+    animation:
+        oasisWave
+        7s
+        ease-in-out
+        infinite;
+}
+
+.hero-wave.one {
+    bottom: 25%;
+}
+
+.hero-wave.two {
+    bottom: 16%;
+
+    opacity: .55;
+
+    animation-delay:
+        -2s;
+}
+
+.hero-wave.three {
+    bottom: 7%;
+
+    opacity: .32;
+
+    animation-delay:
+        -4s;
+}
+
+@keyframes oasisWave {
+
+    0%,
+    100% {
+        transform:
+            translateX(-2%);
+    }
+
+    50% {
+        transform:
+            translateX(2%);
+    }
+}
+
+
+/* =========================================================
+   HERO PALMS
+========================================================= */
+
+.hero-palm {
+    position: absolute;
+
+    font-size:
+        clamp(
+            80px,
+            11vw,
+            160px
+        );
+
+    opacity:
+        .42;
+
+    filter:
+        drop-shadow(
+            0 20px 18px
+            rgba(30,70,50,.16)
+        );
+
+    animation:
+        oasisPalm
+        5s
+        ease-in-out
+        infinite;
+}
+
+.hero-palm.left {
+    left:
+        2%;
+
+    bottom:
+        27%;
+}
+
+.hero-palm.right {
+    right:
+        4%;
+
+    bottom:
+        22%;
+
+    animation-delay:
+        -2s;
+}
+
+@keyframes oasisPalm {
+
+    0%,
+    100% {
+        transform:
+            rotate(-2deg)
+            translateY(0);
+    }
+
+    50% {
+        transform:
+            rotate(2deg)
+            translateY(-7px);
+    }
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.hero-content {
+    position: relative;
+
+    z-index: 2;
+
+    width:
+        min(
+            1160px,
+            calc(100% - 40px)
+        );
+
+    margin:
+        0 auto;
+
+    padding-top:
+        70px;
+}
+
+.hero-eyebrow {
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        8px 13px;
+
+    border:
+        1px solid
+        rgba(63,114,87,.13);
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(255,255,255,.48);
+
+    color:
+        #5b8970;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        1.2px;
+
+    text-transform:
+        uppercase;
+}
+
+.hero-eyebrow::before {
+    content: "";
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        #73a76e;
+
+    box-shadow:
+        0 0 0 5px
+        rgba(115,167,110,.10);
+
+    animation:
+        oasisPulse
+        2s
+        ease-in-out
+        infinite;
+}
+
+@keyframes oasisPulse {
+
+    0%,
+    100% {
+        transform:
+            scale(1);
+
+        opacity:
+            .75;
+    }
+
+    50% {
+        transform:
+            scale(1.25);
+
+        opacity:
+            1;
+    }
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.hero h1 {
+    max-width:
+        780px;
+
+    margin-top:
+        22px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        clamp(
+            64px,
+            9vw,
+            120px
+        );
+
+    line-height:
+        .84;
+
+    letter-spacing:
+        -5px;
+
+    font-weight:
+        800;
+
+    color:
+        var(--oasis-green-dark);
+
+    animation:
+        oasisHeroAppear
+        .9s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+}
+
+.hero h1 span {
+    display:
+        block;
+
+    color:
+        var(--oasis-ocean);
+}
+
+@keyframes oasisHeroAppear {
+
+    from {
+        opacity:
+            0;
+
+        transform:
+            translateY(30px);
+    }
+
+    to {
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+    }
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.hero-description {
+    max-width:
+        570px;
+
+    margin-top:
+        26px;
+
+    color:
+        #557269;
+
+    font-size:
+        15px;
+
+    line-height:
+        1.8;
+
+    font-weight:
+        500;
+}
+
+
+/* =========================================================
+   HERO BUTTONS
+========================================================= */
+
+.hero-buttons {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        12px;
+
+    margin-top:
+        30px;
+}
+
+
+/* =========================================================
+   HERO STATS
+========================================================= */
+
+.hero-stats {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        38px;
+
+    margin-top:
+        48px;
+}
+
+.hero-stat {
+    position:
+        relative;
+}
+
+.hero-stat:not(:last-child)::after {
+    content: "";
+
+    position:
+        absolute;
+
+    right:
+        -19px;
+
+    top:
+        50%;
+
+    width:
+        1px;
+
+    height:
+        30px;
+
+    transform:
+        translateY(-50%);
+
+    background:
+        rgba(63,114,87,.18);
+}
+
+.hero-stat strong {
+    display:
+        block;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        27px;
+
+    line-height:
+        1;
+
+    color:
+        var(--oasis-green);
+}
+
+.hero-stat span {
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        #71867d;
+
+    font-size:
+        9px;
+
+    font-weight:
+        600;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        .8px;
+}
+
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.oasis-section {
+    padding:
+        120px 20px;
+
+    background:
+        rgba(255,255,255,.40);
+
+    border-top:
+        1px solid
+        rgba(63,114,87,.07);
+
+    border-bottom:
+        1px solid
+        rgba(63,114,87,.07);
+}
+
+.oasis-section.dark {
+    background:
+        #17382a;
+
+    color:
+        white;
+}
+
+.oasis-section.dark .section-title {
+    color:
+        #eef6ee;
+}
+
+.oasis-section.dark .section-text {
+    color:
+        #a9beb0;
+}
+
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.eyebrow {
+    color:
+        #609178;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        3px;
+
+    text-transform:
+        uppercase;
+}
+
+
+/* =========================================================
+   SECTION TITLE
+========================================================= */
+
+.section-title {
+    margin-top:
+        8px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        clamp(
+            45px,
+            6vw,
+            75px
+        );
+
+    line-height:
+        .94;
+
+    letter-spacing:
+        -2.5px;
+
+    color:
+        var(--oasis-green-dark);
+}
+
+.section-title span {
+    color:
+        var(--oasis-ocean);
+}
+
+
+/* =========================================================
+   SECTION TEXT
+========================================================= */
+
+.section-text {
+    max-width:
+        670px;
+
+    margin-top:
+        17px;
+
+    color:
+        var(--oasis-muted);
+
+    font-size:
+        13px;
+
+    line-height:
+        1.8;
+}
+
+
+/* =========================================================
+   ZONES
+========================================================= */
+
+.zones-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:
+        18px;
+
+    margin-top:
+        50px;
+}
+
+.zone-card {
+    position:
+        relative;
+
+    min-height:
+        290px;
+
+    padding:
+        28px;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid
+        rgba(255,255,255,.72);
+
+    border-radius:
+        var(--oasis-radius);
+
+    background:
+        rgba(255,255,255,.62);
+
+    box-shadow:
+        var(--oasis-shadow);
+
+    transition:
+        .3s ease;
+}
+
+.zone-card::before {
+    content: "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.38),
+            transparent 55%
+        );
+
+    pointer-events:
+        none;
+}
+
+.zone-card:hover {
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        0 35px 80px
+        rgba(30,75,61,.19);
+}
+
+.zone-card.village {
+    background:
+        linear-gradient(
+            145deg,
+            #dce9d4,
+            #f1e5c4
+        );
+}
+
+.zone-card.port {
+    background:
+        linear-gradient(
+            145deg,
+            #c5e0dd,
+            #e7ddbf
+        );
+}
+
+.zone-card.forest {
+    background:
+        linear-gradient(
+            145deg,
+            #b7d0b0,
+            #dbe4c7
+        );
+}
+
+.zone-icon {
+    position:
+        relative;
+
+    width:
+        58px;
+
+    height:
+        58px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(255,255,255,.62);
+
+    font-size:
+        27px;
+
+    box-shadow:
+        0 10px 25px
+        rgba(50,90,70,.10);
+}
+
+.zone-card h3 {
+    position:
+        relative;
+
+    margin-top:
+        20px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        30px;
+
+    color:
+        var(--oasis-green-dark);
+}
+
+.zone-card p {
+    position:
+        relative;
+
+    max-width:
+        360px;
+
+    margin-top:
+        6px;
+
+    color:
+        #667e73;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.7;
+}
+
+.zone-link {
+    position:
+        absolute;
+
+    left:
+        28px;
+
+    bottom:
+        25px;
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        6px;
+
+    color:
+        var(--oasis-green);
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        1px;
+}
+
+
+/* =========================================================
+   PROGRESSION
+========================================================= */
+
+.progress-panel {
+    margin-top:
+        50px;
+
+    padding:
+        35px;
+
+    border:
+        1px solid
+        rgba(255,255,255,.7);
+
+    border-radius:
+        28px;
+
+    background:
+        rgba(255,255,255,.58);
+
+    box-shadow:
+        var(--oasis-shadow);
+}
+
+.progress-header {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+}
+
+.progress-level {
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        55px;
+
+    line-height:
+        .9;
+
+    color:
+        var(--oasis-green);
+}
+
+.progress-level small {
+    font-family:
+        "Fredoka",
+        sans-serif;
+
+    font-size:
+        11px;
+
+    color:
+        #82968d;
+}
+
+.progress-percent {
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        28px;
+
+    color:
+        var(--oasis-sand);
+}
+
+.progress-bar {
+    height:
+        10px;
+
+    margin-top:
+        25px;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        999px;
+
+    background:
+        rgba(63,114,87,.10);
+}
+
+.progress-bar span {
+    display:
+        block;
+
+    width:
+        2%;
+
+    height:
+        100%;
+
+    border-radius:
+        inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--oasis-green),
+            var(--oasis-ocean)
+        );
+
+    transition:
+        width
+        .8s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+}
+
+
+/* =========================================================
+   EVOLUTION CARDS
+========================================================= */
+
+.evolution-grid {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(5, 1fr);
+
+    gap:
+        10px;
+
+    margin-top:
+        25px;
+}
+
+.evolution-card {
+    padding:
+        15px 10px;
+
+    border:
+        1px solid
+        rgba(63,114,87,.10);
+
+    border-radius:
+        15px;
+
+    background:
+        rgba(255,255,255,.45);
+
+    text-align:
+        center;
+
+    transition:
+        .2s ease;
+}
+
+.evolution-card:hover {
+    transform:
+        translateY(-4px);
+
+    background:
+        rgba(255,255,255,.75);
+}
+
+.evolution-card strong {
+    display:
+        block;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        21px;
+
+    color:
+        var(--oasis-green);
+}
+
+.evolution-card span {
+    display:
+        block;
+
+    margin-top:
+        2px;
+
+    color:
+        #778b82;
+
+    font-size:
+        8px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        .5px;
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.oasis-cta {
+    padding:
+        100px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #315f49,
+            #183b2c
+        );
+}
+
+.cta-box {
+    width:
+        min(
+            900px,
+            100%
+        );
+
+    margin:
+        0 auto;
+
+    padding:
+        60px 30px;
+
+    text-align:
+        center;
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+
+    border-radius:
+        30px;
+
+    background:
+        rgba(255,255,255,.06);
+}
+
+.cta-box h2 {
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        clamp(
+            40px,
+            6vw,
+            68px
+        );
+
+    line-height:
+        .95;
+
+    color:
+        #f1f7ef;
+}
+
+.cta-box h2 span {
+    color:
+        var(--oasis-sand);
+}
+
+.cta-box p {
+    max-width:
+        600px;
+
+    margin:
+        16px auto 0;
+
+    color:
+        #b5c9ba;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.8;
+}
+
+.cta-box .button {
+    margin-top:
+        27px;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding:
+        38px 20px;
+
+    background:
+        #10281d;
+
+    color:
+        white;
+}
+
+.footer-inner {
+    width:
+        min(
+            1120px,
+            100%
+        );
+
+    margin:
+        0 auto;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+}
+
+.footer-brand {
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        21px;
+
+    font-weight:
+        800;
+
+    color:
+        #d5e8d1;
+}
+
+.footer-text {
+    color:
+        #8fa99a;
+
+    font-size:
+        10px;
+}
+
+
+/* =========================================================
+   REVEAL ANIMATION
+========================================================= */
+
+[data-reveal] {
+    opacity:
+        0;
+
+    transform:
+        translateY(25px);
+
+    transition:
+        opacity
+        .7s
+        ease,
+        transform
+        .7s
+        cubic-bezier(
+            .2,
+            .8,
+            .2,
+            1
+        );
+}
+
+[data-reveal].is-visible {
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+}
+
+
+/* =========================================================
+   BACK TO TOP
+========================================================= */
+
+.back-to-top {
+    position:
+        fixed;
+
+    right:
+        25px;
+
+    bottom:
+        25px;
+
+    width:
+        45px;
+
+    height:
+        45px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border-radius:
+        14px;
+
+    background:
+        var(--oasis-green);
+
+    color:
+        white;
+
+    box-shadow:
+        0 12px 30px
+        rgba(40,85,62,.25);
+
+    opacity:
+        0;
+
+    visibility:
+        hidden;
+
+    transform:
+        translateY(10px);
+
+    transition:
+        .25s ease;
+
+    z-index:
+        900;
+}
+
+.back-to-top.is-visible {
+    opacity:
+        1;
+
+    visibility:
+        visible;
+
+    transform:
+        translateY(0);
+}
+
+.back-to-top:hover {
+    transform:
+        translateY(-3px);
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media(max-width: 950px) {
+
+    .nav-links {
+        display:
+            none;
+    }
+
+    .zones-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .evolution-grid {
+        grid-template-columns:
+            repeat(3,1fr);
+    }
+
+}
+
+
+@media(max-width: 650px) {
+
+    .navbar {
+        top:
+            10px;
+
+        width:
+            calc(100% - 20px);
+
+        height:
+            60px;
+
+        padding:
+            0 9px 0 12px;
+    }
+
+    .brand-mark {
+        width:
+            39px;
+
+        height:
+            39px;
+    }
+
+    .brand-name {
+        font-size:
+            19px;
+    }
+
+    .nav-discord {
+        padding:
+            10px 12px;
+    }
+
+    .hero {
+        min-height:
+            850px;
+    }
+
+    .hero-content {
+        width:
+            calc(100% - 30px);
+
+        padding-top:
+            80px;
+    }
+
+    .hero h1 {
+        font-size:
+            60px;
+
+        letter-spacing:
+            -3px;
+    }
+
+    .hero-description {
+        font-size:
+            13px;
+    }
+
+    .hero-buttons {
+        flex-direction:
+            column;
+
+        align-items:
+            stretch;
+    }
+
+    .button {
+        width:
+            100%;
+    }
+
+    .hero-stats {
+        gap:
+            25px;
+
+        margin-top:
+            40px;
+    }
+
+    .hero-stat:not(:last-child)::after {
+        right:
+            -13px;
+    }
+
+    .oasis-section {
+        padding:
+            85px 15px;
+    }
+
+    .section-title {
+        font-size:
+            45px;
+    }
+
+    .zones-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .zone-card {
+        min-height:
+            270px;
+    }
+
+    .progress-panel {
+        padding:
+            25px;
+    }
+
+    .evolution-grid {
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .footer-inner {
+        flex-direction:
+            column;
+
+        text-align:
+            center;
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media(prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior:
+            auto !important;
+
+        animation-duration:
+            .01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            .01ms !important;
+    }
+
+}
+```
