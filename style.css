@@ -1,34 +1,7 @@
-```css
 /* =========================================================
-   OASIS • STYLE GLOBAL
-   Tropical / Moderne / Premium
+   OASIS • STYLE.CSS
+   STYLE COMMUN DU SITE
 ========================================================= */
-
-:root {
-    --oasis-green-dark: #17382a;
-    --oasis-green: #3f7257;
-    --oasis-green-light: #78a77d;
-
-    --oasis-ocean: #4fa9a6;
-    --oasis-ocean-light: #8bc9c3;
-
-    --oasis-sand: #d8be7a;
-    --oasis-sand-light: #eee0b7;
-
-    --oasis-cream: #f4f1e5;
-    --oasis-white: #ffffff;
-
-    --oasis-text: #244238;
-    --oasis-muted: #6d8479;
-
-    --oasis-glass: rgba(255, 255, 255, .62);
-    --oasis-border: rgba(255, 255, 255, .65);
-
-    --oasis-shadow:
-        0 25px 70px rgba(30, 75, 61, .14);
-
-    --oasis-radius: 24px;
-}
 
 
 /* =========================================================
@@ -47,46 +20,18 @@ html {
 
 body {
     min-height: 100vh;
-
     overflow-x: hidden;
 
-    font-family:
-        "Fredoka",
-        sans-serif;
+    font-family: "Fredoka", sans-serif;
 
-    color: var(--oasis-text);
+    color: #24362f;
 
     background:
         linear-gradient(
             180deg,
-            #a8d4d0 0%,
-            #c9ddd0 38%,
-            #e8dfc2 100%
-        );
-}
-
-body::before {
-    content: "";
-
-    position: fixed;
-
-    inset: 0;
-
-    z-index: -10;
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle at 10% 10%,
-            rgba(255,255,255,.48),
-            transparent 24%
-        ),
-
-        radial-gradient(
-            circle at 90% 20%,
-            rgba(255,255,255,.32),
-            transparent 25%
+            #a8d3d1 0%,
+            #c7ded2 45%,
+            #e8dfc4 100%
         );
 }
 
@@ -95,32 +40,76 @@ a {
     text-decoration: none;
 }
 
-button,
-input,
-textarea,
-select {
-    font: inherit;
-}
-
 button {
+    font: inherit;
     border: 0;
     cursor: pointer;
 }
 
 
 /* =========================================================
-   CONTAINER
+   VARIABLES
 ========================================================= */
 
-.oasis-container {
-    width:
-        min(
-            1160px,
-            calc(100% - 40px)
-        );
+:root {
 
-    margin:
-        0 auto;
+    --oasis-green: #578f87;
+    --oasis-green-dark: #416f68;
+    --oasis-green-light: #8fc8c4;
+
+    --oasis-dark: #294a42;
+    --oasis-text: #57756d;
+    --oasis-muted: #71877f;
+
+    --oasis-sand: #c39b5e;
+    --oasis-cream: #f4f0df;
+
+    --white-glass: rgba(255,255,255,.65);
+    --white-soft: rgba(255,255,255,.45);
+
+    --border-light: rgba(255,255,255,.7);
+
+    --shadow:
+        0 25px 60px rgba(50,90,80,.12);
+
+    --radius: 24px;
+}
+
+
+/* =========================================================
+   BACKGROUND
+========================================================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    z-index: -10;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(255,255,255,.55),
+            transparent 25%
+        ),
+
+        radial-gradient(
+            circle at 85% 25%,
+            rgba(255,255,255,.35),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            180deg,
+            #a7d2d0,
+            #c6ded1 48%,
+            #e8dfc2
+        );
 }
 
 
@@ -129,24 +118,21 @@ button {
 ========================================================= */
 
 .navbar {
+
     position: fixed;
 
     top: 18px;
     left: 50%;
 
-    transform:
-        translateX(-50%);
+    transform: translateX(-50%);
 
     width:
-        min(
-            1180px,
-            calc(100% - 40px)
-        );
+        min(1180px, calc(100% - 40px));
 
     height: 68px;
 
     padding:
-        0 12px 0 18px;
+        0 12px 0 20px;
 
     display: flex;
 
@@ -154,60 +140,41 @@ button {
 
     justify-content: space-between;
 
-    gap: 20px;
-
     background:
-        rgba(255,255,255,.72);
+        rgba(255,255,255,.76);
 
     border:
-        1px solid
-        rgba(255,255,255,.8);
+        2px solid rgba(255,255,255,.7);
 
     border-radius: 20px;
 
     backdrop-filter:
-        blur(20px);
+        blur(18px);
 
     -webkit-backdrop-filter:
-        blur(20px);
+        blur(18px);
 
     box-shadow:
-        0 15px 45px
-        rgba(35,75,65,.13);
+        0 15px 40px rgba(50,90,80,.14);
 
     z-index: 1000;
-
-    transition:
-        .25s ease;
 }
 
-.navbar.navbar-scrolled {
-    top: 10px;
-
-    background:
-        rgba(255,255,255,.86);
-
-    box-shadow:
-        0 18px 45px
-        rgba(35,75,65,.17);
-}
-
-
-/* =========================================================
-   BRAND
-========================================================= */
 
 .brand {
+
     display: flex;
 
     align-items: center;
 
     gap: 10px;
 
-    flex-shrink: 0;
+    font-weight: 800;
 }
 
+
 .brand-mark {
+
     width: 43px;
     height: 43px;
 
@@ -220,45 +187,38 @@ button {
     background:
         linear-gradient(
             145deg,
-            #7bc2bb,
-            #478a80
+            #8fc8c4,
+            #568c86
         );
 
-    color: white;
+    box-shadow:
+        0 7px 18px rgba(50,100,95,.2);
 
     font-size: 22px;
-
-    box-shadow:
-        0 8px 20px
-        rgba(54,120,111,.22);
 }
 
+
 .brand-name {
+
     font-family:
         "Baloo 2",
         sans-serif;
 
-    font-size: 23px;
+    font-size: 22px;
 
     font-weight: 800;
 
-    letter-spacing: .5px;
-
-    color:
-        var(--oasis-green);
+    color: #41675d;
 }
+
 
 .brand-name span {
-    color:
-        var(--oasis-sand);
+    color: #c39b5e;
 }
 
 
-/* =========================================================
-   NAV LINKS
-========================================================= */
-
 .nav-links {
+
     display: flex;
 
     align-items: center;
@@ -266,16 +226,15 @@ button {
     gap: 4px;
 }
 
+
 .nav-links a {
-    position: relative;
 
     padding:
         10px 14px;
 
     border-radius: 12px;
 
-    color:
-        #607a70;
+    color: #617b73;
 
     font-size: 12px;
 
@@ -285,109 +244,61 @@ button {
         .2s ease;
 }
 
-.nav-links a::after {
-    content: "";
 
-    position: absolute;
-
-    left: 14px;
-    right: 14px;
-
-    bottom: 5px;
-
-    height: 2px;
-
-    border-radius: 99px;
+.nav-links a:hover {
 
     background:
-        var(--oasis-green);
+        #e1efeb;
 
-    transform:
-        scaleX(0);
+    color:
+        #41675d;
+}
 
-    transform-origin:
-        center;
+
+.nav-discord {
+
+    padding:
+        12px 18px;
+
+    border-radius:
+        13px;
+
+    background:
+        #638f87;
+
+    color:
+        white;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    box-shadow:
+        0 8px 20px rgba(55,100,94,.18);
 
     transition:
         .2s ease;
 }
 
-.nav-links a:hover {
-    color:
-        var(--oasis-green);
-
-    background:
-        rgba(63,114,87,.07);
-}
-
-.nav-links a:hover::after,
-.nav-links a.active::after {
-    transform:
-        scaleX(1);
-}
-
-.nav-links a.active {
-    color:
-        var(--oasis-green);
-
-    background:
-        rgba(63,114,87,.07);
-}
-
-
-/* =========================================================
-   DISCORD BUTTON
-========================================================= */
-
-.nav-discord {
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 7px;
-
-    padding:
-        12px 18px;
-
-    border-radius: 13px;
-
-    background:
-        var(--oasis-green);
-
-    color: white;
-
-    font-size: 12px;
-
-    font-weight: 700;
-
-    box-shadow:
-        0 10px 25px
-        rgba(48,95,69,.18);
-
-    transition:
-        .22s ease;
-}
 
 .nav-discord:hover {
+
     transform:
         translateY(-2px);
 
     background:
-        #315f49;
-
-    box-shadow:
-        0 14px 30px
-        rgba(48,95,69,.24);
+        #527c75;
 }
 
 
 /* =========================================================
-   BUTTONS
+   BOUTONS
 ========================================================= */
 
 .button {
+
     display: inline-flex;
 
     align-items: center;
@@ -396,440 +307,155 @@ button {
 
     gap: 8px;
 
-    min-height: 48px;
-
     padding:
-        13px 20px;
+        14px 20px;
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
-    font-size: 12px;
+    font-size:
+        12px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
     transition:
         .22s ease;
 }
 
+
 .button-primary {
+
     background:
-        var(--oasis-green);
+        #578f87;
 
     color:
         white;
 
     box-shadow:
-        0 12px 28px
-        rgba(48,95,69,.20);
+        0 12px 25px rgba(52,105,96,.2);
 }
 
+
 .button-primary:hover {
+
     transform:
         translateY(-3px);
 
     background:
-        #315f49;
-
-    box-shadow:
-        0 17px 35px
-        rgba(48,95,69,.25);
+        #467c75;
 }
+
 
 .button-secondary {
+
     background:
-        rgba(255,255,255,.52);
+        rgba(255,255,255,.5);
 
     border:
-        1px solid
-        rgba(63,114,87,.13);
+        1px solid rgba(69,111,102,.15);
 
     color:
-        var(--oasis-green);
+        #4d7169;
 }
 
+
 .button-secondary:hover {
-    transform:
-        translateY(-2px);
 
     background:
-        rgba(255,255,255,.82);
+        white;
+
+    transform:
+        translateY(-2px);
 }
 
 
 /* =========================================================
-   HERO
+   HERO COMMUN
 ========================================================= */
 
 .hero {
-    position: relative;
 
     min-height:
         100vh;
 
-    display: flex;
+    position:
+        relative;
 
-    align-items: center;
+    display:
+        flex;
 
-    overflow: hidden;
+    align-items:
+        center;
 
-    isolation: isolate;
+    overflow:
+        hidden;
+
+    isolation:
+        isolate;
 }
 
-.hero-background {
-    position: absolute;
-
-    inset: 0;
-
-    z-index: -3;
-
-    overflow: hidden;
-
-    background:
-        linear-gradient(
-            180deg,
-            #8bc7ca 0%,
-            #b8d8cf 45%,
-            #e5dfc2 100%
-        );
-}
-
-
-/* =========================================================
-   HERO SUN
-========================================================= */
-
-.hero-background::before {
-    content: "";
-
-    position: absolute;
-
-    width:
-        min(520px, 65vw);
-
-    height:
-        min(520px, 65vw);
-
-    right:
-        8%;
-
-    top:
-        8%;
-
-    border-radius:
-        50%;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(255,240,187,.8),
-            rgba(255,240,187,.22) 42%,
-            transparent 70%
-        );
-
-    animation:
-        oasisSun
-        8s
-        ease-in-out
-        infinite;
-}
-
-@keyframes oasisSun {
-
-    0%,
-    100% {
-        transform:
-            scale(.95);
-    }
-
-    50% {
-        transform:
-            scale(1.08);
-    }
-}
-
-
-/* =========================================================
-   HERO WATER
-========================================================= */
-
-.hero-water {
-    position: absolute;
-
-    left: -5%;
-    right: -5%;
-
-    bottom: -2%;
-
-    height: 42%;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(82,174,177,.75),
-            rgba(49,137,151,.95)
-        );
-
-    clip-path:
-        polygon(
-            0 14%,
-            8% 10%,
-            18% 17%,
-            28% 9%,
-            39% 14%,
-            51% 7%,
-            62% 15%,
-            74% 8%,
-            87% 13%,
-            100% 7%,
-            100% 100%,
-            0 100%
-        );
-
-    z-index: -2;
-}
-
-
-/* =========================================================
-   HERO WAVES
-========================================================= */
-
-.hero-wave {
-    position: absolute;
-
-    left: -10%;
-
-    width: 120%;
-
-    height: 85px;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(255,255,255,.16);
-
-    z-index: -1;
-
-    animation:
-        oasisWave
-        7s
-        ease-in-out
-        infinite;
-}
-
-.hero-wave.one {
-    bottom: 25%;
-}
-
-.hero-wave.two {
-    bottom: 16%;
-
-    opacity: .55;
-
-    animation-delay:
-        -2s;
-}
-
-.hero-wave.three {
-    bottom: 7%;
-
-    opacity: .32;
-
-    animation-delay:
-        -4s;
-}
-
-@keyframes oasisWave {
-
-    0%,
-    100% {
-        transform:
-            translateX(-2%);
-    }
-
-    50% {
-        transform:
-            translateX(2%);
-    }
-}
-
-
-/* =========================================================
-   HERO PALMS
-========================================================= */
-
-.hero-palm {
-    position: absolute;
-
-    font-size:
-        clamp(
-            80px,
-            11vw,
-            160px
-        );
-
-    opacity:
-        .42;
-
-    filter:
-        drop-shadow(
-            0 20px 18px
-            rgba(30,70,50,.16)
-        );
-
-    animation:
-        oasisPalm
-        5s
-        ease-in-out
-        infinite;
-}
-
-.hero-palm.left {
-    left:
-        2%;
-
-    bottom:
-        27%;
-}
-
-.hero-palm.right {
-    right:
-        4%;
-
-    bottom:
-        22%;
-
-    animation-delay:
-        -2s;
-}
-
-@keyframes oasisPalm {
-
-    0%,
-    100% {
-        transform:
-            rotate(-2deg)
-            translateY(0);
-    }
-
-    50% {
-        transform:
-            rotate(2deg)
-            translateY(-7px);
-    }
-}
-
-
-/* =========================================================
-   HERO CONTENT
-========================================================= */
 
 .hero-content {
-    position: relative;
-
-    z-index: 2;
 
     width:
-        min(
-            1160px,
-            calc(100% - 40px)
-        );
+        min(1180px, calc(100% - 40px));
 
     margin:
-        0 auto;
+        auto;
 
     padding-top:
         70px;
 }
 
-.hero-eyebrow {
-    display: inline-flex;
 
-    align-items: center;
+/* =========================================================
+   HERO TAG
+========================================================= */
 
-    gap: 8px;
+.hero-tag {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
 
     padding:
         8px 13px;
 
     border:
-        1px solid
-        rgba(63,114,87,.13);
+        1px solid rgba(255,255,255,.5);
 
     border-radius:
         999px;
 
     background:
-        rgba(255,255,255,.48);
+        rgba(255,255,255,.45);
 
     color:
-        #5b8970;
+        #4e827b;
 
     font-size:
         10px;
 
     font-weight:
-        800;
+        700;
 
     letter-spacing:
-        1.2px;
-
-    text-transform:
-        uppercase;
-}
-
-.hero-eyebrow::before {
-    content: "";
-
-    width:
-        7px;
-
-    height:
-        7px;
-
-    border-radius:
-        50%;
-
-    background:
-        #73a76e;
-
-    box-shadow:
-        0 0 0 5px
-        rgba(115,167,110,.10);
-
-    animation:
-        oasisPulse
-        2s
-        ease-in-out
-        infinite;
-}
-
-@keyframes oasisPulse {
-
-    0%,
-    100% {
-        transform:
-            scale(1);
-
-        opacity:
-            .75;
-    }
-
-    50% {
-        transform:
-            scale(1.25);
-
-        opacity:
-            1;
-    }
+        1px;
 }
 
 
 /* =========================================================
-   HERO TITLE
+   HERO TITRE
 ========================================================= */
 
 .hero h1 {
+
     max-width:
         780px;
 
@@ -841,60 +467,29 @@ button {
         sans-serif;
 
     font-size:
-        clamp(
-            64px,
-            9vw,
-            120px
-        );
+        clamp(60px, 9vw, 115px);
 
     line-height:
-        .84;
+        .86;
 
     letter-spacing:
-        -5px;
+        -4px;
 
     font-weight:
         800;
 
     color:
-        var(--oasis-green-dark);
-
-    animation:
-        oasisHeroAppear
-        .9s
-        cubic-bezier(
-            .2,
-            .8,
-            .2,
-            1
-        );
+        #294a42;
 }
 
+
 .hero h1 span {
+
     display:
         block;
 
     color:
-        var(--oasis-ocean);
-}
-
-@keyframes oasisHeroAppear {
-
-    from {
-        opacity:
-            0;
-
-        transform:
-            translateY(30px);
-    }
-
-    to {
-        opacity:
-            1;
-
-        transform:
-            translateY(0);
-    }
+        #4d8d87;
 }
 
 
@@ -903,14 +498,15 @@ button {
 ========================================================= */
 
 .hero-description {
+
     max-width:
         570px;
 
     margin-top:
-        26px;
+        25px;
 
     color:
-        #557269;
+        #57756d;
 
     font-size:
         15px;
@@ -924,15 +520,13 @@ button {
 
 
 /* =========================================================
-   HERO BUTTONS
+   HERO BOUTONS
 ========================================================= */
 
 .hero-buttons {
+
     display:
         flex;
-
-    align-items:
-        center;
 
     gap:
         12px;
@@ -943,141 +537,111 @@ button {
 
 
 /* =========================================================
-   HERO STATS
+   ANIMATIONS
 ========================================================= */
 
-.hero-stats {
-    display:
-        flex;
+@keyframes heroAppear {
 
-    align-items:
-        center;
+    from {
+        opacity: 0;
+        transform:
+            translateY(30px);
+    }
 
-    gap:
-        38px;
-
-    margin-top:
-        48px;
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
 }
 
-.hero-stat {
-    position:
-        relative;
+
+.hero h1 {
+
+    animation:
+        heroAppear .9s cubic-bezier(.2,.8,.2,1);
 }
 
-.hero-stat:not(:last-child)::after {
-    content: "";
 
-    position:
-        absolute;
+@keyframes pulse {
 
-    right:
-        -19px;
+    0%,100% {
+        transform:
+            scale(1);
 
-    top:
-        50%;
+        opacity:
+            .7;
+    }
 
-    width:
-        1px;
+    50% {
+        transform:
+            scale(1.5);
 
-    height:
-        30px;
-
-    transform:
-        translateY(-50%);
-
-    background:
-        rgba(63,114,87,.18);
+        opacity:
+            1;
+    }
 }
 
-.hero-stat strong {
-    display:
-        block;
 
-    font-family:
-        "Baloo 2",
-        sans-serif;
+@keyframes waveMove {
 
-    font-size:
-        27px;
+    0%,100% {
+        transform:
+            translateX(-2%);
+    }
 
-    line-height:
-        1;
-
-    color:
-        var(--oasis-green);
+    50% {
+        transform:
+            translateX(2%);
+    }
 }
 
-.hero-stat span {
-    display:
-        block;
 
-    margin-top:
-        5px;
+@keyframes palmFloat {
 
-    color:
-        #71867d;
+    0%,100% {
+        transform:
+            rotate(-2deg);
+    }
 
-    font-size:
-        9px;
-
-    font-weight:
-        600;
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        .8px;
+    50% {
+        transform:
+            rotate(2deg)
+            translateY(-5px);
+    }
 }
 
 
 /* =========================================================
-   SECTION
+   SECTIONS
 ========================================================= */
 
-.oasis-section {
+.section {
+
     padding:
         120px 20px;
-
-    background:
-        rgba(255,255,255,.40);
-
-    border-top:
-        1px solid
-        rgba(63,114,87,.07);
-
-    border-bottom:
-        1px solid
-        rgba(63,114,87,.07);
 }
 
-.oasis-section.dark {
-    background:
-        #17382a;
 
-    color:
-        white;
-}
+.container,
+.section-container {
 
-.oasis-section.dark .section-title {
-    color:
-        #eef6ee;
-}
+    width:
+        min(1120px,100%);
 
-.oasis-section.dark .section-text {
-    color:
-        #a9beb0;
+    margin:
+        auto;
 }
 
 
 /* =========================================================
-   EYEBROW
+   TITRES SECTIONS
 ========================================================= */
 
 .eyebrow {
+
     color:
-        #609178;
+        #5b958d;
 
     font-size:
         10px;
@@ -1093,11 +657,9 @@ button {
 }
 
 
-/* =========================================================
-   SECTION TITLE
-========================================================= */
-
+.title,
 .section-title {
+
     margin-top:
         8px;
 
@@ -1106,41 +668,38 @@ button {
         sans-serif;
 
     font-size:
-        clamp(
-            45px,
-            6vw,
-            75px
-        );
+        clamp(45px,6vw,72px);
 
     line-height:
-        .94;
+        .95;
 
     letter-spacing:
-        -2.5px;
+        -2px;
 
     color:
-        var(--oasis-green-dark);
+        #31574e;
 }
 
+
+.title span,
 .section-title span {
+
     color:
-        var(--oasis-ocean);
+        #bd9558;
 }
 
 
-/* =========================================================
-   SECTION TEXT
-========================================================= */
-
+.description,
 .section-text {
+
     max-width:
         670px;
 
     margin-top:
-        17px;
+        16px;
 
     color:
-        var(--oasis-muted);
+        #71877f;
 
     font-size:
         13px;
@@ -1151,118 +710,96 @@ button {
 
 
 /* =========================================================
-   ZONES
+   ÉVOLUTION COMMUNE
 ========================================================= */
 
-.zones-grid {
+.evolution-section {
+
+    padding:
+        120px 20px;
+
+    background:
+        rgba(255,255,255,.4);
+
+    border-top:
+        1px solid rgba(70,110,100,.08);
+
+    border-bottom:
+        1px solid rgba(70,110,100,.08);
+}
+
+
+/* =========================================================
+   TIMELINE CARTES
+========================================================= */
+
+.timeline {
+
+    position:
+        relative;
+
     display:
         grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(4,1fr);
 
     gap:
-        18px;
+        14px;
 
     margin-top:
-        50px;
+        55px;
 }
 
-.zone-card {
+
+.timeline-card {
+
     position:
         relative;
 
-    min-height:
-        290px;
-
     padding:
-        28px;
-
-    overflow:
-        hidden;
+        25px 20px;
 
     border:
-        1px solid
-        rgba(255,255,255,.72);
+        2px solid rgba(255,255,255,.72);
 
     border-radius:
-        var(--oasis-radius);
+        22px;
 
     background:
-        rgba(255,255,255,.62);
+        rgba(255,255,255,.65);
 
     box-shadow:
-        var(--oasis-shadow);
+        0 18px 40px rgba(55,100,91,.08);
 
     transition:
-        .3s ease;
+        .25s ease;
 }
 
-.zone-card::before {
-    content: "";
 
-    position:
-        absolute;
+.timeline-card:hover {
 
-    inset:
-        0;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.38),
-            transparent 55%
-        );
-
-    pointer-events:
-        none;
-}
-
-.zone-card:hover {
     transform:
         translateY(-8px);
 
     box-shadow:
-        0 35px 80px
-        rgba(30,75,61,.19);
+        0 25px 50px rgba(55,100,91,.14);
 }
 
-.zone-card.village {
-    background:
-        linear-gradient(
-            145deg,
-            #dce9d4,
-            #f1e5c4
-        );
-}
 
-.zone-card.port {
-    background:
-        linear-gradient(
-            145deg,
-            #c5e0dd,
-            #e7ddbf
-        );
-}
+.timeline-dot {
 
-.zone-card.forest {
-    background:
-        linear-gradient(
-            145deg,
-            #b7d0b0,
-            #dbe4c7
-        );
-}
-
-.zone-icon {
     position:
         relative;
 
+    z-index:
+        2;
+
     width:
-        58px;
+        42px;
 
     height:
-        58px;
+        42px;
 
     display:
         grid;
@@ -1271,25 +808,177 @@ button {
         center;
 
     border-radius:
-        18px;
+        50%;
 
     background:
-        rgba(255,255,255,.62);
+        #5d9188;
+
+    color:
+        white;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
 
     font-size:
-        27px;
+        18px;
 
-    box-shadow:
-        0 10px 25px
-        rgba(50,90,70,.10);
+    font-weight:
+        800;
 }
 
-.zone-card h3 {
+
+.timeline-card h3 {
+
+    margin-top:
+        18px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        25px;
+
+    color:
+        #45695f;
+}
+
+
+.timeline-card p {
+
+    margin-top:
+        7px;
+
+    color:
+        #7b8d86;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.7;
+}
+
+
+.timeline-status {
+
+    display:
+        inline-block;
+
+    margin-top:
+        16px;
+
+    padding:
+        6px 9px;
+
+    border-radius:
+        999px;
+
+    background:
+        #e2efeb;
+
+    color:
+        #5b8b82;
+
+    font-size:
+        8px;
+
+    font-weight:
+        800;
+}
+
+
+/* =========================================================
+   CARTES PORT
+========================================================= */
+
+.port-section {
+
+    padding:
+        120px 20px;
+}
+
+
+.port-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        18px;
+
+    margin-top:
+        50px;
+}
+
+
+.port-card {
+
+    min-height:
+        250px;
+
     position:
         relative;
 
+    overflow:
+        hidden;
+
+    padding:
+        30px;
+
+    border:
+        2px solid rgba(255,255,255,.72);
+
+    border-radius:
+        25px;
+
+    background:
+        rgba(255,255,255,.65);
+
+    box-shadow:
+        0 18px 40px rgba(55,100,91,.08);
+
+    transition:
+        .25s ease;
+}
+
+
+.port-card:hover {
+
+    transform:
+        translateY(-7px);
+}
+
+
+.port-card-large {
+
+    grid-row:
+        span 2;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(130,188,190,.72),
+            rgba(229,220,185,.7)
+        );
+}
+
+
+.port-icon {
+
+    font-size:
+        40px;
+}
+
+
+.port-card h3 {
+
     margin-top:
-        20px;
+        18px;
 
     font-family:
         "Baloo 2",
@@ -1299,21 +988,17 @@ button {
         30px;
 
     color:
-        var(--oasis-green-dark);
+        #42685f;
 }
 
-.zone-card p {
-    position:
-        relative;
 
-    max-width:
-        360px;
+.port-card p {
 
     margin-top:
-        6px;
+        7px;
 
     color:
-        #667e73;
+        #73867f;
 
     font-size:
         11px;
@@ -1322,68 +1007,54 @@ button {
         1.7;
 }
 
-.zone-link {
+
+.port-decoration {
+
     position:
         absolute;
 
-    left:
-        28px;
+    right:
+        -15px;
 
     bottom:
-        25px;
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    gap:
-        6px;
-
-    color:
-        var(--oasis-green);
+        -25px;
 
     font-size:
-        10px;
+        130px;
 
-    font-weight:
-        800;
+    opacity:
+        .15;
 
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        1px;
+    transform:
+        rotate(-8deg);
 }
 
 
 /* =========================================================
-   PROGRESSION
+   NAVIGATION ENTRE PAGES
 ========================================================= */
 
-.progress-panel {
-    margin-top:
-        50px;
+.page-navigation {
 
     padding:
-        35px;
-
-    border:
-        1px solid
-        rgba(255,255,255,.7);
-
-    border-radius:
-        28px;
+        80px 20px;
 
     background:
-        rgba(255,255,255,.58);
+        rgba(60,91,79,.94);
 
-    box-shadow:
-        var(--oasis-shadow);
+    color:
+        white;
 }
 
-.progress-header {
+
+.page-navigation-inner {
+
+    width:
+        min(1120px,100%);
+
+    margin:
+        auto;
+
     display:
         flex;
 
@@ -1397,34 +1068,637 @@ button {
         20px;
 }
 
-.progress-level {
+
+.page-nav-card {
+
+    padding:
+        20px 25px;
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    border-radius:
+        18px;
+
+    background:
+        rgba(255,255,255,.06);
+
+    transition:
+        .25s ease;
+}
+
+
+.page-nav-card:hover {
+
+    transform:
+        translateY(-4px);
+
+    background:
+        rgba(255,255,255,.1);
+}
+
+
+.page-nav-card span {
+
+    display:
+        block;
+
+    color:
+        #a9c1b5;
+
+    font-size:
+        9px;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        2px;
+}
+
+
+.page-nav-card strong {
+
+    display:
+        block;
+
+    margin-top:
+        5px;
+
+    color:
+        white;
+
     font-family:
         "Baloo 2",
         sans-serif;
 
     font-size:
-        55px;
-
-    line-height:
-        .9;
-
-    color:
-        var(--oasis-green);
+        22px;
 }
 
-.progress-level small {
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    padding:
+        35px 20px;
+
+    background:
+        #385448;
+
+    color:
+        white;
+}
+
+
+.footer-inner {
+
+    width:
+        min(1120px,100%);
+
+    margin:
+        auto;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+}
+
+
+.footer-brand {
+
     font-family:
-        "Fredoka",
+        "Baloo 2",
         sans-serif;
 
-    font-size:
-        11px;
-
     color:
-        #82968d;
+        #c8e1d3;
+
+    font-size:
+        20px;
+
+    font-weight:
+        800;
 }
 
-.progress-percent {
+
+.footer-text {
+
+    color:
+        #b5c9bd;
+
+    font-size:
+        10px;
+}
+
+
+/* =========================================================
+   =========================================================
+   FORÊT
+   =========================================================
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   FOND
+--------------------------------------------------------- */
+
+body.forest-page {
+
+    background:
+        #10251c;
+
+    color:
+        #eef8f0;
+}
+
+
+body.forest-page::before {
+
+    background:
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(126,178,126,.20),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 80% 25%,
+            rgba(101,150,104,.16),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            180deg,
+            #19392a 0%,
+            #10281e 48%,
+            #091810 100%
+        );
+}
+
+
+/* ---------------------------------------------------------
+   NAVBAR FORÊT
+--------------------------------------------------------- */
+
+.forest-page .navbar {
+
+    background:
+        rgba(18,42,30,.72);
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    box-shadow:
+        0 15px 45px rgba(0,0,0,.20);
+}
+
+
+.forest-page .brand-name {
+
+    color:
+        #d8ecd7;
+}
+
+
+.forest-page .nav-links a {
+
+    color:
+        #aec2b3;
+}
+
+
+.forest-page .nav-links a:hover {
+
+    background:
+        rgba(147,191,143,.10);
+
+    color:
+        white;
+}
+
+
+.forest-page .nav-discord {
+
+    background:
+        #668f60;
+}
+
+
+.forest-page .nav-discord:hover {
+
+    background:
+        #79a970;
+}
+
+
+/* ---------------------------------------------------------
+   PARTICULES
+--------------------------------------------------------- */
+
+.forest-particles {
+
+    position:
+        fixed;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    overflow:
+        hidden;
+
+    z-index:
+        2;
+}
+
+
+.forest-particle {
+
+    position:
+        absolute;
+
+    width:
+        4px;
+
+    height:
+        4px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(218,239,213,.35);
+
+    animation:
+        forestParticleFloat linear infinite;
+}
+
+
+@keyframes forestParticleFloat {
+
+    from {
+
+        transform:
+            translateY(110vh);
+
+        opacity:
+            0;
+    }
+
+    15% {
+
+        opacity:
+            1;
+    }
+
+    85% {
+
+        opacity:
+            1;
+    }
+
+    to {
+
+        transform:
+            translateY(-10vh);
+
+        opacity:
+            0;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   HERO FORÊT
+--------------------------------------------------------- */
+
+.forest-page .hero {
+
+    background:
+        #10251c;
+}
+
+
+.forest-page .hero::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(7,20,13,.96) 0%,
+            rgba(7,20,13,.78) 42%,
+            rgba(7,20,13,.18) 100%
+        );
+}
+
+
+.hero-forest {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        0;
+
+    background:
+
+        radial-gradient(
+            ellipse at 75% 60%,
+            rgba(124,174,106,.28),
+            transparent 25%
+        ),
+
+        linear-gradient(
+            180deg,
+            rgba(47,91,61,.75),
+            rgba(11,29,19,.98)
+        );
+}
+
+
+.hero-forest::before {
+
+    content:
+        "🌲 🌲 🌴 🌲 🌳 🌲 🌴 🌲";
+
+    position:
+        absolute;
+
+    left:
+        35%;
+
+    right:
+        -5%;
+
+    bottom:
+        4%;
+
+    white-space:
+        nowrap;
+
+    font-size:
+        clamp(90px,14vw,190px);
+
+    letter-spacing:
+        10px;
+
+    opacity:
+        .42;
+
+    filter:
+        drop-shadow(
+            0 25px 25px rgba(0,0,0,.3)
+        );
+
+    transform:
+        scale(1.1);
+}
+
+
+.hero-forest::after {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    width:
+        600px;
+
+    height:
+        600px;
+
+    right:
+        7%;
+
+    top:
+        10%;
+
+    border-radius:
+        50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(208,230,177,.20),
+            transparent 65%
+        );
+
+    animation:
+        forestLight 7s ease-in-out infinite;
+}
+
+
+@keyframes forestLight {
+
+    0%,100% {
+
+        transform:
+            scale(.9);
+
+        opacity:
+            .5;
+    }
+
+    50% {
+
+        transform:
+            scale(1.15);
+
+        opacity:
+            .9;
+    }
+}
+
+
+/* ---------------------------------------------------------
+   CONTENU HERO FORÊT
+--------------------------------------------------------- */
+
+.forest-page .hero-content {
+
+    position:
+        relative;
+
+    z-index:
+        3;
+}
+
+
+.forest-page .breadcrumb {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    color:
+        #8fae95;
+
+    font-size:
+        10px;
+
+    font-weight:
+        700;
+
+    letter-spacing:
+        1px;
+
+    text-transform:
+        uppercase;
+}
+
+
+.forest-page .breadcrumb a {
+
+    color:
+        #8fae95;
+
+    transition:
+        .2s;
+}
+
+
+.forest-page .breadcrumb a:hover {
+
+    color:
+        white;
+}
+
+
+.forest-page .hero-tag {
+
+    margin-top:
+        22px;
+
+    border:
+        1px solid rgba(154,197,141,.22);
+
+    background:
+        rgba(130,171,119,.08);
+
+    color:
+        #a8ca9f;
+}
+
+
+.forest-page .hero h1 {
+
+    margin-top:
+        18px;
+
+    color:
+        #edf7ed;
+}
+
+
+.forest-page .hero h1 span {
+
+    color:
+        #86b778;
+}
+
+
+.forest-page .hero-description {
+
+    color:
+        #adc0b1;
+}
+
+
+.forest-page .button-primary {
+
+    background:
+        #668f60;
+
+    box-shadow:
+        0 12px 30px rgba(30,69,42,.35);
+}
+
+
+.forest-page .button-primary:hover {
+
+    background:
+        #79a970;
+}
+
+
+.forest-page .button-secondary {
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid rgba(255,255,255,.12);
+
+    color:
+        #d4e3d5;
+}
+
+
+.forest-page .button-secondary:hover {
+
+    background:
+        rgba(255,255,255,.12);
+}
+
+
+/* ---------------------------------------------------------
+   STATS FORÊT
+--------------------------------------------------------- */
+
+.forest-page .hero-stats {
+
+    display:
+        flex;
+
+    gap:
+        45px;
+
+    margin-top:
+        52px;
+}
+
+
+.forest-page .hero-stat strong {
+
+    display:
+        block;
+
     font-family:
         "Baloo 2",
         sans-serif;
@@ -1433,27 +1707,385 @@ button {
         28px;
 
     color:
-        var(--oasis-sand);
+        #dbeed9;
 }
 
-.progress-bar {
-    height:
-        10px;
+
+.forest-page .hero-stat span {
+
+    display:
+        block;
 
     margin-top:
-        25px;
+        -4px;
+
+    color:
+        #8fa697;
+
+    font-size:
+        10px;
+}
+
+
+/* ---------------------------------------------------------
+   SECTIONS FORÊT
+--------------------------------------------------------- */
+
+.forest-page .section {
+
+    background:
+        transparent;
+}
+
+
+.forest-page .section-container {
+
+    width:
+        min(1120px,100%);
+
+    margin:
+        auto;
+}
+
+
+.forest-page .eyebrow {
+
+    color:
+        #86ae79;
+}
+
+
+.forest-page .section-title {
+
+    color:
+        #e8f2e8;
+}
+
+
+.forest-page .section-title span {
+
+    color:
+        #d3b96f;
+}
+
+
+.forest-page .section-text {
+
+    color:
+        #9db3a2;
+}
+
+
+/* ---------------------------------------------------------
+   ÉVOLUTION FORÊT
+--------------------------------------------------------- */
+
+.forest-page .evolution-section {
+
+    background:
+        linear-gradient(
+            180deg,
+            #10281e,
+            #132f23
+        );
+
+    border-top:
+        1px solid rgba(255,255,255,.06);
+
+    border-bottom:
+        1px solid rgba(255,255,255,.06);
+}
+
+
+.evolution-panel {
+
+    position:
+        relative;
+
+    min-height:
+        430px;
+
+    margin-top:
+        55px;
 
     overflow:
         hidden;
+
+    border:
+        1px solid rgba(255,255,255,.13);
+
+    border-radius:
+        30px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #315e42,
+            #172e21
+        );
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.28);
+}
+
+
+.evolution-panel::before {
+
+    content:
+        "🌲 🌳 🌴 🌿 🌲 🌳 🌿 🌴";
+
+    position:
+        absolute;
+
+    left:
+        -3%;
+
+    right:
+        -3%;
+
+    bottom:
+        30px;
+
+    font-size:
+        clamp(65px,9vw,125px);
+
+    white-space:
+        nowrap;
+
+    opacity:
+        .48;
+
+    letter-spacing:
+        5px;
+
+    transition:
+        .5s ease;
+}
+
+
+.evolution-panel:hover::before {
+
+    transform:
+        scale(1.04)
+        translateY(-5px);
+}
+
+
+.evolution-mist {
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    background:
+        radial-gradient(
+            ellipse at 50% 30%,
+            rgba(219,238,211,.15),
+            transparent 35%
+        );
+}
+
+
+.evolution-content {
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    padding:
+        35px;
+}
+
+
+.evolution-top {
+
+    display:
+        flex;
+
+    align-items:
+        flex-start;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+}
+
+
+.evolution-current {
+
+    display:
+        inline-flex;
+
+    align-items:
+        center;
+
+    gap:
+        8px;
+
+    padding:
+        9px 13px;
 
     border-radius:
         999px;
 
     background:
-        rgba(63,114,87,.10);
+        rgba(255,255,255,.08);
+
+    border:
+        1px solid rgba(255,255,255,.10);
+
+    color:
+        #c8ddc8;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
 }
 
-.progress-bar span {
+
+.evolution-current::before {
+
+    content:
+        "";
+
+    width:
+        7px;
+
+    height:
+        7px;
+
+    border-radius:
+        50%;
+
+    background:
+        #92bd83;
+
+    box-shadow:
+        0 0 12px rgba(146,189,131,.7);
+}
+
+
+.evolution-level {
+
+    margin-top:
+        80px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        80px;
+
+    line-height:
+        .8;
+
+    color:
+        white;
+}
+
+
+.evolution-level span {
+
+    color:
+        #91b982;
+
+    font-size:
+        20px;
+}
+
+
+.evolution-name {
+
+    margin-top:
+        8px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        30px;
+
+    color:
+        #e6efe4;
+}
+
+
+.evolution-description {
+
+    max-width:
+        520px;
+
+    margin-top:
+        6px;
+
+    color:
+        #b4c6b7;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.7;
+}
+
+
+.evolution-progress {
+
+    max-width:
+        550px;
+
+    margin-top:
+        25px;
+}
+
+
+.evolution-progress-top {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    color:
+        #9eb5a4;
+
+    font-size:
+        10px;
+}
+
+
+.evolution-bar {
+
+    height:
+        7px;
+
+    margin-top:
+        10px;
+
+    overflow:
+        hidden;
+
+    border-radius:
+        99px;
+
+    background:
+        rgba(255,255,255,.08);
+}
+
+
+.evolution-bar span {
+
     display:
         block;
 
@@ -1469,70 +2101,85 @@ button {
     background:
         linear-gradient(
             90deg,
-            var(--oasis-green),
-            var(--oasis-ocean)
+            #6f9f65,
+            #a2c88f
         );
 
     transition:
-        width
-        .8s
-        cubic-bezier(
-            .2,
-            .8,
-            .2,
-            1
-        );
+        width .8s cubic-bezier(.2,.8,.2,1);
 }
 
 
-/* =========================================================
-   EVOLUTION CARDS
-========================================================= */
+/* ---------------------------------------------------------
+   SÉLECTEUR NIVEAUX
+--------------------------------------------------------- */
 
-.evolution-grid {
+.level-selector {
+
+    margin-top:
+        55px;
+
     display:
         grid;
 
     grid-template-columns:
-        repeat(5, 1fr);
+        repeat(6,1fr);
 
     gap:
         10px;
-
-    margin-top:
-        25px;
 }
 
-.evolution-card {
+
+.level-button {
+
     padding:
-        15px 10px;
+        14px 8px;
 
     border:
-        1px solid
-        rgba(63,114,87,.10);
+        1px solid rgba(255,255,255,.09);
 
     border-radius:
-        15px;
+        14px;
 
     background:
-        rgba(255,255,255,.45);
+        rgba(255,255,255,.045);
 
-    text-align:
-        center;
+    color:
+        #a6baaa;
 
     transition:
         .2s ease;
 }
 
-.evolution-card:hover {
+
+.level-button:hover {
+
     transform:
-        translateY(-4px);
+        translateY(-3px);
 
     background:
-        rgba(255,255,255,.75);
+        rgba(126,169,113,.12);
+
+    color:
+        white;
 }
 
-.evolution-card strong {
+
+.level-button.active {
+
+    background:
+        rgba(126,169,113,.18);
+
+    border-color:
+        rgba(154,197,141,.28);
+
+    color:
+        #d9ebd5;
+}
+
+
+.level-button strong {
+
     display:
         block;
 
@@ -1541,238 +2188,119 @@ button {
         sans-serif;
 
     font-size:
-        21px;
-
-    color:
-        var(--oasis-green);
+        20px;
 }
 
-.evolution-card span {
+
+.level-button span {
+
     display:
         block;
 
     margin-top:
         2px;
 
-    color:
-        #778b82;
-
     font-size:
         8px;
-
-    text-transform:
-        uppercase;
-
-    letter-spacing:
-        .5px;
 }
 
 
-/* =========================================================
-   CTA
-========================================================= */
+/* ---------------------------------------------------------
+   FEATURES FORÊT
+--------------------------------------------------------- */
 
-.oasis-cta {
-    padding:
-        100px 20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #315f49,
-            #183b2c
-        );
-}
-
-.cta-box {
-    width:
-        min(
-            900px,
-            100%
-        );
-
-    margin:
-        0 auto;
-
-    padding:
-        60px 30px;
-
-    text-align:
-        center;
-
-    border:
-        1px solid
-        rgba(255,255,255,.12);
-
-    border-radius:
-        30px;
-
-    background:
-        rgba(255,255,255,.06);
-}
-
-.cta-box h2 {
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        clamp(
-            40px,
-            6vw,
-            68px
-        );
-
-    line-height:
-        .95;
-
-    color:
-        #f1f7ef;
-}
-
-.cta-box h2 span {
-    color:
-        var(--oasis-sand);
-}
-
-.cta-box p {
-    max-width:
-        600px;
-
-    margin:
-        16px auto 0;
-
-    color:
-        #b5c9ba;
-
-    font-size:
-        12px;
-
-    line-height:
-        1.8;
-}
-
-.cta-box .button {
-    margin-top:
-        27px;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer {
-    padding:
-        38px 20px;
-
-    background:
-        #10281d;
-
-    color:
-        white;
-}
-
-.footer-inner {
-    width:
-        min(
-            1120px,
-            100%
-        );
-
-    margin:
-        0 auto;
+.forest-page .features-grid {
 
     display:
-        flex;
+        grid;
 
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
+    grid-template-columns:
+        repeat(3,1fr);
 
     gap:
-        20px;
-}
+        16px;
 
-.footer-brand {
-    font-family:
-        "Baloo 2",
-        sans-serif;
-
-    font-size:
-        21px;
-
-    font-weight:
-        800;
-
-    color:
-        #d5e8d1;
-}
-
-.footer-text {
-    color:
-        #8fa99a;
-
-    font-size:
-        10px;
+    margin-top:
+        50px;
 }
 
 
-/* =========================================================
-   REVEAL ANIMATION
-========================================================= */
+.feature-card {
 
-[data-reveal] {
-    opacity:
-        0;
+    position:
+        relative;
 
-    transform:
-        translateY(25px);
+    padding:
+        27px;
+
+    overflow:
+        hidden;
+
+    border:
+        1px solid rgba(255,255,255,.10);
+
+    border-radius:
+        22px;
+
+    background:
+        rgba(255,255,255,.045);
+
+    box-shadow:
+        0 20px 45px rgba(0,0,0,.14);
 
     transition:
-        opacity
-        .7s
-        ease,
-        transform
-        .7s
-        cubic-bezier(
-            .2,
-            .8,
-            .2,
-            1
-        );
-}
-
-[data-reveal].is-visible {
-    opacity:
-        1;
-
-    transform:
-        translateY(0);
+        .25s ease;
 }
 
 
-/* =========================================================
-   BACK TO TOP
-========================================================= */
+.feature-card::after {
 
-.back-to-top {
+    content:
+        "";
+
     position:
-        fixed;
-
-    right:
-        25px;
-
-    bottom:
-        25px;
+        absolute;
 
     width:
-        45px;
+        120px;
 
     height:
-        45px;
+        120px;
+
+    right:
+        -45px;
+
+    bottom:
+        -55px;
+
+    border-radius:
+        50%;
+
+    background:
+        rgba(137,181,119,.09);
+}
+
+
+.feature-card:hover {
+
+    transform:
+        translateY(-7px);
+
+    border-color:
+        rgba(152,194,138,.20);
+
+    background:
+        rgba(255,255,255,.065);
+}
+
+
+.feature-icon {
+
+    width:
+        50px;
+
+    height:
+        50px;
 
     display:
         grid;
@@ -1781,48 +2309,353 @@ footer {
         center;
 
     border-radius:
-        14px;
+        15px;
 
     background:
-        var(--oasis-green);
+        rgba(123,166,108,.13);
+
+    font-size:
+        23px;
+}
+
+
+.feature-card h3 {
+
+    margin-top:
+        18px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        21px;
 
     color:
-        white;
+        #e1eddf;
+}
 
-    box-shadow:
-        0 12px 30px
-        rgba(40,85,62,.25);
 
-    opacity:
+.feature-card p {
+
+    margin-top:
+        8px;
+
+    color:
+        #94ab99;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.7;
+}
+
+
+/* ---------------------------------------------------------
+   TIMELINE FORÊT
+--------------------------------------------------------- */
+
+.forest-page .timeline-section {
+
+    background:
+        #0d2118;
+}
+
+
+.forest-page .timeline {
+
+    display:
+        block;
+
+    margin-top:
+        55px;
+
+    padding-left:
+        30px;
+}
+
+
+.forest-page .timeline::before {
+
+    content:
+        "";
+
+    position:
+        absolute;
+
+    left:
+        7px;
+
+    top:
         0;
 
-    visibility:
-        hidden;
+    bottom:
+        0;
 
-    transform:
-        translateY(10px);
+    width:
+        2px;
 
-    transition:
-        .25s ease;
-
-    z-index:
-        900;
+    background:
+        linear-gradient(
+            180deg,
+            #719d68,
+            rgba(113,157,104,.05)
+        );
 }
 
-.back-to-top.is-visible {
-    opacity:
-        1;
 
-    visibility:
-        visible;
+.forest-page .timeline-item {
 
-    transform:
-        translateY(0);
+    position:
+        relative;
+
+    padding:
+        0 0 45px 35px;
 }
 
-.back-to-top:hover {
-    transform:
-        translateY(-3px);
+
+.forest-page .timeline-dot {
+
+    position:
+        absolute;
+
+    left:
+        -1px;
+
+    top:
+        2px;
+
+    width:
+        17px;
+
+    height:
+        17px;
+
+    border-radius:
+        50%;
+
+    background:
+        #7fae72;
+
+    border:
+        4px solid #0d2118;
+
+    box-shadow:
+        0 0 0 2px rgba(127,174,114,.30);
+}
+
+
+.forest-page .timeline-number {
+
+    color:
+        #8aae7e;
+
+    font-size:
+        10px;
+
+    font-weight:
+        800;
+
+    letter-spacing:
+        2px;
+}
+
+
+.forest-page .timeline-item h3 {
+
+    margin-top:
+        5px;
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        25px;
+
+    color:
+        #e1ece1;
+}
+
+
+.forest-page .timeline-item p {
+
+    max-width:
+        650px;
+
+    margin-top:
+        4px;
+
+    color:
+        #91a895;
+
+    font-size:
+        11px;
+
+    line-height:
+        1.7;
+}
+
+
+/* ---------------------------------------------------------
+   CTA FORÊT
+--------------------------------------------------------- */
+
+.forest-page .cta {
+
+    padding:
+        100px 20px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #274e36,
+            #13291e
+        );
+}
+
+
+.forest-page .cta-box {
+
+    width:
+        min(900px,100%);
+
+    margin:
+        auto;
+
+    text-align:
+        center;
+
+    padding:
+        55px 30px;
+
+    border:
+        1px solid rgba(255,255,255,.11);
+
+    border-radius:
+        28px;
+
+    background:
+        rgba(255,255,255,.045);
+}
+
+
+.forest-page .cta-box h2 {
+
+    font-family:
+        "Baloo 2",
+        sans-serif;
+
+    font-size:
+        clamp(40px,6vw,65px);
+
+    line-height:
+        .95;
+
+    color:
+        #edf5eb;
+}
+
+
+.forest-page .cta-box h2 span {
+
+    color:
+        #d4bb73;
+}
+
+
+.forest-page .cta-box p {
+
+    max-width:
+        570px;
+
+    margin:
+        15px auto 0;
+
+    color:
+        #a2b6a6;
+
+    font-size:
+        12px;
+
+    line-height:
+        1.7;
+}
+
+
+.forest-page .cta-box .button {
+
+    margin-top:
+        25px;
+}
+
+
+/* ---------------------------------------------------------
+   FOOTER FORÊT
+--------------------------------------------------------- */
+
+.forest-page footer {
+
+    background:
+        #08150e;
+}
+
+
+.forest-page .footer-brand {
+
+    color:
+        #c8dfc4;
+}
+
+
+.forest-page .footer-text {
+
+    color:
+        #829789;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media(max-width:950px) {
+
+    .nav-links {
+        display:
+            none;
+    }
+
+    .timeline {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .timeline::before {
+        display:
+            none;
+    }
+
+    .port-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .port-card-large {
+        grid-row:
+            auto;
+    }
+
+    .forest-page .features-grid {
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+    .forest-page .level-selector {
+        grid-template-columns:
+            repeat(3,1fr);
+    }
 }
 
 
@@ -1830,29 +2663,10 @@ footer {
    MOBILE
 ========================================================= */
 
-@media(max-width: 950px) {
-
-    .nav-links {
-        display:
-            none;
-    }
-
-    .zones-grid {
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .evolution-grid {
-        grid-template-columns:
-            repeat(3,1fr);
-    }
-
-}
-
-
-@media(max-width: 650px) {
+@media(max-width:650px) {
 
     .navbar {
+
         top:
             10px;
 
@@ -1861,56 +2675,83 @@ footer {
 
         height:
             60px;
-
-        padding:
-            0 9px 0 12px;
-    }
-
-    .brand-mark {
-        width:
-            39px;
-
-        height:
-            39px;
     }
 
     .brand-name {
+
         font-size:
-            19px;
+            18px;
     }
 
     .nav-discord {
+
         padding:
             10px 12px;
     }
 
-    .hero {
-        min-height:
-            850px;
-    }
-
     .hero-content {
+
         width:
             calc(100% - 30px);
 
         padding-top:
-            80px;
+            90px;
     }
 
     .hero h1 {
+
         font-size:
-            60px;
+            58px;
 
         letter-spacing:
-            -3px;
+            -2px;
     }
 
     .hero-description {
+
         font-size:
             13px;
     }
 
     .hero-buttons {
+
+        flex-direction:
+            column;
+    }
+
+    .button {
+
+        width:
+            100%;
+    }
+
+    .section {
+
+        padding:
+            85px 15px;
+    }
+
+    .title,
+    .section-title {
+
+        font-size:
+            44px;
+    }
+
+    .timeline {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .port-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .page-navigation-inner {
+
         flex-direction:
             column;
 
@@ -1918,55 +2759,8 @@ footer {
             stretch;
     }
 
-    .button {
-        width:
-            100%;
-    }
-
-    .hero-stats {
-        gap:
-            25px;
-
-        margin-top:
-            40px;
-    }
-
-    .hero-stat:not(:last-child)::after {
-        right:
-            -13px;
-    }
-
-    .oasis-section {
-        padding:
-            85px 15px;
-    }
-
-    .section-title {
-        font-size:
-            45px;
-    }
-
-    .zones-grid {
-        grid-template-columns:
-            1fr;
-    }
-
-    .zone-card {
-        min-height:
-            270px;
-    }
-
-    .progress-panel {
-        padding:
-            25px;
-    }
-
-    .evolution-grid {
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
     .footer-inner {
+
         flex-direction:
             column;
 
@@ -1974,30 +2768,80 @@ footer {
             center;
     }
 
-}
 
+    /* -----------------------------------------------------
+       FORÊT MOBILE
+    ----------------------------------------------------- */
 
-/* =========================================================
-   ACCESSIBILITY
-========================================================= */
+    .forest-page .hero h1 {
 
-@media(prefers-reduced-motion: reduce) {
+        font-size:
+            58px;
 
-    *,
-    *::before,
-    *::after {
-        scroll-behavior:
-            auto !important;
-
-        animation-duration:
-            .01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        transition-duration:
-            .01ms !important;
+        letter-spacing:
+            -2px;
     }
 
+    .forest-page .hero-description {
+
+        font-size:
+            13px;
+    }
+
+    .forest-page .hero-buttons {
+
+        flex-direction:
+            column;
+    }
+
+    .forest-page .hero-stats {
+
+        gap:
+            24px;
+
+        margin-top:
+            40px;
+    }
+
+    .forest-page .features-grid {
+
+        grid-template-columns:
+            1fr;
+    }
+
+    .forest-page .level-selector {
+
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+    .evolution-content {
+
+        padding:
+            25px;
+    }
+
+    .evolution-level {
+
+        margin-top:
+            60px;
+
+        font-size:
+            65px;
+    }
+
+    .evolution-panel {
+
+        min-height:
+            460px;
+    }
+
+    .forest-page .footer-inner {
+
+        flex-direction:
+            column;
+
+        text-align:
+            center;
+    }
 }
-```
