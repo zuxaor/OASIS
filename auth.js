@@ -1,20 +1,15 @@
 /* =========================================================
-   🌴 OASIS — AUTHENTIFICATION
+   🌴 OASIS — AUTHENTIFICATION DISCORD
    ========================================================= */
 
 (() => {
     "use strict";
 
-    const USERS_KEY = "oasis_users";
-    const SESSION_KEY = "oasis_session";
-
-    const DEFAULT_USER_DATA = {
+    const DEFAULT_USER = {
         coins: 0,
         level: 0,
         xp: 0,
         clan: null,
-        avatar_url: "",
-        interests: [],
         achievements: [],
         missions: [],
         challenges: [],
@@ -23,260 +18,95 @@
         island: {
             level: 0,
             contributions: 0
-        },
-        created_at: null,
-        last_login: null
+        }
     };
 
-    function getUsers() {
+    let currentUser = null;
+
+    async function getCurrentUser() {
         try {
-            const users = JSON.parse(
-                localStorage.getItem(USERS_KEY)
-            );
+            const response = await fetch("/api/me", {
+                credentials: "include"
+            });
 
-            return Array.isArray(users) ? users : [];
+            if (!response.ok) {
+                return null;
+            }
+
+            const data = await response.json();
+
+            return data.user || null;
+
         } catch {
-            return [];
-        }
-    }
-
-    function saveUsers(users) {
-        localStorage.setItem(
-            USERS_KEY,
-            JSON.stringify(users)
-        );
-    }
-
-    function getSession() {
-        const username = localStorage.getItem(SESSION_KEY);
-
-        if (!username) {
             return null;
         }
-
-        return getUsers().find(
-            user => user.username === username
-        ) || null;
     }
 
-    function setSession(username) {
-        localStorage.setItem(
-            SESSION_KEY,
-            username
-        );
+    function loginWithDiscord() {
+        window.location.href = "/auth/discord";
     }
 
-    function clearSession() {
-        localStorage.removeItem(SESSION_KEY);
-    }
-
-    async function hashPassword(password) {
-        const data = new TextEncoder().encode(password);
-
-        const buffer = await crypto.subtle.digest(
-            "SHA-256",
-            data
-        );
-
-        return [...new Uint8Array(buffer)]
-            .map(byte =>
-                byte.toString(16).padStart(2, "0")
-            )
-            .join("");
-    }
-
-    function generateId() {
-        if (crypto.randomUUID) {
-            return crypto.randomUUID();
+    async function logout() {
+        try {
+            await fetch("/auth/logout", {
+                method: "POST",
+                credentials: "include"
+            });
+        } finally {
+            window.location.href = "/";
         }
-
-        return (
-            Date.now().toString(36) +
-            Math.random().toString(36).slice(2)
-        );
     }
 
-    function createUser(username, email, password) {
-        return hashPassword(password).then(passwordHash => {
-            const users = getUsers();
-
-            const normalizedUsername =
-                username.trim().toLowerCase();
-
-            const normalizedEmail =
-                email.trim().toLowerCase();
-
-            if (!normalizedUsername) {
-                throw new Error(
-                    "Le nom d'utilisateur est obligatoire."
-                );
-            }
-
-            if (normalizedUsername.length < 3) {
-                throw new Error(
-                    "Le nom d'utilisateur doit contenir au moins 3 caractères."
-                );
-            }
-
-            if (!/^[a-zA-Z0-9_.-]+$/.test(normalizedUsername)) {
-                throw new Error(
-                    "Le nom d'utilisateur contient des caractères interdits."
-                );
-            }
-
-            if (!normalizedEmail) {
-                throw new Error(
-                    "L'adresse e-mail est obligatoire."
-                );
-            }
-
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(normalizedEmail)) {
-                throw new Error(
-                    "L'adresse e-mail n'est pas valide."
-                );
-            }
-
-            if (password.length < 8) {
-                throw new Error(
-                    "Le mot de passe doit contenir au moins 8 caractères."
-                );
-            }
-
-            if (
-                users.some(
-                    user =>
-                        user.username === normalizedUsername
-                )
-            ) {
-                throw new Error(
-                    "Ce nom d'utilisateur est déjà utilisé."
-                );
-            }
-
-            if (
-                users.some(
-                    user =>
-                        user.email === normalizedEmail
-                )
-            ) {
-                throw new Error(
-                    "Cette adresse e-mail est déjà utilisée."
-                );
-            }
-
-            const now = new Date().toISOString();
-
-            const user = {
-                id: generateId(),
-
-                username: normalizedUsername,
-
-                display_name: username.trim(),
-
-                email: normalizedEmail,
-
-                password_hash: passwordHash,
-
-                ...structuredClone(DEFAULT_USER_DATA),
-
-                created_at: now,
-
-                last_login: now
-            };
-
-            users.push(user);
-
-            saveUsers(users);
-
-            setSession(user.username);
-
-            return user;
-        });
-    }
-
-    function login(usernameOrEmail, password) {
-        return hashPassword(password).then(passwordHash => {
-            const users = getUsers();
-
-            const identifier =
-                usernameOrEmail.trim().toLowerCase();
-
-            const user = users.find(
-                current =>
-                    current.username === identifier ||
-                    current.email === identifier
+    async function updateUser(patch) {
+        try {
+            const response = await fetch(
+                "/api/me",
+                {
+                    method: "PATCH",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    credentials: "include",
+                    body: JSON.stringify(patch)
+                }
             );
 
-            if (!user) {
-                throw new Error(
-                    "Identifiants incorrects."
-                );
+            if (!response.ok) {
+                return null;
             }
 
-            if (user.password_hash !== passwordHash) {
-                throw new Error(
-                    "Identifiants incorrects."
-                );
-            }
+            const data = await response.json();
 
-            user.last_login =
-                new Date().toISOString();
+            currentUser = data.user || null;
 
-            saveUsers(users);
+            window.dispatchEvent(
+                new CustomEvent(
+                    "oasis:user-updated",
+                    {
+                        detail: currentUser
+                    }
+                )
+            );
 
-            setSession(user.username);
+            return currentUser;
 
-            return user;
-        });
-    }
-
-    function logout() {
-        clearSession();
-
-        window.location.reload();
-    }
-
-    function updateUser(patch) {
-        const session = getSession();
-
-        if (!session) {
+        } catch {
             return null;
         }
-
-        const users = getUsers();
-
-        const index = users.findIndex(
-            user => user.id === session.id
-        );
-
-        if (index === -1) {
-            return null;
-        }
-
-        users[index] = {
-            ...users[index],
-            ...patch
-        };
-
-        saveUsers(users);
-
-        return users[index];
     }
 
-    function showAuthScreen() {
+    function createAuthScreen() {
         if (document.getElementById("oasis-auth")) {
             return;
         }
 
         const style = document.createElement("style");
 
-        style.id = "oasis-auth-style";
-
         style.textContent = `
             #oasis-auth {
                 position: fixed;
                 inset: 0;
-                z-index: 99999;
+                z-index: 999999;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -284,130 +114,75 @@
                 background:
                     radial-gradient(
                         circle at 20% 20%,
-                        rgba(33, 170, 139, .18),
+                        rgba(34, 197, 164, .18),
                         transparent 35%
                     ),
                     radial-gradient(
                         circle at 80% 80%,
-                        rgba(15, 117, 103, .16),
+                        rgba(32, 102, 91, .20),
                         transparent 35%
                     ),
                     #071b1a;
-                overflow-y: auto;
             }
 
-            .oasis-auth-box {
-                width: min(440px, 100%);
-                padding: 34px;
-                border-radius: 24px;
-                background: rgba(8, 30, 29, .92);
+            .oasis-auth-card {
+                width: min(430px, 100%);
+                padding: 40px;
+                border-radius: 28px;
+                text-align: center;
+                background: rgba(7, 29, 28, .94);
                 border: 1px solid rgba(255,255,255,.08);
-                box-shadow: 0 30px 100px rgba(0,0,0,.45);
+                box-shadow:
+                    0 30px 100px rgba(0,0,0,.5);
                 backdrop-filter: blur(20px);
             }
 
-            .oasis-auth-brand {
-                text-align: center;
-                margin-bottom: 28px;
+            .oasis-auth-logo {
+                font-size: 64px;
+                margin-bottom: 10px;
             }
 
-            .oasis-auth-brand-icon {
-                font-size: 54px;
-                display: block;
-                margin-bottom: 8px;
-            }
-
-            .oasis-auth-brand h1 {
+            .oasis-auth-card h1 {
                 margin: 0;
                 color: white;
-                font-size: 32px;
+                font-size: 36px;
                 font-weight: 800;
             }
 
-            .oasis-auth-brand p {
-                margin: 8px 0 0;
+            .oasis-auth-card p {
+                margin: 10px 0 30px;
                 color: rgba(255,255,255,.58);
             }
 
-            .oasis-auth-tabs {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 8px;
-                margin-bottom: 22px;
-            }
-
-            .oasis-auth-tab {
-                border: 0;
-                border-radius: 12px;
-                padding: 12px;
-                cursor: pointer;
-                color: rgba(255,255,255,.65);
-                background: rgba(255,255,255,.05);
-                font-weight: 700;
-            }
-
-            .oasis-auth-tab.active {
-                color: white;
-                background: rgba(44, 183, 151, .2);
-            }
-
-            .oasis-auth-field {
-                margin-bottom: 15px;
-            }
-
-            .oasis-auth-field label {
-                display: block;
-                margin-bottom: 7px;
-                color: rgba(255,255,255,.75);
-                font-size: 13px;
-                font-weight: 700;
-            }
-
-            .oasis-auth-field input {
-                width: 100%;
-                box-sizing: border-box;
-                border: 1px solid rgba(255,255,255,.1);
-                border-radius: 12px;
-                padding: 13px 14px;
-                outline: none;
-                color: white;
-                background: rgba(255,255,255,.05);
-            }
-
-            .oasis-auth-field input:focus {
-                border-color: rgba(44,183,151,.7);
-            }
-
-            .oasis-auth-submit {
+            .oasis-discord-login {
                 width: 100%;
                 border: 0;
-                border-radius: 12px;
-                padding: 14px;
+                border-radius: 14px;
+                padding: 15px 20px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
                 cursor: pointer;
                 color: white;
-                background: #199d83;
-                font-weight: 800;
+                background: #5865F2;
                 font-size: 15px;
-                margin-top: 5px;
+                font-weight: 800;
+                transition:
+                    transform .2s ease,
+                    filter .2s ease;
             }
 
-            .oasis-auth-submit:hover {
+            .oasis-discord-login:hover {
                 filter: brightness(1.08);
+                transform: translateY(-2px);
             }
 
-            .oasis-auth-error {
-                display: none;
-                margin-bottom: 15px;
-                padding: 12px;
-                border-radius: 10px;
-                color: #ffb4b4;
-                background: rgba(255,70,70,.1);
-                border: 1px solid rgba(255,70,70,.15);
-                font-size: 13px;
-            }
-
-            .oasis-auth-error.visible {
-                display: block;
+            .oasis-auth-note {
+                margin-top: 18px !important;
+                margin-bottom: 0 !important;
+                font-size: 12px;
+                line-height: 1.5;
             }
         `;
 
@@ -418,261 +193,57 @@
         overlay.id = "oasis-auth";
 
         overlay.innerHTML = `
-            <div class="oasis-auth-box">
+            <div class="oasis-auth-card">
 
-                <div class="oasis-auth-brand">
-                    <span class="oasis-auth-brand-icon">
-                        🌴
-                    </span>
-
-                    <h1>
-                        Oasis
-                    </h1>
-
-                    <p>
-                        Votre espace communautaire
-                    </p>
+                <div class="oasis-auth-logo">
+                    🌴
                 </div>
 
-                <div class="oasis-auth-tabs">
+                <h1>
+                    Oasis
+                </h1>
 
-                    <button
-                        class="oasis-auth-tab active"
-                        type="button"
-                        data-auth-mode="login"
-                    >
-                        Connexion
-                    </button>
+                <p>
+                    Connecte-toi avec ton compte Discord
+                    pour accéder à la communauté.
+                </p>
 
-                    <button
-                        class="oasis-auth-tab"
-                        type="button"
-                        data-auth-mode="register"
-                    >
-                        Inscription
-                    </button>
+                <button
+                    id="oasis-discord-login"
+                    class="oasis-discord-login"
+                    type="button"
+                >
+                    <span>💬</span>
+                    Continuer avec Discord
+                </button>
 
-                </div>
-
-                <div
-                    class="oasis-auth-error"
-                    id="oasis-auth-error"
-                ></div>
-
-                <form id="oasis-auth-form">
-
-                    <div class="oasis-auth-field">
-                        <label for="auth-identifier">
-                            Nom d'utilisateur ou e-mail
-                        </label>
-
-                        <input
-                            id="auth-identifier"
-                            type="text"
-                            autocomplete="username"
-                            required
-                        >
-                    </div>
-
-                    <div
-                        class="oasis-auth-field"
-                        id="auth-email-field"
-                        hidden
-                    >
-                        <label for="auth-email">
-                            E-mail
-                        </label>
-
-                        <input
-                            id="auth-email"
-                            type="email"
-                            autocomplete="email"
-                        >
-                    </div>
-
-                    <div class="oasis-auth-field">
-                        <label for="auth-password">
-                            Mot de passe
-                        </label>
-
-                        <input
-                            id="auth-password"
-                            type="password"
-                            autocomplete="current-password"
-                            minlength="8"
-                            required
-                        >
-                    </div>
-
-                    <div
-                        class="oasis-auth-field"
-                        id="auth-confirm-field"
-                        hidden
-                    >
-                        <label for="auth-confirm">
-                            Confirmer le mot de passe
-                        </label>
-
-                        <input
-                            id="auth-confirm"
-                            type="password"
-                            autocomplete="new-password"
-                            minlength="8"
-                        >
-                    </div>
-
-                    <button
-                        class="oasis-auth-submit"
-                        type="submit"
-                        id="oasis-auth-submit"
-                    >
-                        Se connecter
-                    </button>
-
-                </form>
+                <p class="oasis-auth-note">
+                    Ton compte Oasis est automatiquement
+                    lié à ton compte Discord.
+                </p>
 
             </div>
         `;
 
         document.body.appendChild(overlay);
 
-        let mode = "login";
-
-        const tabs = overlay.querySelectorAll(
-            "[data-auth-mode]"
-        );
-
-        const identifier =
-            overlay.querySelector("#auth-identifier");
-
-        const email =
-            overlay.querySelector("#auth-email");
-
-        const emailField =
-            overlay.querySelector("#auth-email-field");
-
-        const confirm =
-            overlay.querySelector("#auth-confirm");
-
-        const confirmField =
-            overlay.querySelector("#auth-confirm-field");
-
-        const submit =
-            overlay.querySelector("#oasis-auth-submit");
-
-        const error =
-            overlay.querySelector("#oasis-auth-error");
-
-        const form =
-            overlay.querySelector("#oasis-auth-form");
-
-        function setMode(nextMode) {
-            mode = nextMode;
-
-            tabs.forEach(tab => {
-                tab.classList.toggle(
-                    "active",
-                    tab.dataset.authMode === mode
-                );
-            });
-
-            const register =
-                mode === "register";
-
-            emailField.hidden = !register;
-            confirmField.hidden = !register;
-
-            email.required = register;
-            confirm.required = register;
-
-            identifier.placeholder = register
-                ? "Nom d'utilisateur"
-                : "Nom d'utilisateur ou e-mail";
-
-            submit.textContent = register
-                ? "Créer mon compte"
-                : "Se connecter";
-
-            error.classList.remove("visible");
-            error.textContent = "";
-        }
-
-        tabs.forEach(tab => {
-            tab.addEventListener(
+        document
+            .getElementById("oasis-discord-login")
+            .addEventListener(
                 "click",
-                () => setMode(tab.dataset.authMode)
+                loginWithDiscord
             );
-        });
-
-        form.addEventListener("submit", async event => {
-            event.preventDefault();
-
-            error.classList.remove("visible");
-
-            submit.disabled = true;
-
-            try {
-                let user;
-
-                if (mode === "register") {
-                    if (confirm.value !== identifier.value) {
-                        throw new Error(
-                            "La confirmation du mot de passe est incorrecte."
-                        );
-                    }
-
-                    user = await createUser(
-                        identifier.value,
-                        email.value,
-                        confirm.value
-                    );
-                } else {
-                    user = await login(
-                        identifier.value,
-                        document.getElementById(
-                            "auth-password"
-                        ).value
-                    );
-                }
-
-                window.OasisAuth.currentUser = user;
-
-                overlay.remove();
-
-                document.body.classList.add(
-                    "oasis-authenticated"
-                );
-
-                window.dispatchEvent(
-                    new CustomEvent(
-                        "oasis:authenticated",
-                        {
-                            detail: user
-                        }
-                    )
-                );
-
-                window.location.hash = "#/";
-
-                window.location.reload();
-
-            } catch (err) {
-                error.textContent =
-                    err.message ||
-                    "Une erreur est survenue.";
-
-                error.classList.add("visible");
-
-            } finally {
-                submit.disabled = false;
-            }
-        });
     }
 
-    function syncUserChrome(user) {
+    function updateUserInterface(user) {
         if (!user) {
             return;
         }
+
+        const displayName =
+            user.display_name ||
+            user.username ||
+            "Membre";
 
         const sidebarName =
             document.getElementById(
@@ -695,9 +266,7 @@
             );
 
         if (sidebarName) {
-            sidebarName.textContent =
-                user.display_name ||
-                user.username;
+            sidebarName.textContent = displayName;
         }
 
         if (sidebarClan) {
@@ -709,50 +278,46 @@
 
         if (coins) {
             coins.textContent =
-                new Intl.NumberFormat("fr-FR")
-                    .format(user.coins || 0);
+                Number(user.coins || 0).toLocaleString(
+                    "fr-FR"
+                );
         }
 
         if (avatar) {
-            avatar.textContent =
-                user.avatar_url
-                    ? ""
-                    : "👤";
-
             if (user.avatar_url) {
                 avatar.innerHTML = `
                     <img
-                        src="${String(user.avatar_url)
-                            .replaceAll('"', "&quot;")}"
-                        alt="Avatar"
+                        src="${user.avatar_url}"
+                        alt="Avatar Discord"
                     >
                 `;
+            } else {
+                avatar.textContent = "👤";
             }
         }
     }
 
-    function init() {
-        const currentUser = getSession();
+    async function initAuth() {
+        currentUser = await getCurrentUser();
 
         window.OasisAuth = {
-            getCurrentUser: getSession,
-            createUser,
-            login,
+            getCurrentUser: () => currentUser,
+            loginWithDiscord,
             logout,
             updateUser,
-
-            currentUser
+            DEFAULT_USER
         };
 
         if (!currentUser) {
-            document.documentElement.style.overflow = "hidden";
+            document.documentElement.style.overflow =
+                "hidden";
 
-            showAuthScreen();
+            createAuthScreen();
 
             return;
         }
 
-        syncUserChrome(currentUser);
+        updateUserInterface(currentUser);
 
         const logoutButton =
             document.getElementById(
@@ -776,13 +341,16 @@
         );
     }
 
-    if (document.readyState === "loading") {
+    if (
+        document.readyState ===
+        "loading"
+    ) {
         document.addEventListener(
             "DOMContentLoaded",
-            init
+            initAuth
         );
     } else {
-        init();
+        initAuth();
     }
 
 })();
