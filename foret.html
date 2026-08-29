@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<meta name="theme-color" content="#315f4a">
+<meta name="description" content="Oasis • La Forêt">
+
+<title>Oasis • La Forêt</title>
+
+<link rel="stylesheet" href="./style.css">
+```
+
+</head>
+
+<body>
+
+```
+<!-- NAVIGATION -->
+<nav class="navbar">
+
+    <a href="./index.html" class="brand">
+        <div class="brand-mark">🌴</div>
+
+        <div class="brand-name">
+            OASIS<span>.</span>
+        </div>
+    </a>
+
+    <div class="nav-links">
+        <a href="./index.html">Accueil</a>
+        <a href="./village.html">Village</a>
+        <a href="./port.html">Port</a>
+        <a href="./foret.html" class="active">Forêt</a>
+    </div>
+
+    <a
+        href="https://discord.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="nav-discord"
+    >
+        Discord
+    </a>
+
+</nav>
+
+
+<!-- HERO -->
+<main>
+
+    <section class="hero">
+
+        <div class="hero-background forest-background"></div>
+
+        <div class="hero-overlay"></div>
+
+        <div class="hero-content">
+
+            <div class="breadcrumb">
+                <a href="./index.html">Oasis</a>
+                <span>›</span>
+                <span>La Forêt</span>
+            </div>
+
+            <div class="hero-tag">
+                🌿 ZONE 03 • LA FORÊT
+            </div>
+
+            <h1>
+                La forêt
+                <span>respire.</span>
+            </h1>
+
+            <p class="hero-description">
+                Une zone sauvage au cœur d'Oasis.
+                La nature évolue progressivement avec
+                la communauté et transforme peu à peu
+                cette partie de l'île.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a
+                    href="#evolution"
+                    class="button button-primary"
+                >
+                    🌿 Voir l'évolution
+                </a>
+
+                <a
+                    href="./index.html#ile"
+                    class="button button-secondary"
+                >
+                    🏝️ Retour à l'île
+                </a>
+
+            </div>
+
+            <div class="hero-stats">
+
+                <div class="hero-stat">
+                    <strong>50</strong>
+                    <span>évolutions</span>
+                </div>
+
+                <div class="hero-stat">
+                    <strong>🌲</strong>
+                    <span>zone naturelle</span>
+                </div>
+
+                <div class="hero-stat">
+                    <strong>∞</strong>
+                    <span>possibilités</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ÉVOLUTION -->
+    <section
+        class="section evolution-section"
+        id="evolution"
+    >
+
+        <div class="section-container">
+
+            <div class="eyebrow">
+                Évolution de la forêt
+            </div>
+
+            <h2 class="section-title">
+                De terrain sauvage
+                <span>à sanctuaire.</span>
+            </h2>
+
+            <p class="section-text">
+                La forêt évolue au rythme de l'île.
+                Chaque niveau représente une nouvelle
+                étape de son développement.
+            </p>
+
+
+            <div class="evolution-panel">
+
+                <div class="evolution-content">
+
+                    <div class="evolution-top">
+
+                        <div>
+                            <div class="eyebrow">
+                                Progression actuelle
+                            </div>
+                        </div>
+
+                        <div
+                            class="evolution-current"
+                            id="forest-status"
+                        >
+                            ÉVOLUTION 01
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        class="evolution-level"
+                        id="forest-level"
+                    >
+                        01 <span>/ 50</span>
+                    </div>
+
+
+                    <div
+                        class="evolution-name"
+                        id="forest-name"
+                    >
+                        Le terrain sauvage
+                    </div>
+
+
+                    <p
+                        class="evolution-description"
+                        id="forest-description"
+                    >
+                        Une terre encore sauvage où la
+                        végétation commence tout juste
+                        à prendre possession de l'île.
+                    </p>
+
+
+                    <div class="evolution-progress">
+
+                        <div class="evolution-progress-top">
+
+                            <span>
+                                Progression
+                            </span>
+
+                            <span id="forest-progress-text">
+                                2%
+                            </span>
+
+                        </div>
+
+                        <div class="evolution-bar">
+                            <span
+                                id="forest-progress"
+                                style="width: 2%;"
+                            ></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- NIVEAUX -->
+            <div class="level-selector">
+
+                <button
+                    class="level-button active"
+                    data-level="1"
+                >
+                    <strong>01</strong>
+                    <span>Origine</span>
+                </button>
+
+                <button
+                    class="level-button"
+                    data-level="10"
+                >
+                    <strong>10</strong>
+                    <span>Repousse</span>
+                </button>
+
+                <button
+                    class="level-button"
+                    data-level="20"
+                >
+                    <strong>20</strong>
+                    <span>Expansion</span>
+                </button>
+
+                <button
+                    class="level-button"
+                    data-level="30"
+                >
+                    <strong>30</strong>
+                    <span>Sanctuaire</span>
+                </button>
+
+                <button
+                    class="level-button"
+                    data-level="40"
+                >
+                    <strong>40</strong>
+                    <span>Forêt dense</span>
+                </button>
+
+                <button
+                    class="level-button"
+                    data-level="50"
+                >
+                    <strong>50</strong>
+                    <span>Apogée</span>
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CARACTÉRISTIQUES -->
+    <section class="section">
+
+        <div class="section-container">
+
+            <div class="eyebrow">
+                La zone naturelle
+            </div>
+
+            <h2 class="section-title">
+                Une forêt qui
+                <span>prend vie.</span>
+            </h2>
+
+            <p class="section-text">
+                La transformation de la forêt ne concerne
+                pas uniquement les arbres. Toute la zone
+                évolue progressivement.
+            </p>
+
+
+            <div class="features-grid">
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🌲
+                    </div>
+
+                    <h3>
+                        Végétation
+                    </h3>
+
+                    <p>
+                        Les arbres, plantes et feuillages
+                        deviennent progressivement plus
+                        présents dans la zone.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🦋
+                    </div>
+
+                    <h3>
+                        Vie sauvage
+                    </h3>
+
+                    <p>
+                        La forêt accueille progressivement
+                        une biodiversité plus importante.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        💧
+                    </div>
+
+                    <h3>
+                        Sources
+                    </h3>
+
+                    <p>
+                        Des points d'eau et des rivières
+                        peuvent apparaître au fil des
+                        évolutions.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🪵
+                    </div>
+
+                    <h3>
+                        Sentiers
+                    </h3>
+
+                    <p>
+                        De nouveaux chemins permettent
+                        d'explorer progressivement les
+                        profondeurs de la forêt.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🌙
+                    </div>
+
+                    <h3>
+                        Zones mystérieuses
+                    </h3>
+
+                    <p>
+                        Certaines évolutions peuvent
+                        révéler des endroits cachés.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        🏕️
+                    </div>
+
+                    <h3>
+                        Exploration
+                    </h3>
+
+                    <p>
+                        La forêt devient progressivement
+                        un lieu de découverte et
+                        d'exploration.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- GRANDES ÉTAPES -->
+    <section class="section timeline-section">
+
+        <div class="section-container">
+
+            <div class="eyebrow">
+                Les grandes étapes
+            </div>
+
+            <h2 class="section-title">
+                L'histoire de la
+                <span>forêt.</span>
+            </h2>
+
+            <p class="section-text">
+                De son état sauvage jusqu'à son apogée,
+                la forêt se transforme progressivement.
+            </p>
+
+
+            <div class="timeline">
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-number">
+                        ÉVOLUTION 01
+                    </div>
+
+                    <h3>
+                        Le terrain sauvage
+                    </h3>
+
+                    <p>
+                        Une forêt encore peu développée,
+                        presque entièrement laissée à
+                        l'état naturel.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-number">
+                        ÉVOLUTION 10
+                    </div>
+
+                    <h3>
+                        La repousse
+                    </h3>
+
+                    <p>
+                        La végétation reprend du terrain
+                        et les premiers sentiers apparaissent.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-number">
+                        ÉVOLUTION 20
+                    </div>
+
+                    <h3>
+                        L'expansion
+                    </h3>
+
+                    <p>
+                        La forêt devient plus dense et
+                        de nouvelles zones deviennent
+                        progressivement accessibles.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-number">
+                        ÉVOLUTION 30
+                    </div>
+
+                    <h3>
+                        Le sanctuaire
+                    </h3>
+
+                    <p>
+                        La biodiversité s'installe et
+                        la forêt devient un véritable
+                        refuge naturel.
+                    </p>
+
+                </div>
+
+
+                <div class="timeline-item">
+
+                    <div class="timeline-dot"></div>
+
+                    <div class="timeline-number">
+                        ÉVOLUTION 50
+                    </div>
+
+                    <h3>
+                        L'apogée
+                    </h3>
+
+                    <p>
+                        La forêt atteint son évolution
+                        finale et devient un grand
+                        sanctuaire naturel d'Oasis.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta">
+
+        <div class="cta-box">
+
+            <h2>
+                L'île évolue.
+                <span>La forêt aussi.</span>
+            </h2>
+
+            <p>
+                Explore les différentes zones d'Oasis
+                et découvre comment l'île se transforme
+                avec sa communauté.
+            </p>
+
+            <a
+                href="./index.html#ile"
+                class="button button-primary"
+            >
+                🏝️ Explorer l'île
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="footer-inner">
+
+        <div class="footer-brand">
+            OASIS.
+        </div>
+
+        <div class="footer-text">
+            La forêt évolue avec la communauté.
+        </div>
+
+        <div class="footer-text">
+            © 2026 Oasis
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- SCRIPT COMMUN -->
+<script src="./script.js"></script>
+```
+
+</body>
+</html>
