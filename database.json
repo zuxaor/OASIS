@@ -1,0 +1,22 @@
+{
+  "ile": {
+    "niveau": 1,
+    "contributions": 0,
+    "progression": 0
+  },
+  "zones": {
+    "village": {
+      "niveau": 1
+    },
+    "port": {
+      "niveau": 1
+    },
+    "foret": {
+      "niveau": 1
+    }
+  },
+  "evolutions": {
+    "actuelle": 1,
+    "maximum": 50
+  }
+}
