@@ -1,87 +1,17 @@
+/* =========================================================
+   OASIS • SCRIPT PRINCIPAL
+========================================================= */
+
 document.addEventListener("DOMContentLoaded", () => {
 
-```
-/* =========================================================
-   NAVIGATION
-========================================================= */
+    /* =====================================================
+       ANIMATION DES ÉLÉMENTS AU SCROLL
+    ====================================================== */
 
-const currentPage =
-    window.location.pathname
-        .split("/")
-        .pop()
-        .toLowerCase() || "index.html";
-
-document.querySelectorAll(".nav-links a").forEach(link => {
-
-    const href =
-        link.getAttribute("href") || "";
-
-    const targetPage =
-        href.split("#")[0]
-            .split("/")
-            .pop()
-            .toLowerCase();
-
-    link.classList.remove("active");
-
-    if (
-        targetPage === currentPage ||
-        (currentPage === "" && targetPage === "index.html")
-    ) {
-        link.classList.add("active");
-    }
-
-});
-
-
-/* =========================================================
-   SCROLL
-========================================================= */
-
-document.querySelectorAll('a[href^="#"]').forEach(link => {
-
-    link.addEventListener("click", event => {
-
-        const targetId =
-            link.getAttribute("href");
-
-        if (
-            !targetId ||
-            targetId === "#"
-        ) {
-            return;
-        }
-
-        const target =
-            document.querySelector(targetId);
-
-        if (!target) {
-            return;
-        }
-
-        event.preventDefault();
-
-        target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
-
-    });
-
-});
-
-
-/* =========================================================
-   APPARITION DES ÉLÉMENTS
-========================================================= */
-
-const animatedElements =
-    document.querySelectorAll(
-        ".feature-card, .port-card, .timeline-item, .timeline-card, .evolution-panel, .level-button"
-    );
-
-
-if ("IntersectionObserver" in window) {
+    const animatedElements =
+        document.querySelectorAll(
+            ".feature-card, .timeline-item, .evolution-panel, .cta-box"
+        );
 
     const observer =
         new IntersectionObserver(
@@ -89,17 +19,13 @@ if ("IntersectionObserver" in window) {
 
                 entries.forEach(entry => {
 
-                    if (!entry.isIntersecting) {
-                        return;
+                    if (entry.isIntersecting) {
+
+                        entry.target.classList.add("visible");
+
+                        observer.unobserve(entry.target);
+
                     }
-
-                    entry.target.classList.add(
-                        "visible"
-                    );
-
-                    observer.unobserve(
-                        entry.target
-                    );
 
                 });
 
@@ -112,258 +38,324 @@ if ("IntersectionObserver" in window) {
 
     animatedElements.forEach(element => {
 
-        element.classList.add(
-            "scroll-hidden"
-        );
-
         observer.observe(element);
 
     });
 
-}
+
+    /* =====================================================
+       NAVBAR AU SCROLL
+    ====================================================== */
+
+    const navbar =
+        document.querySelector(".navbar");
 
 
-/* =========================================================
-   FORÊT
-========================================================= */
+    if (navbar) {
 
-const forestEvolution = {
+        window.addEventListener(
+            "scroll",
+            () => {
 
-    1: {
-        name: "Le terrain sauvage",
-        description:
-            "Une terre encore sauvage où la végétation commence tout juste à prendre possession de l'île."
-    },
+                if (window.scrollY > 40) {
 
-    10: {
-        name: "La repousse",
-        description:
-            "La nature reprend ses droits. Les premiers arbres se développent et les sentiers commencent à apparaître."
-    },
+                    navbar.classList.add("scrolled");
 
-    20: {
-        name: "L'expansion",
-        description:
-            "La forêt s'étend et devient progressivement plus dense. De nouvelles zones deviennent accessibles."
-    },
+                } else {
 
-    30: {
-        name: "Le sanctuaire",
-        description:
-            "La biodiversité s'installe. La forêt devient un véritable refuge naturel au cœur d'Oasis."
-    },
+                    navbar.classList.remove("scrolled");
 
-    40: {
-        name: "La forêt dense",
-        description:
-            "Une végétation abondante recouvre désormais la zone. Les profondeurs de la forêt deviennent mystérieuses."
-    },
+                }
 
-    50: {
-        name: "L'apogée",
-        description:
-            "La forêt atteint son évolution finale et devient l'un des grands sanctuaires naturels d'Oasis."
-    }
-
-};
-
-
-const forestButtons =
-    document.querySelectorAll(
-        ".level-button"
-    );
-
-const forestLevel =
-    document.getElementById(
-        "forest-level"
-    );
-
-const forestName =
-    document.getElementById(
-        "forest-name"
-    );
-
-const forestDescription =
-    document.getElementById(
-        "forest-description"
-    );
-
-const forestProgress =
-    document.getElementById(
-        "forest-progress"
-    );
-
-const forestProgressText =
-    document.getElementById(
-        "forest-progress-text"
-    );
-
-const forestStatus =
-    document.getElementById(
-        "forest-status"
-    );
-
-
-function showForestEvolution(level) {
-
-    const evolution =
-        forestEvolution[level];
-
-    if (!evolution) {
-        return;
-    }
-
-
-    if (forestLevel) {
-
-        forestLevel.innerHTML =
-            String(level).padStart(2, "0") +
-            " <span>/ 50</span>";
-
-    }
-
-
-    if (forestName) {
-
-        forestName.textContent =
-            evolution.name;
-
-    }
-
-
-    if (forestDescription) {
-
-        forestDescription.textContent =
-            evolution.description;
-
-    }
-
-
-    const percentage =
-        Math.round(
-            (level / 50) * 100
+            }
         );
 
-
-    if (forestProgress) {
-
-        forestProgress.style.width =
-            percentage + "%";
-
     }
 
 
-    if (forestProgressText) {
+    /* =====================================================
+       ÉVOLUTIONS
+    ====================================================== */
 
-        forestProgressText.textContent =
-            percentage + "%";
+    const evolutionData = {
 
-    }
+        1: {
+            name: "Les premiers pas",
+            description:
+                "Oasis commence son histoire. L'île est encore jeune et attend les premières contributions de sa communauté."
+        },
+
+        10: {
+            name: "Le développement",
+            description:
+                "La communauté commence à transformer l'île. Les premières traces d'une véritable civilisation apparaissent."
+        },
+
+        20: {
+            name: "L'expansion",
+            description:
+                "Oasis grandit. De nouvelles zones se développent et l'île devient progressivement plus vivante."
+        },
+
+        30: {
+            name: "La transformation",
+            description:
+                "L'île connaît une véritable transformation. Les différentes zones prennent progressivement leur identité."
+        },
+
+        40: {
+            name: "L'apogée",
+            description:
+                "Oasis atteint une nouvelle maturité. La communauté a profondément transformé son environnement."
+        },
+
+        50: {
+            name: "L'évolution finale",
+            description:
+                "La 50ᵉ évolution est atteinte. L'histoire de la transformation d'Oasis arrive à son apogée."
+        }
+
+    };
 
 
-    if (forestStatus) {
+    /* =====================================================
+       ÉLÉMENTS DE LA PAGE
+    ====================================================== */
 
-        forestStatus.textContent =
-            "ÉVOLUTION " +
-            String(level).padStart(2, "0");
-
-    }
-
-
-    forestButtons.forEach(button => {
-
-        button.classList.toggle(
-            "active",
-            Number(button.dataset.level) === level
-        );
-
-    });
-
-}
+    const levelButtons =
+        document.querySelectorAll(".level-button");
 
 
-forestButtons.forEach(button => {
+    const levelElement =
+        document.getElementById("island-level") ||
+        document.getElementById("forest-level");
 
-    button.addEventListener(
-        "click",
-        () => {
 
-            const level =
-                Number(
-                    button.dataset.level
-                );
+    const nameElement =
+        document.getElementById("island-name") ||
+        document.getElementById("forest-name");
 
-            showForestEvolution(level);
+
+    const descriptionElement =
+        document.getElementById("island-description") ||
+        document.getElementById("forest-description");
+
+
+    const progressElement =
+        document.getElementById("island-progress") ||
+        document.getElementById("forest-progress");
+
+
+    const progressTextElement =
+        document.getElementById("island-progress-text") ||
+        document.getElementById("forest-progress-text");
+
+
+    const statusElement =
+        document.getElementById("island-status") ||
+        document.getElementById("forest-status");
+
+
+    /* =====================================================
+       AFFICHAGE D'UNE ÉVOLUTION
+    ====================================================== */
+
+    function showEvolution(level) {
+
+        const evolution =
+            evolutionData[level];
+
+
+        if (!evolution) {
+            return;
+        }
+
+
+        if (levelElement) {
+
+            levelElement.innerHTML =
+                String(level).padStart(2, "0") +
+                ' <span>/ 50</span>';
 
         }
-    );
-
-});
 
 
-if (
-    forestButtons.length > 0 &&
-    forestLevel
-) {
+        if (nameElement) {
 
-    showForestEvolution(1);
+            nameElement.textContent =
+                evolution.name;
 
-}
+        }
 
 
-/* =========================================================
-   PETITE ANIMATION DU BOUTON DISCORD
-========================================================= */
+        if (descriptionElement) {
 
-document
-    .querySelectorAll(".nav-discord")
-    .forEach(button => {
+            descriptionElement.textContent =
+                evolution.description;
 
-        button.addEventListener(
-            "mouseenter",
-            () => {
-                button.classList.add(
-                    "discord-hover"
-                );
+        }
+
+
+        const percentage =
+            Math.round(
+                (level / 50) * 100
+            );
+
+
+        if (progressElement) {
+
+            progressElement.style.width =
+                percentage + "%";
+
+        }
+
+
+        if (progressTextElement) {
+
+            progressTextElement.textContent =
+                percentage + "%";
+
+        }
+
+
+        if (statusElement) {
+
+            statusElement.textContent =
+                "ÉVOLUTION " +
+                String(level).padStart(2, "0");
+
+        }
+
+
+        levelButtons.forEach(button => {
+
+            button.classList.remove("active");
+
+
+            if (
+                Number(button.dataset.level) ===
+                Number(level)
+            ) {
+
+                button.classList.add("active");
+
             }
-        );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       BOUTONS D'ÉVOLUTION
+    ====================================================== */
+
+    levelButtons.forEach(button => {
 
         button.addEventListener(
-            "mouseleave",
+            "click",
             () => {
-                button.classList.remove(
-                    "discord-hover"
-                );
+
+                const level =
+                    Number(
+                        button.dataset.level
+                    );
+
+
+                showEvolution(level);
+
             }
         );
 
     });
 
 
-/* =========================================================
-   ANNÉE AUTOMATIQUE
-========================================================= */
+    /* =====================================================
+       NIVEAU INITIAL
+    ====================================================== */
 
-document
-    .querySelectorAll(".footer-text")
-    .forEach(element => {
+    if (
+        levelElement ||
+        nameElement ||
+        descriptionElement
+    ) {
 
-        if (
-            element.textContent.includes(
-                "© 2026"
-            )
-        ) {
+        showEvolution(1);
+
+    }
+
+
+    /* =====================================================
+       LIENS ANCRES
+    ====================================================== */
+
+    document
+        .querySelectorAll('a[href^="#"]')
+        .forEach(link => {
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    const targetId =
+                        link.getAttribute("href");
+
+
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+
+                        return;
+
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+
+                    if (!target) {
+                        return;
+                    }
+
+
+                    event.preventDefault();
+
+
+                    target.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+
+                }
+            );
+
+        });
+
+
+    /* =====================================================
+       ANNÉE AUTOMATIQUE
+    ====================================================== */
+
+    document
+        .querySelectorAll(".current-year")
+        .forEach(element => {
 
             element.textContent =
-                element.textContent.replace(
-                    "© 2026",
-                    "© " +
-                    new Date().getFullYear()
-                );
+                new Date().getFullYear();
 
-        }
+        });
 
-    });
-```
+
+    /* =====================================================
+       CONSOLE
+    ====================================================== */
+
+    console.log(
+        "🌴 Oasis • Site chargé avec succès."
+    );
 
 });
