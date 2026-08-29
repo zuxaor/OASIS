@@ -1,176 +1,541 @@
 ```javascript
 /* =========================================================
    OASIS • SCRIPT COMMUN
-   Version de départ
+   index.html
+   village.html
+   port.html
+   foret.html
 ========================================================= */
 
-"use strict";
+document.addEventListener("DOMContentLoaded", () => {
+
+    /* =====================================================
+       CONFIGURATION
+    ===================================================== */
+
+    const CONFIG = {
+        maxEvolution: 50,
+
+        storageKey: "oasisData",
+
+        defaultData: {
+            island: {
+                level: 1,
+                contributions: 0
+            },
+
+            village: {
+                level: 1,
+                contributions: 0
+            },
+
+            port: {
+                level: 1,
+                contributions: 0
+            },
+
+            foret: {
+                level: 1,
+                contributions: 0
+            }
+        }
+    };
 
 
-/* =========================================================
-   CONFIGURATION
-========================================================= */
+    /* =====================================================
+       DONNÉES
+    ===================================================== */
 
-const OASIS_CONFIG = {
+    function loadData() {
 
-    maxEvolution: 50,
+        try {
 
-    storageKey: "oasis_progression",
+            const saved =
+                localStorage.getItem(CONFIG.storageKey);
 
-    defaultProgression: 1
+            if (!saved) {
 
-};
+                return structuredClone(CONFIG.defaultData);
 
+            }
 
-/* =========================================================
-   DONNÉES DES ZONES
-========================================================= */
+            const data = JSON.parse(saved);
 
-const OASIS_ZONES = {
+            return {
 
-    village: {
-        name: "Le Village",
-        icon: "🏘️",
-        page: "village.html"
-    },
+                ...structuredClone(CONFIG.defaultData),
 
-    port: {
-        name: "Le Port",
-        icon: "⚓",
-        page: "port.html"
-    },
+                ...data,
 
-    foret: {
-        name: "La Forêt",
-        icon: "🌲",
-        page: "foret.html"
+                island: {
+                    ...CONFIG.defaultData.island,
+                    ...(data.island || {})
+                },
+
+                village: {
+                    ...CONFIG.defaultData.village,
+                    ...(data.village || {})
+                },
+
+                port: {
+                    ...CONFIG.defaultData.port,
+                    ...(data.port || {})
+                },
+
+                foret: {
+                    ...CONFIG.defaultData.foret,
+                    ...(data.foret || {})
+                }
+
+            };
+
+        } catch (error) {
+
+            console.error(
+                "Erreur lors du chargement des données Oasis :",
+                error
+            );
+
+            return structuredClone(CONFIG.defaultData);
+
+        }
+
     }
 
-};
+
+    function saveData(data) {
+
+        try {
+
+            localStorage.setItem(
+                CONFIG.storageKey,
+                JSON.stringify(data)
+            );
+
+        } catch (error) {
+
+            console.error(
+                "Erreur lors de la sauvegarde Oasis :",
+                error
+            );
+
+        }
+
+    }
 
 
-/* =========================================================
-   PROGRESSION DE L'ÎLE
-========================================================= */
+    let oasisData = loadData();
 
-function getIslandProgress() {
 
-    const saved =
-        localStorage.getItem(
-            OASIS_CONFIG.storageKey
+    /* =====================================================
+       OUTILS
+    ===================================================== */
+
+    function clamp(value, min, max) {
+
+        return Math.min(
+            Math.max(value, min),
+            max
         );
 
-    if (saved === null) {
+    }
 
-        return OASIS_CONFIG.defaultProgression;
+
+    function formatLevel(level) {
+
+        return String(level).padStart(2, "0");
 
     }
 
-    const progression =
-        Number(saved);
 
-    if (
-        !Number.isFinite(progression) ||
-        progression < 1
-    ) {
+    function getPercentage(level) {
 
-        return OASIS_CONFIG.defaultProgression;
-
-    }
-
-    return Math.min(
-        Math.floor(progression),
-        OASIS_CONFIG.maxEvolution
-    );
-
-}
-
-
-function setIslandProgress(value) {
-
-    let progression =
-        Number(value);
-
-    if (!Number.isFinite(progression)) {
-
-        progression =
-            OASIS_CONFIG.defaultProgression;
-
-    }
-
-    progression =
-        Math.max(
-            1,
-            Math.min(
-                Math.floor(progression),
-                OASIS_CONFIG.maxEvolution
-            )
+        return Math.round(
+            (level / CONFIG.maxEvolution) * 100
         );
 
-    localStorage.setItem(
-        OASIS_CONFIG.storageKey,
-        String(progression)
-    );
-
-    updateIslandProgressUI();
-
-    return progression;
-
-}
+    }
 
 
-/* =========================================================
-   CALCUL DE POURCENTAGE
-========================================================= */
+    function getZoneFromPage() {
 
-function getProgressPercentage(level) {
+        const path =
+            window.location.pathname
+                .toLowerCase();
 
-    const value =
-        Number(level);
+        if (
+            path.includes("village")
+        ) {
 
-    if (!Number.isFinite(value)) {
+            return "village";
 
-        return 0;
+        }
+
+        if (
+            path.includes("port")
+        ) {
+
+            return "port";
+
+        }
+
+        if (
+            path.includes("foret") ||
+            path.includes("forêt")
+        ) {
+
+            return "foret";
+
+        }
+
+        return "island";
 
     }
 
-    return Math.round(
-        (value / OASIS_CONFIG.maxEvolution) * 100
-    );
 
-}
+    /* =====================================================
+       ÉVOLUTION GÉNÉRALE
+    ===================================================== */
+
+    function getZoneData(zone) {
+
+        if (!oasisData[zone]) {
+
+            oasisData[zone] = {
+                level: 1,
+                contributions: 0
+            };
+
+        }
+
+        return oasisData[zone];
+
+    }
 
 
-/* =========================================================
-   MISE À JOUR DE L'INTERFACE
-========================================================= */
+    function setZoneLevel(zone, level) {
 
-function updateIslandProgressUI() {
+        const zoneData =
+            getZoneData(zone);
 
-    const level =
-        getIslandProgress();
+        zoneData.level =
+            clamp(
+                Number(level) || 1,
+                1,
+                CONFIG.maxEvolution
+            );
 
-    const percentage =
-        getProgressPercentage(level);
+        saveData(oasisData);
+
+        updatePage(zone);
+
+    }
 
 
-    document
-        .querySelectorAll(
-            "[data-island-level]"
-        )
-        .forEach(element => {
+    function addContribution(zone, amount = 1) {
+
+        const zoneData =
+            getZoneData(zone);
+
+        amount =
+            Math.max(
+                0,
+                Number(amount) || 0
+            );
+
+        zoneData.contributions += amount;
+
+        /*
+         * Une contribution fait progresser
+         * automatiquement la zone.
+         *
+         * Pour l'instant :
+         * 1 contribution = 1 évolution.
+         */
+
+        zoneData.level =
+            clamp(
+                zoneData.level + amount,
+                1,
+                CONFIG.maxEvolution
+            );
+
+        saveData(oasisData);
+
+        updatePage(zone);
+
+        announceEvolution(
+            zone,
+            zoneData.level
+        );
+
+    }
+
+
+    /* =====================================================
+       DONNÉES DES ÉVOLUTIONS
+    ===================================================== */
+
+    const evolutionData = {
+
+        island: {
+
+            1: {
+                name: "L'île sauvage",
+                description:
+                    "Oasis commence son aventure. L'île est encore largement sauvage et attend de prendre vie."
+            },
+
+            10: {
+                name: "Les premiers changements",
+                description:
+                    "La communauté commence à transformer l'île. Les premières zones prennent forme."
+            },
+
+            20: {
+                name: "L'île se développe",
+                description:
+                    "Les différentes zones d'Oasis commencent à évoluer et l'île devient progressivement plus vivante."
+            },
+
+            30: {
+                name: "Une véritable communauté",
+                description:
+                    "Oasis prend forme. Les habitants, les lieux et les différentes zones commencent à former un ensemble cohérent."
+            },
+
+            40: {
+                name: "L'île florissante",
+                description:
+                    "L'île atteint un niveau de développement important grâce aux efforts de toute la communauté."
+            },
+
+            50: {
+                name: "L'apogée d'Oasis",
+                description:
+                    "Oasis atteint son évolution maximale et devient une île entièrement développée."
+            }
+
+        },
+
+
+        village: {
+
+            1: {
+                name: "Le petit village",
+                description:
+                    "Quelques habitations forment les premières bases du village d'Oasis."
+            },
+
+            10: {
+                name: "Les premières maisons",
+                description:
+                    "Le village commence à s'agrandir et de nouvelles habitations apparaissent."
+            },
+
+            20: {
+                name: "Le village grandit",
+                description:
+                    "Les rues se développent et le village devient progressivement plus vivant."
+            },
+
+            30: {
+                name: "Le cœur de l'île",
+                description:
+                    "Le village devient un véritable centre de vie pour la communauté."
+            },
+
+            40: {
+                name: "Le grand village",
+                description:
+                    "Le village est désormais fortement développé et accueille une communauté importante."
+            },
+
+            50: {
+                name: "Le village d'Oasis",
+                description:
+                    "Le village atteint son évolution finale et devient l'un des lieux principaux de l'île."
+            }
+
+        },
+
+
+        port: {
+
+            1: {
+                name: "Les vestiges",
+                description:
+                    "Quelques vieux quais et embarcations abandonnées constituent les premiers vestiges du port."
+            },
+
+            10: {
+                name: "Les premiers quais",
+                description:
+                    "Les anciens quais sont réparés et les premières embarcations commencent à revenir."
+            },
+
+            20: {
+                name: "Le port se développe",
+                description:
+                    "Les quais s'étendent et les premières infrastructures portuaires apparaissent."
+            },
+
+            30: {
+                name: "Le port actif",
+                description:
+                    "Le port devient un véritable lieu de passage et de commerce sur l'île."
+            },
+
+            40: {
+                name: "Le grand port",
+                description:
+                    "Les quais et les infrastructures maritimes sont désormais fortement développés."
+            },
+
+            50: {
+                name: "Le grand port d'Oasis",
+                description:
+                    "Le port atteint son évolution finale et devient le véritable centre maritime d'Oasis."
+            }
+
+        },
+
+
+        foret: {
+
+            1: {
+                name: "Le terrain sauvage",
+                description:
+                    "Une terre encore sauvage où la végétation commence tout juste à prendre possession de l'île."
+            },
+
+            10: {
+                name: "La repousse",
+                description:
+                    "La nature reprend ses droits. Les premiers arbres se développent et les sentiers commencent à apparaître."
+            },
+
+            20: {
+                name: "L'expansion",
+                description:
+                    "La forêt s'étend et devient progressivement plus dense. De nouvelles zones deviennent accessibles."
+            },
+
+            30: {
+                name: "Le sanctuaire",
+                description:
+                    "La biodiversité s'installe. La forêt devient un véritable refuge naturel au cœur d'Oasis."
+            },
+
+            40: {
+                name: "La forêt dense",
+                description:
+                    "Une végétation abondante recouvre désormais la zone. Les profondeurs de la forêt deviennent mystérieuses."
+            },
+
+            50: {
+                name: "L'apogée",
+                description:
+                    "La forêt atteint son évolution finale et devient l'un des grands sanctuaires naturels d'Oasis."
+            }
+
+        }
+
+    };
+
+
+    /* =====================================================
+       TROUVER L'ÉVOLUTION LA PLUS PROCHE
+    ===================================================== */
+
+    function getEvolution(zone, level) {
+
+        const data =
+            evolutionData[zone];
+
+        if (!data) {
+
+            return null;
+
+        }
+
+        const levels =
+            Object.keys(data)
+                .map(Number)
+                .sort((a, b) => a - b);
+
+        let selectedLevel =
+            levels[0];
+
+        for (const currentLevel of levels) {
+
+            if (level >= currentLevel) {
+
+                selectedLevel =
+                    currentLevel;
+
+            }
+
+        }
+
+        return {
+
+            level: selectedLevel,
+
+            ...data[selectedLevel]
+
+        };
+
+    }
+
+
+    /* =====================================================
+       MISE À JOUR DE LA PAGE
+    ===================================================== */
+
+    function updatePage(zone = getZoneFromPage()) {
+
+        const zoneData =
+            getZoneData(zone);
+
+        const level =
+            clamp(
+                Number(zoneData.level) || 1,
+                1,
+                CONFIG.maxEvolution
+            );
+
+        const percentage =
+            getPercentage(level);
+
+
+        /* -----------------------------------------------
+           NIVEAU
+        ----------------------------------------------- */
+
+        const levelElements =
+            document.querySelectorAll(
+                "[data-oasis-level]"
+            );
+
+        levelElements.forEach(element => {
 
             element.textContent =
-                String(level).padStart(2, "0");
+                formatLevel(level);
 
         });
 
 
-    document
-        .querySelectorAll(
-            "[data-island-progress]"
-        )
-        .forEach(element => {
+        /* -----------------------------------------------
+           POURCENTAGE
+        ----------------------------------------------- */
+
+        const percentageElements =
+            document.querySelectorAll(
+                "[data-oasis-progress]"
+            );
+
+        percentageElements.forEach(element => {
 
             element.textContent =
                 percentage + "%";
@@ -178,312 +543,392 @@ function updateIslandProgressUI() {
         });
 
 
-    document
-        .querySelectorAll(
-            "[data-island-progress-bar]"
-        )
-        .forEach(element => {
+        /* -----------------------------------------------
+           BARRES
+        ----------------------------------------------- */
 
-            element.style.width =
+        const bars =
+            document.querySelectorAll(
+                "[data-oasis-progress-bar]"
+            );
+
+        bars.forEach(bar => {
+
+            bar.style.width =
                 percentage + "%";
 
         });
 
 
-    document
-        .querySelectorAll(
-            "[data-island-max]"
-        )
-        .forEach(element => {
+        /* -----------------------------------------------
+           CONTRIBUTIONS
+        ----------------------------------------------- */
+
+        const contributionElements =
+            document.querySelectorAll(
+                "[data-oasis-contributions]"
+            );
+
+        contributionElements.forEach(element => {
 
             element.textContent =
-                OASIS_CONFIG.maxEvolution;
+                zoneData.contributions;
 
         });
 
-}
+
+        /* -----------------------------------------------
+           ÉVOLUTION
+        ----------------------------------------------- */
+
+        const evolution =
+            getEvolution(
+                zone,
+                level
+            );
+
+        if (!evolution) return;
 
 
-/* =========================================================
-   NAVIGATION DES ZONES
-========================================================= */
+        const nameElements =
+            document.querySelectorAll(
+                "[data-oasis-evolution-name]"
+            );
 
-function setupZoneNavigation() {
+        nameElements.forEach(element => {
 
-    document
-        .querySelectorAll(
-            "[data-zone]"
-        )
-        .forEach(element => {
+            element.textContent =
+                evolution.name;
 
-            const zone =
-                element.dataset.zone;
-
-            const zoneData =
-                OASIS_ZONES[zone];
-
-            if (!zoneData) return;
+        });
 
 
-            element.addEventListener(
+        const descriptionElements =
+            document.querySelectorAll(
+                "[data-oasis-evolution-description]"
+            );
+
+        descriptionElements.forEach(element => {
+
+            element.textContent =
+                evolution.description;
+
+        });
+
+
+        const statusElements =
+            document.querySelectorAll(
+                "[data-oasis-status]"
+            );
+
+        statusElements.forEach(element => {
+
+            element.textContent =
+                "ÉVOLUTION " +
+                formatLevel(level);
+
+        });
+
+
+        /* -----------------------------------------------
+           SÉLECTEURS
+        ----------------------------------------------- */
+
+        const buttons =
+            document.querySelectorAll(
+                "[data-oasis-level-button]"
+            );
+
+        buttons.forEach(button => {
+
+            const buttonLevel =
+                Number(
+                    button.dataset.oasisLevelButton
+                );
+
+            button.classList.toggle(
+                "active",
+                buttonLevel === level
+            );
+
+        });
+
+
+        /* -----------------------------------------------
+           CLASSE DU NIVEAU
+        ----------------------------------------------- */
+
+        document.body.dataset.oasisZone =
+            zone;
+
+        document.body.dataset.oasisLevel =
+            level;
+
+    }
+
+
+    /* =====================================================
+       BOUTONS DE NIVEAUX
+    ===================================================== */
+
+    function initLevelButtons() {
+
+        const buttons =
+            document.querySelectorAll(
+                "[data-oasis-level-button]"
+            );
+
+        buttons.forEach(button => {
+
+            button.addEventListener(
                 "click",
                 () => {
 
-                    window.location.href =
-                        zoneData.page;
+                    const level =
+                        Number(
+                            button.dataset.oasisLevelButton
+                        );
+
+                    const zone =
+                        button.dataset.oasisZone ||
+                        getZoneFromPage();
+
+                    setZoneLevel(
+                        zone,
+                        level
+                    );
 
                 }
             );
 
         });
 
-}
+    }
 
 
-/* =========================================================
-   ANIMATION AU SCROLL
-========================================================= */
+    /* =====================================================
+       BOUTONS DE CONTRIBUTION
+    ===================================================== */
 
-function setupScrollAnimations() {
+    function initContributionButtons() {
 
-    const elements =
-        document.querySelectorAll(
-            "[data-reveal]"
-        );
+        const buttons =
+            document.querySelectorAll(
+                "[data-oasis-contribute]"
+            );
 
-    if (!elements.length) return;
+        buttons.forEach(button => {
 
+            button.addEventListener(
+                "click",
+                () => {
 
-    if (
-        !("IntersectionObserver" in window)
-    ) {
+                    const zone =
+                        button.dataset.oasisZone ||
+                        getZoneFromPage();
 
-        elements.forEach(element => {
+                    const amount =
+                        Number(
+                            button.dataset.oasisContribute
+                        ) || 1;
 
-            element.classList.add(
-                "is-visible"
+                    addContribution(
+                        zone,
+                        amount
+                    );
+
+                }
             );
 
         });
 
-        return;
+    }
+
+
+    /* =====================================================
+       ANNONCE D'ÉVOLUTION
+    ===================================================== */
+
+    function announceEvolution(zone, level) {
+
+        const milestoneLevels =
+            [10, 20, 30, 40, 50];
+
+        if (
+            !milestoneLevels.includes(level)
+        ) {
+
+            return;
+
+        }
+
+        const names = {
+
+            island: "l'île",
+
+            village: "le village",
+
+            port: "le port",
+
+            foret: "la forêt"
+
+        };
+
+        const zoneName =
+            names[zone] || "Oasis";
+
+
+        showNotification(
+            "🌴 Nouvelle évolution !",
+            `${zoneName} atteint l'évolution ${formatLevel(level)} !`
+        );
 
     }
 
 
-    const observer =
-        new IntersectionObserver(
-            entries => {
+    /* =====================================================
+       NOTIFICATION
+    ===================================================== */
 
-                entries.forEach(entry => {
+    function showNotification(title, message) {
 
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
+        let container =
+            document.querySelector(
+                ".oasis-notifications"
+            );
 
-                    entry.target.classList.add(
-                        "is-visible"
-                    );
 
-                    observer.unobserve(
-                        entry.target
-                    );
+        if (!container) {
 
-                });
+            container =
+                document.createElement("div");
 
-            },
+            container.className =
+                "oasis-notifications";
+
+            Object.assign(
+                container.style,
+                {
+                    position: "fixed",
+                    right: "20px",
+                    bottom: "20px",
+                    zIndex: "99999",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                    width: "min(360px, calc(100% - 40px))"
+                }
+            );
+
+            document.body.appendChild(
+                container
+            );
+
+        }
+
+
+        const notification =
+            document.createElement("div");
+
+
+        Object.assign(
+            notification.style,
             {
-                threshold: 0.12
+                padding: "16px 18px",
+                borderRadius: "18px",
+                background: "rgba(25,45,35,.94)",
+                border: "1px solid rgba(255,255,255,.12)",
+                color: "white",
+                boxShadow: "0 20px 45px rgba(0,0,0,.25)",
+                backdropFilter: "blur(15px)",
+                transform: "translateY(20px)",
+                opacity: "0",
+                transition: ".3s ease"
             }
         );
 
 
-    elements.forEach(element => {
+        notification.innerHTML = `
 
-        observer.observe(element);
+            <strong
+                style="
+                    display:block;
+                    font-size:14px;
+                    margin-bottom:5px;
+                "
+            >
+                ${title}
+            </strong>
 
-    });
+            <span
+                style="
+                    display:block;
+                    font-size:11px;
+                    opacity:.75;
+                    line-height:1.5;
+                "
+            >
+                ${message}
+            </span>
 
-}
+        `;
 
 
-/* =========================================================
-   NAVBAR
-========================================================= */
-
-function setupNavbar() {
-
-    const navbar =
-        document.querySelector(
-            ".navbar"
+        container.appendChild(
+            notification
         );
 
-    if (!navbar) return;
+
+        requestAnimationFrame(() => {
+
+            notification.style.opacity =
+                "1";
+
+            notification.style.transform =
+                "translateY(0)";
+
+        });
 
 
-    function updateNavbar() {
+        setTimeout(() => {
 
-        if (window.scrollY > 20) {
+            notification.style.opacity =
+                "0";
 
-            navbar.classList.add(
-                "navbar-scrolled"
-            );
+            notification.style.transform =
+                "translateY(15px)";
 
-        } else {
+            setTimeout(() => {
 
-            navbar.classList.remove(
-                "navbar-scrolled"
-            );
+                notification.remove();
 
-        }
+            }, 300);
+
+        }, 4000);
 
     }
 
 
-    updateNavbar();
+    /* =====================================================
+       NAVIGATION ACTIVE
+    ===================================================== */
+
+    function initNavigation() {
+
+        const currentPage =
+            window.location.pathname
+                .split("/")
+                .pop()
+                .toLowerCase();
 
 
-    window.addEventListener(
-        "scroll",
-        updateNavbar,
-        {
-            passive: true
-        }
-    );
-
-}
-
-
-/* =========================================================
-   BOUTON RETOUR EN HAUT
-========================================================= */
-
-function setupBackToTop() {
-
-    const button =
-        document.querySelector(
-            "[data-back-to-top]"
-        );
-
-    if (!button) return;
-
-
-    button.addEventListener(
-        "click",
-        () => {
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth"
-            });
-
-        }
-    );
-
-
-    function updateButton() {
-
-        button.classList.toggle(
-            "is-visible",
-            window.scrollY > 500
-        );
-
-    }
-
-
-    updateButton();
-
-
-    window.addEventListener(
-        "scroll",
-        updateButton,
-        {
-            passive: true
-        }
-    );
-
-}
-
-
-/* =========================================================
-   LIENS DISCORD
-========================================================= */
-
-function setupDiscordLinks() {
-
-    document
-        .querySelectorAll(
-            "[data-discord]"
-        )
-        .forEach(link => {
-
-            link.addEventListener(
-                "click",
-                event => {
-
-                    const url =
-                        link.dataset.discord;
-
-                    if (!url) return;
-
-                    event.preventDefault();
-
-                    window.open(
-                        url,
-                        "_blank",
-                        "noopener,noreferrer"
-                    );
-
-                }
+        const links =
+            document.querySelectorAll(
+                ".nav-links a"
             );
 
-        });
 
-}
-
-
-/* =========================================================
-   ANNÉE AUTOMATIQUE
-========================================================= */
-
-function updateCurrentYear() {
-
-    const year =
-        new Date().getFullYear();
-
-
-    document
-        .querySelectorAll(
-            "[data-current-year]"
-        )
-        .forEach(element => {
-
-            element.textContent =
-                year;
-
-        });
-
-}
-
-
-/* =========================================================
-   LIEN DE PAGE ACTIVE
-========================================================= */
-
-function setupActiveNavigation() {
-
-    const currentPage =
-        window.location.pathname
-            .split("/")
-            .pop()
-            .toLowerCase();
-
-
-    document
-        .querySelectorAll(
-            ".nav-links a"
-        )
-        .forEach(link => {
+        links.forEach(link => {
 
             const href =
                 link.getAttribute("href");
@@ -491,20 +936,16 @@ function setupActiveNavigation() {
             if (!href) return;
 
 
-            const linkPage =
+            const cleanHref =
                 href
+                    .split("#")[0]
                     .split("/")
                     .pop()
-                    .split("#")[0]
                     .toLowerCase();
 
 
             if (
-                linkPage === currentPage ||
-                (
-                    currentPage === "" &&
-                    linkPage === "index.html"
-                )
+                cleanHref === currentPage
             ) {
 
                 link.classList.add(
@@ -515,157 +956,367 @@ function setupActiveNavigation() {
 
         });
 
-}
+    }
 
 
-/* =========================================================
-   COMPTEUR ANIMÉ
-========================================================= */
+    /* =====================================================
+       ANIMATION AU SCROLL
+    ===================================================== */
 
-function animateCounters() {
+    function initScrollAnimations() {
 
-    const counters =
-        document.querySelectorAll(
-            "[data-counter]"
-        );
-
-    if (!counters.length) return;
-
-
-    counters.forEach(counter => {
-
-        const target =
-            Number(
-                counter.dataset.counter
+        const elements =
+            document.querySelectorAll(
+                "[data-oasis-reveal]"
             );
 
-        if (!Number.isFinite(target)) {
+
+        if (!elements.length) {
+
             return;
+
         }
 
 
-        let current = 0;
+        const observer =
+            new IntersectionObserver(
+                entries => {
 
-        const duration = 900;
+                    entries.forEach(entry => {
 
-        const start =
-            performance.now();
+                        if (
+                            entry.isIntersecting
+                        ) {
 
+                            entry.target.classList.add(
+                                "is-visible"
+                            );
 
-        function update(time) {
+                            observer.unobserve(
+                                entry.target
+                            );
 
-            const elapsed =
-                time - start;
+                        }
 
-            const progress =
-                Math.min(
-                    elapsed / duration,
-                    1
-                );
+                    });
 
-
-            const eased =
-                1 -
-                Math.pow(
-                    1 - progress,
-                    3
-                );
-
-
-            current =
-                Math.round(
-                    target * eased
-                );
+                },
+                {
+                    threshold: .12
+                }
+            );
 
 
-            counter.textContent =
-                current;
+        elements.forEach(element => {
+
+            observer.observe(
+                element
+            );
+
+        });
+
+    }
 
 
-            if (progress < 1) {
+    /* =====================================================
+       COMPTEUR ANIMÉ
+    ===================================================== */
 
-                requestAnimationFrame(
-                    update
-                );
+    function initCounters() {
+
+        const counters =
+            document.querySelectorAll(
+                "[data-oasis-counter]"
+            );
+
+
+        counters.forEach(counter => {
+
+            const target =
+                Number(
+                    counter.dataset.oasisCounter
+                ) || 0;
+
+            const duration =
+                Number(
+                    counter.dataset.oasisDuration
+                ) || 900;
+
+            let start = null;
+
+
+            function animate(timestamp) {
+
+                if (!start) {
+
+                    start = timestamp;
+
+                }
+
+
+                const progress =
+                    Math.min(
+                        (timestamp - start) /
+                        duration,
+                        1
+                    );
+
+
+                const eased =
+                    1 -
+                    Math.pow(
+                        1 - progress,
+                        3
+                    );
+
+
+                counter.textContent =
+                    Math.floor(
+                        eased * target
+                    );
+
+
+                if (progress < 1) {
+
+                    requestAnimationFrame(
+                        animate
+                    );
+
+                } else {
+
+                    counter.textContent =
+                        target;
+
+                }
 
             }
 
+
+            const observer =
+                new IntersectionObserver(
+                    entries => {
+
+                        if (
+                            entries[0].isIntersecting
+                        ) {
+
+                            requestAnimationFrame(
+                                animate
+                            );
+
+                            observer.disconnect();
+
+                        }
+
+                    }
+                );
+
+
+            observer.observe(
+                counter
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       SCROLL TOP
+    ===================================================== */
+
+    function initScrollTop() {
+
+        const buttons =
+            document.querySelectorAll(
+                "[data-oasis-top]"
+            );
+
+
+        buttons.forEach(button => {
+
+            button.addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+
+                    window.scrollTo({
+                        top: 0,
+                        behavior: "smooth"
+                    });
+
+                }
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       LIENS DOUX VERS LES SECTIONS
+    ===================================================== */
+
+    function initSmoothAnchors() {
+
+        document
+            .querySelectorAll(
+                'a[href^="#"]'
+            )
+            .forEach(link => {
+
+                link.addEventListener(
+                    "click",
+                    event => {
+
+                        const targetId =
+                            link.getAttribute(
+                                "href"
+                            );
+
+                        if (
+                            !targetId ||
+                            targetId === "#"
+                        ) {
+
+                            return;
+
+                        }
+
+
+                        const target =
+                            document.querySelector(
+                                targetId
+                            );
+
+
+                        if (!target) {
+
+                            return;
+
+                        }
+
+
+                        event.preventDefault();
+
+
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+                );
+
+            });
+
+    }
+
+
+    /* =====================================================
+       EXPOSER LES DONNÉES POUR DEBUG / AUTRES SCRIPTS
+    ===================================================== */
+
+    window.Oasis = {
+
+        getData() {
+
+            return oasisData;
+
+        },
+
+
+        save() {
+
+            saveData(
+                oasisData
+            );
+
+        },
+
+
+        getZone(zone) {
+
+            return getZoneData(
+                zone
+            );
+
+        },
+
+
+        setLevel(zone, level) {
+
+            setZoneLevel(
+                zone,
+                level
+            );
+
+        },
+
+
+        contribute(zone, amount = 1) {
+
+            addContribution(
+                zone,
+                amount
+            );
+
+        },
+
+
+        getEvolution(zone, level) {
+
+            return getEvolution(
+                zone,
+                level
+            );
+
+        },
+
+
+        reset() {
+
+            oasisData =
+                structuredClone(
+                    CONFIG.defaultData
+                );
+
+            saveData(
+                oasisData
+            );
+
+            updatePage();
+
         }
 
-
-        requestAnimationFrame(
-            update
-        );
-
-    });
-
-}
+    };
 
 
-/* =========================================================
-   INITIALISATION
-========================================================= */
+    /* =====================================================
+       INITIALISATION
+    ===================================================== */
 
-function initOasis() {
+    initNavigation();
 
-    updateIslandProgressUI();
+    initLevelButtons();
 
-    setupZoneNavigation();
+    initContributionButtons();
 
-    setupScrollAnimations();
+    initScrollAnimations();
 
-    setupNavbar();
+    initCounters();
 
-    setupBackToTop();
+    initScrollTop();
 
-    setupDiscordLinks();
+    initSmoothAnchors();
 
-    setupActiveNavigation();
-
-    updateCurrentYear();
-
-    animateCounters();
-
-}
+    updatePage();
 
 
-/* =========================================================
-   LANCEMENT
-========================================================= */
-
-if (
-    document.readyState === "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        initOasis
+    console.log(
+        "🌴 Oasis • script.js chargé"
     );
 
-} else {
-
-    initOasis();
-
-}
-
-
-/* =========================================================
-   API GLOBALE
-========================================================= */
-
-window.Oasis = {
-
-    config: OASIS_CONFIG,
-
-    zones: OASIS_ZONES,
-
-    getProgress: getIslandProgress,
-
-    setProgress: setIslandProgress,
-
-    getPercentage: getProgressPercentage,
-
-    updateUI: updateIslandProgressUI
-
-};
+});
 ```
