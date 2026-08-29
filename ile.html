@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Île Oasis, la progression communautaire de la communauté Oasis."
+  >
+
+  <title>Île Oasis 🌴</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="oasis-island-page">
+
+  <!-- =====================================================
+       🌴 FOND OASIS
+       ===================================================== -->
+
+  <div class="oasis-background" aria-hidden="true">
+    <div class="oasis-gradient"></div>
+    <div class="oasis-glow oasis-glow-one"></div>
+    <div class="oasis-glow oasis-glow-two"></div>
+    <div class="oasis-mist oasis-mist-one"></div>
+    <div class="oasis-mist oasis-mist-two"></div>
+    <div class="oasis-particles"></div>
+  </div>
+
+
+  <!-- =====================================================
+       🧭 NAVIGATION
+       ===================================================== -->
+
+  <header class="oasis-header">
+
+    <a href="index.html" class="oasis-logo">
+      <span class="oasis-logo-icon">🌴</span>
+      <span>Oasis</span>
+    </a>
+
+    <nav class="oasis-nav" aria-label="Navigation principale">
+
+      <a href="index.html">
+        🏠 Accueil
+      </a>
+
+      <a href="classements.html">
+        🏆 Classements
+      </a>
+
+      <a href="clans.html">
+        🏕️ Clans
+      </a>
+
+      <a href="missions.html">
+        🎯 Missions
+      </a>
+
+      <a href="defis.html">
+        ⚔️ Défis
+      </a>
+
+      <a href="ile.html" class="active">
+        🏝️ Île Oasis
+      </a>
+
+      <a href="profil.html">
+        👤 Profil
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =====================================================
+       🏝️ CONTENU
+       ===================================================== -->
+
+  <main class="oasis-page">
+
+    <!-- HERO -->
+
+    <section class="oasis-hero">
+
+      <div class="oasis-hero-content">
+
+        <span class="oasis-eyebrow">
+          🌊 PROGRESSION COMMUNAUTAIRE
+        </span>
+
+        <h1>
+          L'Île <span>Oasis</span>
+        </h1>
+
+        <p>
+          Une île qui évolue grâce aux contributions
+          de toute la communauté.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         🏝️ ÎLE
+         ================================================= -->
+
+    <section class="island-section">
+
+      <div class="island-card">
+
+        <div class="island-scene">
+
+          <div class="island-sky"></div>
+
+          <div class="island-sun"></div>
+
+          <div class="island-cloud cloud-one"></div>
+          <div class="island-cloud cloud-two"></div>
+
+          <div class="island-mountain mountain-one"></div>
+          <div class="island-mountain mountain-two"></div>
+
+          <div class="island-water"></div>
+
+          <div class="island-land">
+
+            <div class="island-beach"></div>
+
+            <div class="island-palm palm-one">
+              🌴
+            </div>
+
+            <div class="island-palm palm-two">
+              🌴
+            </div>
+
+            <div class="island-palm palm-three">
+              🌴
+            </div>
+
+            <div class="island-palm palm-four">
+              🌴
+            </div>
+
+            <div class="island-building building-one"></div>
+            <div class="island-building building-two"></div>
+
+            <div class="island-path path-one"></div>
+            <div class="island-path path-two"></div>
+
+          </div>
+
+          <div class="island-lights">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         📊 PROGRESSION
+         ================================================= -->
+
+    <section class="island-progress-section">
+
+      <div class="island-info-card">
+
+        <div class="island-info-top">
+
+          <div>
+
+            <span class="section-label">
+              🏝️ NIVEAU ACTUEL
+            </span>
+
+            <h2 id="islandLevel">
+              Niveau —
+            </h2>
+
+            <p id="islandLevelName">
+              Chargement...
+            </p>
+
+          </div>
+
+          <div class="island-level-badge">
+            <span id="islandLevelNumber">
+              —
+            </span>
+            <small>/ 50</small>
+          </div>
+
+        </div>
+
+
+        <div class="island-progress">
+
+          <div class="island-progress-header">
+
+            <span>
+              Progression
+            </span>
+
+            <strong id="islandProgressText">
+              —
+            </strong>
+
+          </div>
+
+          <div class="progress-track">
+
+            <div
+              id="islandProgressBar"
+              class="progress-fill"
+              data-progress="0"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <div class="island-stat-grid">
+
+          <div class="island-stat">
+
+            <span class="stat-icon">
+              🤝
+            </span>
+
+            <div>
+
+              <strong id="totalContributions">
+                —
+              </strong>
+
+              <small>
+                Contributions
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="island-stat">
+
+            <span class="stat-icon">
+              🌴
+            </span>
+
+            <div>
+
+              <strong id="islandCoins">
+                —
+              </strong>
+
+              <small>
+                Coins investis
+              </small>
+
+            </div>
+
+          </div>
+
+
+          <div class="island-stat">
+
+            <span class="stat-icon">
+              📈
+            </span>
+
+            <div>
+
+              <strong id="nextIslandLevel">
+                —
+              </strong>
+
+              <small>
+                Prochain niveau
+              </small>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           💰 CONTRIBUTION
+           ================================================= -->
+
+      <div class="island-contribution-card">
+
+        <div class="card-icon">
+          🌴
+        </div>
+
+        <div class="card-content">
+
+          <h3>
+            Contribuer à l'Île
+          </h3>
+
+          <p>
+            Participe à la construction de l'Oasis
+            en utilisant tes Oasis Coins.
+          </p>
+
+        </div>
+
+        <a
+          href="contribuer-ile.html"
+          class="oasis-button oasis-button-primary"
+          data-oasis-magnetic
+        >
+          🤝 Contribuer
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         🗺️ ÉVOLUTION
+         ================================================= -->
+
+    <section class="island-evolution">
+
+      <div class="section-heading">
+
+        <span class="section-label">
+          🌴 ÉVOLUTION DE L'ÎLE
+        </span>
+
+        <h2>
+          Une Oasis qui grandit
+        </h2>
+
+        <p>
+          Chaque niveau représente une nouvelle étape
+          dans le développement de l'île.
+        </p>
+
+      </div>
+
+
+      <div class="evolution-grid">
+
+        <article class="evolution-card">
+
+          <span class="evolution-number">
+            01 — 10
+          </span>
+
+          <div class="evolution-icon">
+            🌴
+          </div>
+
+          <h3>
+            Île sauvage
+          </h3>
+
+          <p>
+            Plages, végétation tropicale, reliefs naturels
+            et premières zones sauvages.
+          </p>
+
+        </article>
+
+
+        <article class="evolution-card">
+
+          <span class="evolution-number">
+            11 — 20
+          </span>
+
+          <div class="evolution-icon">
+            🛖
+          </div>
+
+          <h3>
+            Premiers aménagements
+          </h3>
+
+          <p>
+            Chemins, pontons, espaces de repos et
+            premières constructions.
+          </p>
+
+        </article>
+
+
+        <article class="evolution-card">
+
+          <span class="evolution-number">
+            21 — 30
+          </span>
+
+          <div class="evolution-icon">
+            🏘️
+          </div>
+
+          <h3>
+            Développement
+          </h3>
+
+          <p>
+            Maisons, jardins, commerces et nouveaux
+            espaces communautaires.
+          </p>
+
+        </article>
+
+
+        <article class="evolution-card">
+
+          <span class="evolution-number">
+            31 — 40
+          </span>
+
+          <div class="evolution-icon">
+            ⚓
+          </div>
+
+          <h3>
+            Grande île
+          </h3>
+
+          <p>
+            Port, places, éclairage, jardins et
+            bâtiments supplémentaires.
+          </p>
+
+        </article>
+
+
+        <article class="evolution-card">
+
+          <span class="evolution-number">
+            41 — 49
+          </span>
+
+          <div class="evolution-icon">
+            🌃
+          </div>
+
+          <h3>
+            Presque terminée
+          </h3>
+
+          <p>
+            Architecture développée, grand port,
+            zones communautaires et nombreux détails.
+          </p>
+
+        </article>
+
+
+        <article class="evolution-card evolution-final">
+
+          <span class="evolution-number">
+            NIVEAU 50
+          </span>
+
+          <div class="evolution-icon">
+            🏝️
+          </div>
+
+          <h3>
+            Oasis complète
+          </h3>
+
+          <p>
+            Une véritable Oasis communautaire avec
+            plage, port, bâtiments, jardins, eau,
+            végétation et éclairage.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =================================================
+         ℹ️ INFORMATION
+         ================================================= -->
+
+    <section class="island-note">
+
+      <div class="island-note-icon">
+        💚
+      </div>
+
+      <div>
+
+        <h3>
+          Une progression pour toute la communauté
+        </h3>
+
+        <p>
+          Les niveaux de l'Île Oasis représentent
+          uniquement la progression collective.
+          Ils ne donnent aucun avantage ni récompense.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       🦶 FOOTER
+       ===================================================== -->
+
+  <footer class="oasis-footer">
+
+    <div class="footer-brand">
+      🌴 Oasis
+    </div>
+
+    <p>
+      Une communauté. Une île. Une Oasis.
+    </p>
+
+  </footer>
+
+
+  <!-- =====================================================
+       ⚙️ SCRIPT GLOBAL
+       ===================================================== -->
+
+  <script src="script.js"></script>
+
+
+  <!-- =====================================================
+       🏝️ DONNÉES ÎLE
+       ===================================================== -->
+
+  <script>
+    /*
+     * Cette page ne contient volontairement
+     * aucun score fictif.
+     *
+     * Les données réelles de l'île doivent être
+     * injectées par le backend / système Oasis.
+     */
+
+    window.OasisIsland = window.OasisIsland || {
+
+      level: null,
+
+      levelName: null,
+
+      progress: null,
+
+      totalContributions: null,
+
+      totalCoins: null,
+
+      nextLevel: null
+
+    };
+
+
+    function updateIslandDisplay(data) {
+
+      if (!data) return;
+
+
+      const level =
+        Number.isFinite(Number(data.level))
+          ? Number(data.level)
+          : null;
+
+
+      const progress =
+        Number.isFinite(Number(data.progress))
+          ? Math.max(
+              0,
+              Math.min(100, Number(data.progress))
+            )
+          : null;
+
+
+      const levelElement =
+        document.getElementById(
+          "islandLevel"
+        );
+
+
+      const numberElement =
+        document.getElementById(
+          "islandLevelNumber"
+        );
+
+
+      const nameElement =
+        document.getElementById(
+          "islandLevelName"
+        );
+
+
+      const progressBar =
+        document.getElementById(
+          "islandProgressBar"
+        );
+
+
+      const progressText =
+        document.getElementById(
+          "islandProgressText"
+        );
+
+
+      const contributionsElement =
+        document.getElementById(
+          "totalContributions"
+        );
+
+
+      const coinsElement =
+        document.getElementById(
+          "islandCoins"
+        );
+
+
+      const nextLevelElement =
+        document.getElementById(
+          "nextIslandLevel"
+        );
+
+
+      if (levelElement) {
+
+        levelElement.textContent =
+          level !== null
+            ? `Niveau ${level}`
+            : "Niveau —";
+
+      }
+
+
+      if (numberElement) {
+
+        numberElement.textContent =
+          level !== null
+            ? level
+            : "—";
+
+      }
+
+
+      if (nameElement) {
+
+        nameElement.textContent =
+          data.levelName ||
+          "Données indisponibles";
+
+      }
+
+
+      if (progressBar) {
+
+        progressBar.style.width =
+          progress !== null
+            ? `${progress}%`
+            : "0%";
+
+      }
+
+
+      if (progressText) {
+
+        progressText.textContent =
+          progress !== null
+            ? `${progress}%`
+            : "—";
+
+      }
+
+
+      if (contributionsElement) {
+
+        contributionsElement.textContent =
+          Number.isFinite(
+            Number(data.totalContributions)
+          )
+            ? Number(
+                data.totalContributions
+              ).toLocaleString("fr-FR")
+            : "—";
+
+      }
+
+
+      if (coinsElement) {
+
+        coinsElement.textContent =
+          Number.isFinite(
+            Number(data.totalCoins)
+          )
+            ? Number(
+                data.totalCoins
+              ).toLocaleString("fr-FR")
+            : "—";
+
+      }
+
+
+      if (nextLevelElement) {
+
+        nextLevelElement.textContent =
+          Number.isFinite(
+            Number(data.nextLevel)
+          )
+            ? data.nextLevel
+            : "—";
+
+      }
+
+    };
+
+
+    /*
+     * Fonction prévue pour recevoir les données
+     * réelles de l'API/backend Oasis.
+     */
+
+    window.OasisIsland.update =
+      updateIslandDisplay;
+  </script>
+
+</body>
+</html>
